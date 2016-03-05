@@ -38,19 +38,7 @@ public class Computer extends Player implements Runnable {
 			while (m_aiToggled) {
 				boolean foundValidMove = false;
 				do {
-					Random rnd = new Random();
-					int row = rnd.nextInt(m_board.getm_Board().size());
-					int column = rnd.nextInt(m_board.getm_Board().get(row).size());
-					Tile randomTile = m_board.getm_Board().get(row).get(column);
-					
-					if (!randomTile.isMine() && randomTile.isHidden()) {
-						foundValidMove = true;
-						m_board.revealTile(column, row);
-						m_gameController.repaintAll();
-						System.out.println("Revealed tile: (" + row + "," + column + ")");
-					} else {
-						System.out.println("Mine or already revealed tile found. Looping.");
-					}
+					if (makeMove()) foundValidMove = true;
 				} while (!foundValidMove);
 				
 				try {
@@ -60,5 +48,25 @@ public class Computer extends Player implements Runnable {
 				}
 			}
 		}
+	}
+	
+	private boolean makeMove() {
+		Random rnd = new Random();
+		int row = rnd.nextInt(m_board.getm_Board().size());
+		int column = rnd.nextInt(m_board.getm_Board().get(row).size());
+		Tile randomTile = m_board.getm_Board().get(row).get(column);
+		
+		if (!randomTile.isMine() && randomTile.isHidden()) {
+			m_board.revealTile(column, row);
+			m_gameController.repaintAll();
+			System.out.println("Revealed tile: (" + row + "," + column + ")");
+			return true;
+		} else {
+			System.out.println("Mine or already revealed tile found. Looping.");
+			return false;
+		}
+	}
+		
+		return true;
 	}
 }

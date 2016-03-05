@@ -230,17 +230,18 @@ public class GameController implements MouseListener, ActionListener {
 	 */
 	public void mouseClicked(MouseEvent e) {
 		if (!(m_board.getm_GameLost())) {
+			int xPos = (int) Math.floor(e.getX() / Tile.WIDTH);
+			int yPos = (int) Math.floor(e.getY() / Tile.HEIGHT);
 			
 			if (e.getButton() == MouseEvent.BUTTON1) {
 				// Work out the positions in the Array of the mouse click
-				int xPos = (int) Math.floor(e.getX() / Tile.WIDTH);
-				int yPos = (int) Math.floor(e.getY() / Tile.HEIGHT);
+				
 				m_board.revealTile(xPos, yPos);
 				m_panelGame.repaint();
 				m_panelInfo.repaint();
 			} else if (e.getButton() == MouseEvent.BUTTON3) {
 				
-				m_board.defusedTile(e.getX(), e.getY());
+				m_board.defusedTile(xPos, yPos);
 				m_panelGame.repaint();
 				m_panelInfo.repaint();
 			}

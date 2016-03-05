@@ -173,25 +173,21 @@ public class Board {
 	 * @param x an int which is the X position of the click
 	 * @param y an int which is the Y position of the click
 	 */
-	public void defusedTile(int x, int y) {
-		// Work out the positions in the Array of the mouse click
-		int xPos = (int) Math.floor(x / Tile.WIDTH);
-		int yPos = (int) Math.floor(y / Tile.HEIGHT);
-		
-		if (inLimit(yPos, xPos)) {
+	public void defusedTile(int x, int y) {		
+		if (inLimit(y, x)) {
 			
-			boolean isMine = m_board.get(yPos).get(xPos).isMine();
-			boolean isDefused = m_board.get(yPos).get(xPos).isDefused();
-			boolean isHidden = m_board.get(yPos).get(xPos).isHidden();
+			boolean isMine = m_board.get(y).get(x).isMine();
+			boolean isDefused = m_board.get(y).get(x).isDefused();
+			boolean isHidden = m_board.get(y).get(x).isHidden();
 			
 			if (isHidden) {
 				if (!(isDefused)) {
-					m_board.get(yPos).remove(xPos);
-					m_board.get(yPos).add(xPos, new Defused(isMine, true, true));
+					m_board.get(y).remove(x);
+					m_board.get(y).add(x, new Defused(isMine, true, true));
 					haveWon();
 				} else {
-					m_board.get(yPos).remove(xPos);
-					m_board.get(yPos).add(xPos, new Hidden(isMine, true, false));
+					m_board.get(y).remove(x);
+					m_board.get(y).add(x, new Hidden(isMine, true, false));
 				}
 			}
 		}
