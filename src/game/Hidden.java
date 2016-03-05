@@ -39,6 +39,8 @@ public class Hidden extends Tile {
 					x * Tile.WIDTH,
 					y * Tile.HEIGHT,
 					null);
+		
+		
 	}
 
 }

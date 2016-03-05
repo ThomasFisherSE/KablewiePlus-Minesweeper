@@ -75,7 +75,7 @@ public class GameController implements MouseListener, ActionListener {
 	private Clip m_bomb;
 	private Clip m_won;
 	
-	private boolean m_test = false;
+	private boolean m_test = true;
 
 	/**
 	 * Constructor

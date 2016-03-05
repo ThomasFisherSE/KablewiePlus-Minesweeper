@@ -14,8 +14,13 @@ public class Computer extends Player implements Runnable {
 	private boolean m_aiToggled = false;
 	private Board m_board;
 	private GameController m_gameController;
-	private final int SLEEP_TIME = 500;
-	private Point[] m_currentPoint;
+	private final int SLEEP_TIME = 2000;
+	
+	// AI Difficulty Probabilities
+	private final double PERFECT_PROBABILITY = 1; // i.e. will always play perfectly
+	private final double NORMAL_PROBABILITY = 0.9; // i.e. 1/10 moves won't be perfect
+	private final double EASY_PROBABILITY = 0.5; // i.e. only 50% chance to make a perfect move
+	
 	
 	public boolean toggleAi() {
 		m_aiToggled = !m_aiToggled;
@@ -27,21 +32,7 @@ public class Computer extends Player implements Runnable {
 		m_board = board;
 		m_gameController = gc;
 	}
-	
-	public boolean isValidPoint(Board board,int x, int y) {
-		boolean flag = false;
-		m_currentPoint[0].setPoint(x, y);
-		for (int i = 0; i < board.getm_validPoints().length; i++) {
-			if (board.getm_validPoints()[i] == m_currentPoint[0]) {
-				break;
-			} else if (board.getm_validPoints()[i] != m_currentPoint[0]) {
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
-	
+
 	public void run() {
 		while (true) {
 			while (m_aiToggled) {
@@ -51,10 +42,10 @@ public class Computer extends Player implements Runnable {
 					int row = rnd.nextInt(m_board.getm_Board().size());
 					int column = rnd.nextInt(m_board.getm_Board().get(row).size());
 					Tile randomTile = m_board.getm_Board().get(row).get(column);
-				
+					
 					if (!randomTile.isMine() && randomTile.isHidden()) {
 						foundValidMove = true;
-						m_board.revealTile(row, column);
+						m_board.revealTile(column, row);
 						m_gameController.repaintAll();
 						System.out.println("Revealed tile: (" + row + "," + column + ")");
 					} else {
