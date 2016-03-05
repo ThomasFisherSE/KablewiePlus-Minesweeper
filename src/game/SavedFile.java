@@ -1,0 +1,108 @@
+/**
+ * @file SavedFile.java
+ * @author Victoria Charvis
+ * @date 29th Febuary 2016
+ * @brief Saves current game
+ * 
+ * Saves the current game into the selected CSV file
+ * 
+ * @see Tony Gaddis and Godfrey Muganda, chapter 4.10
+ * from "Starting out with Java from control structures through data structures
+ * 1st edition
+ */
+
+package game;
+
+import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+public class SavedFile {
+	
+	private String m_fileName;
+	
+	/**
+	 * 
+	 * @return the selected files name
+	 */
+	private String getFileName() {
+		return m_fileName;
+	}
+	
+	/**
+	 * 
+	 * @param slot the number slot for the gave to be saved into
+	 */
+	private void setFileName(int slot) {
+		m_fileName=("SaveFile" + slot + ".csv");
+	}
+	
+	/**
+	 * 
+	 * @param slot the number slot for the gave to be saved into
+	 * @param board the board of the game to be saved
+	 * @param player the player of the game to be saved
+	 */
+	public void saveFile(int slot, Board board, Player player) {
+		setFileName(slot);
+		try {
+			
+			//Set up connection to the file
+			FileWriter writer = new FileWriter(getFileName());
+			PrintWriter output = new PrintWriter(writer);
+			
+			/**
+			 * Saving player name, time passed, diffused tile amount, 
+			 * total mines, hidden tile amount, revealed tiles amount
+			 */
+			output.print(player.getUsername()+",");
+			output.print(board.getTimePassed()+",");
+			output.print(board.getDefusedTile()+",");
+			output.print(board.getMineCount()+",");
+			output.print(board.getHiddenTile()+",");
+			output.print(board.getRevealedTile()+",");
+			
+			//Saving tile data
+			
+			//Creating a copy of the tiles in the board
+			ArrayList<ArrayList<Tile>> boardData;
+			boardData = new ArrayList<ArrayList<Tile>>();
+			boardData = board.getm_Board();
+			
+			//Getting and saving the board size
+			int tileAmount = boardData.size();
+			output.print(tileAmount+",");
+			
+			/**
+			 * For every tile record if it's revealed, hidden, 
+			 * diffused and mined by True/False
+			 */
+			for (int i=0; i<tileAmount; i++) {
+				for (int j=0; j<tileAmount; j++) {
+					if (boardData.get(i).get(j).isDefused()) {
+						output.print("T");
+					} else {
+						output.print("F");
+					}
+					if (boardData.get(i).get(j).isMine()) {
+						output.print("T");
+					} else {
+						output.print("F");
+					}
+					if (boardData.get(i).get(j).isHidden()) {
+						output.print("T,");
+					} else {
+						output.print("F,");
+					}
+				}
+			}
+			
+			//closing the resource
+			output.close();
+		}
+		
+		catch (Exception e) {}
+	}
+}
