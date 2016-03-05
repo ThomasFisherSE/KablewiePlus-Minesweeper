@@ -59,6 +59,7 @@ public class GameController implements MouseListener, ActionListener {
 
 	private JMenuItem m_newGame;
 	private JMenuItem m_settings;
+	private JMenuItem m_playAutomatically;
 	private JMenuItem m_exit;
 	private JMenuItem m_about;
 	private JMenuItem m_instructions;
@@ -74,8 +75,6 @@ public class GameController implements MouseListener, ActionListener {
 	private Clip m_tick;
 	private Clip m_bomb;
 	private Clip m_won;
-	
-	private boolean m_compTest = true;
 
 	/**
 	 * Constructor
@@ -96,13 +95,6 @@ public class GameController implements MouseListener, ActionListener {
 		setInfo();
 		startGame();
 		setSound();
-		
-		if (m_compTest) {
-			m_computerPlayer = new Computer("AI", m_board, this);
-			Thread aiThread = new Thread(m_computerPlayer);
-			aiThread.start();
-			m_computerPlayer.toggleAi();
-		}
 
 		m_time = new Timer(1000, this);
 		m_time.start();
@@ -281,6 +273,8 @@ public class GameController implements MouseListener, ActionListener {
 		m_newGame.addActionListener(this);
 		m_settings = new JMenuItem("Settings");
 		m_settings.addActionListener(this);
+		m_playAutomatically = new JMenuItem("Play Automatically");
+		m_playAutomatically.addActionListener(this);
 		m_exit = new JMenuItem("Exit");
 		m_exit.addActionListener(this);
 		
@@ -313,6 +307,7 @@ public class GameController implements MouseListener, ActionListener {
 		game.add(m_saveGame);
 		game.add(m_loadGame);
 		game.add(m_settings);
+		game.add(m_playAutomatically);
 		game.add(m_exit);
 				
 		JMenu help = new JMenu("Help");
@@ -372,6 +367,11 @@ public class GameController implements MouseListener, ActionListener {
 			m_bomb.close();
 			m_menu.display();
 			
+		} else if (event.getSource() == m_playAutomatically) {
+			m_computerPlayer = new Computer("AI", m_board, this);
+			Thread aiThread = new Thread(m_computerPlayer);
+			aiThread.start();
+			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_exit) {
 			
 			System.exit(0);
