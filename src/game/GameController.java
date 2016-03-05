@@ -75,7 +75,7 @@ public class GameController implements MouseListener, ActionListener {
 	private Clip m_bomb;
 	private Clip m_won;
 	
-	private boolean m_test = true;
+	private boolean m_compTest = true;
 
 	/**
 	 * Constructor
@@ -97,7 +97,7 @@ public class GameController implements MouseListener, ActionListener {
 		startGame();
 		setSound();
 		
-		if (m_test) {
+		if (m_compTest) {
 			m_computerPlayer = new Computer("AI", m_board, this);
 			Thread aiThread = new Thread(m_computerPlayer);
 			aiThread.start();

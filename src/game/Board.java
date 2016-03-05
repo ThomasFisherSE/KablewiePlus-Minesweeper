@@ -268,7 +268,7 @@ public class Board {
 	/**
 	 * checks if the game have been won or not
 	 */
-	private void haveWon() {
+	public void haveWon() {
 		if (getRevealedTile() + getDefusedTile() == m_board.size() * m_board.size()) {
 			m_gameLost = false;
 			m_gameWon = true;

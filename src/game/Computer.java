@@ -14,7 +14,7 @@ public class Computer extends Player implements Runnable {
 	private boolean m_aiToggled = false;
 	private Board m_board;
 	private GameController m_gameController;
-	private final int SLEEP_TIME = 2000;
+	private final int SLEEP_TIME = 500;
 	
 	// AI Difficulty Probabilities
 	private final double PERFECT_PROBABILITY = 1; // i.e. will always play perfectly
@@ -34,18 +34,27 @@ public class Computer extends Player implements Runnable {
 	}
 
 	public void run() {
-		while (true) {
-			while (m_aiToggled) {
-				boolean foundValidMove = false;
-				do {
-					if (makeMove()) foundValidMove = true;
-				} while (!foundValidMove);
-				
-				try {
-					Thread.sleep(SLEEP_TIME); //Wait 3 seconds
-				} catch (InterruptedException e) {
-					System.err.println("Failed to put thread to sleep.");
+		while (m_aiToggled) {
+			boolean foundValidMove = false;
+			
+			do {
+				if (makeMove()) foundValidMove = true;
+					
+				if (m_board.getm_GameLost()) {
+					m_gameController.setGameLost();
+					m_aiToggled = false;
 				}
+				
+				if (m_board.getm_GameWon()) {
+					m_gameController.setGameWin();
+					m_aiToggled = false;
+				}
+			} while (!foundValidMove);
+			
+			try {
+				Thread.sleep(SLEEP_TIME); //Wait 3 seconds
+			} catch (InterruptedException e) {
+				System.err.println("Failed to put thread to sleep.");
 			}
 		}
 	}
