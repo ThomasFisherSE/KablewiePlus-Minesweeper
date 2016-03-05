@@ -55,18 +55,22 @@ public class Computer extends Player implements Runnable {
 		int row = rnd.nextInt(m_board.getm_Board().size());
 		int column = rnd.nextInt(m_board.getm_Board().get(row).size());
 		Tile randomTile = m_board.getm_Board().get(row).get(column);
-		
 		if (!randomTile.isMine() && randomTile.isHidden()) {
 			m_board.revealTile(column, row);
 			m_gameController.repaintAll();
 			System.out.println("Revealed tile: (" + row + "," + column + ")");
 			return true;
+		} else if (randomTile.isMine() && !randomTile.isDefused()) {
+			m_board.defusedTile(column, row);
+			m_gameController.repaintAll();
+			System.out.println("Mine  tile found. Looping.");
+			return true;
+		} else if (randomTile.isMine() && randomTile.isDefused()) {
+			System.out.println("Mine already defused. Looping.");
+			return false;
 		} else {
-			System.out.println("Mine or already revealed tile found. Looping.");
+			System.out.println("Revealed tile found. Looping.");
 			return false;
 		}
-	}
-		
-		return true;
 	}
 }
