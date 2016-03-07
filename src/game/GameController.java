@@ -91,7 +91,6 @@ public class GameController implements MouseListener, ActionListener {
 		this.m_player = player;
 		this.m_frame = frame;
 		this.m_menu = menu;
-		m_computerPlayer = new Computer("AI", m_board, this);
 		
 		setInfo();
 		startGame();
@@ -369,6 +368,10 @@ public class GameController implements MouseListener, ActionListener {
 			m_menu.display();
 			
 		} else if (event.getSource() == m_playAutomatically) {
+			if (m_computerPlayer == null) {
+				m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
+			}
+			
 			Thread aiThread = new Thread(m_computerPlayer);
 			aiThread.start();
 			m_computerPlayer.toggleAi();
