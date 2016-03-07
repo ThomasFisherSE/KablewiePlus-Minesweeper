@@ -369,7 +369,9 @@ public class GameController implements MouseListener, ActionListener {
 			
 		} else if (event.getSource() == m_playAutomatically) {
 			if (m_computerPlayer == null) {
-				m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
+				int difficulty = Integer.parseInt(JOptionPane.showInputDialog(
+						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
+				m_computerPlayer = new Computer("AI", m_board, this, difficulty);
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);

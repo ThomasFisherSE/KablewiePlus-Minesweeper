@@ -36,12 +36,19 @@ public class Computer extends Player implements Runnable {
 		m_difficulty = difficulty;
 		m_board = board;
 		m_gameController = gc;
-		firstMove();
+		makeStupidMove(); //Make first move
 		m_gameController.repaintAll();
 	}
 
 	public void run() {
 		while (m_aiToggled) {
+			//Sleep here as computer will always have just made a move
+			try {
+				Thread.sleep(SLEEP_TIME); //Wait 3 seconds
+			} catch (InterruptedException e) {
+				System.err.println("Failed to put thread to sleep.");
+			}
+			
 			boolean foundValidMove = false;
 			
 			do {
@@ -49,23 +56,7 @@ public class Computer extends Player implements Runnable {
 				m_gameController.repaintAll();	
 				checkGameOver();
 			} while (!foundValidMove);
-			
-			try {
-				Thread.sleep(SLEEP_TIME); //Wait 3 seconds
-			} catch (InterruptedException e) {
-				System.err.println("Failed to put thread to sleep.");
-			}
 		}
-	}
-	
-	private boolean firstMove() {
-		Random rnd = new Random();
-		int row = rnd.nextInt(m_board.getm_Board().size());
-		int column = rnd.nextInt(m_board.getm_Board().get(row).size());
-		
-		m_board.revealTile(column, row);
-		checkGameOver();
-		return true;
 	}
 	
 	private boolean checkGameOver() {
@@ -109,15 +100,15 @@ public class Computer extends Player implements Runnable {
 		double randomInt = new Random().nextInt(MAXIMUM - MINIMUM + 1);
 		
 		if (randomInt <= (m_difficulty)) {
-			System.out.println("Prob val: " + EASY_PROBABILITY);
-			System.out.println(randomInt);
+			System.out.println("Prob val: " + m_difficulty);
+			System.out.println("RNG produced: " + randomInt);
 			System.out.println("Less than probability, SUCCESS");
 			System.out.println("(Make smart move)");
 			
 			return makeSmartMove();
 		} else {
-			System.out.println("Prob val: " + EASY_PROBABILITY*2);
-			System.out.println(randomInt);
+			System.out.println("Prob val: " + m_difficulty);
+			System.out.println("RNG produced: " + randomInt);
 			System.out.println("More than probability, FAIL");
 			System.out.println("(Make stupid move)");
 			
@@ -130,12 +121,21 @@ public class Computer extends Player implements Runnable {
 	}
 	
 	private boolean makeStupidMove() {
-		Random rnd = new Random();
-		int row = rnd.nextInt(m_board.getm_Board().size());
-		int column = rnd.nextInt(m_board.getm_Board().get(row).size());
+		boolean findingHiddenTile = true;
 		
-		m_board.revealTile(column, row);
-		checkGameOver();
+		while (findingHiddenTile) {
+			Random rnd = new Random();
+			int row = rnd.nextInt(m_board.getm_Board().size());
+			int column = rnd.nextInt(m_board.getm_Board().get(row).size());
+			Tile randomTile = m_board.getm_Board().get(row).get(column);
+			
+			if (randomTile.isHidden()) {
+				m_board.revealTile(column, row);
+				System.out.println("Revealed tile: (" + row + "," + column + ")");
+				findingHiddenTile = false;
+			}
+		}
+			
 		return true;
 	}
 }
