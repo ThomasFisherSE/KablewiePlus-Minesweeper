@@ -59,7 +59,6 @@ public class GameController implements MouseListener, ActionListener {
 
 	private JMenuItem m_newGame;
 	private JMenuItem m_settings;
-	private JMenuItem m_playAutomatically;
 	private JMenuItem m_exit;
 	private JMenuItem m_about;
 	private JMenuItem m_instructions;
@@ -71,7 +70,12 @@ public class GameController implements MouseListener, ActionListener {
 	private JMenuItem m_saveSlot1;
 	private JMenuItem m_saveSlot2;
 	private JMenuItem m_saveSlot3;
-
+	private JMenu m_playAutomatically;
+	private JMenuItem m_easyDifficulty;
+	private JMenuItem m_normalDifficulty;
+	private JMenuItem m_hardDifficulty;
+	private JMenuItem m_customDifficulty;
+	
 	private Clip m_tick;
 	private Clip m_bomb;
 	private Clip m_won;
@@ -273,10 +277,23 @@ public class GameController implements MouseListener, ActionListener {
 		m_newGame.addActionListener(this);
 		m_settings = new JMenuItem("Settings");
 		m_settings.addActionListener(this);
-		m_playAutomatically = new JMenuItem("Play Automatically");
-		m_playAutomatically.addActionListener(this);
 		m_exit = new JMenuItem("Exit");
 		m_exit.addActionListener(this);
+		
+		m_playAutomatically = new JMenu("Play Automatically");
+		m_easyDifficulty = new JMenuItem("Easy Difficulty");
+		m_easyDifficulty.addActionListener(this);
+		m_normalDifficulty = new JMenuItem("Normal Difficulty");
+		m_normalDifficulty.addActionListener(this);
+		m_hardDifficulty = new JMenuItem("Hard Difficulty");
+		m_hardDifficulty.addActionListener(this);
+		m_customDifficulty = new JMenuItem("Custom Difficulty");
+		m_customDifficulty.addActionListener(this);
+		
+		m_playAutomatically.add(m_easyDifficulty);
+		m_playAutomatically.add(m_normalDifficulty);
+		m_playAutomatically.add(m_hardDifficulty);
+		m_playAutomatically.add(m_customDifficulty);
 		
 		m_loadGame = new JMenu("Load Game");
 		m_loadSlot1 = new JMenuItem("Slot 1");
@@ -367,7 +384,31 @@ public class GameController implements MouseListener, ActionListener {
 			m_bomb.close();
 			m_menu.display();
 			
-		} else if (event.getSource() == m_playAutomatically) {
+		} else if (event.getSource() == m_easyDifficulty) {
+			if (m_computerPlayer == null) {
+				m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
+			}
+			
+			Thread aiThread = new Thread(m_computerPlayer);
+			aiThread.start();
+			m_computerPlayer.toggleAi();
+		} else if (event.getSource() == m_normalDifficulty) {
+			if (m_computerPlayer == null) {
+				m_computerPlayer = new Computer("AI", m_board, this, Computer.NORMAL_PROBABILITY);
+			}
+			
+			Thread aiThread = new Thread(m_computerPlayer);
+			aiThread.start();
+			m_computerPlayer.toggleAi();
+		} else if (event.getSource() == m_hardDifficulty) {
+			if (m_computerPlayer == null) {
+				m_computerPlayer = new Computer("AI", m_board, this, Computer.PERFECT_PROBABILITY);
+			}
+			
+			Thread aiThread = new Thread(m_computerPlayer);
+			aiThread.start();
+			m_computerPlayer.toggleAi();
+		} else if (event.getSource() == m_customDifficulty) {
 			if (m_computerPlayer == null) {
 				int difficulty = Integer.parseInt(JOptionPane.showInputDialog(
 						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));

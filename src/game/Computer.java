@@ -15,6 +15,7 @@ public class Computer extends Player implements Runnable {
 	private Board m_board;
 	private GameController m_gameController;
 	private int m_difficulty;
+	private boolean m_test = true;
 	
 	private final int SLEEP_TIME = 2000;
 	private final int MAXIMUM = 100;
@@ -80,18 +81,32 @@ public class Computer extends Player implements Runnable {
 				Tile randomTile = m_board.getm_Board().get(row).get(column);
 				if (!randomTile.isMine() && randomTile.isHidden()) {
 					m_board.revealTile(column, row);
-					System.out.println("Revealed tile: (" + row + "," + column + ")");
+					
+					if (m_test) {
+						System.out.println("Revealed tile: (" + row + "," + column + ")");
+					}
+					
 					return true;
 				} else if (randomTile.isMine() && !randomTile.isDefused()) {
 					m_board.defusedTile(column, row);
 					m_gameController.repaintAll();
-					System.out.println("Mine tile found. Looping.");
+					
+					if (m_test) {
+						System.out.println("Mine tile found. Looping.");
+					}
+					
 					return true;
 				} else if (randomTile.isMine() && randomTile.isDefused()) {
-					System.out.println("Mine already defused. Looping.");
+					if (m_test) {
+						System.out.println("Mine already defused. Looping.");
+					}
+					
 					return false;
 				} else {
-					System.out.println("Revealed tile found. Looping.");
+					if (m_test) {
+						System.out.println("Revealed tile found. Looping.");
+					}
+					
 					return false;
 				}
 	}
@@ -100,17 +115,21 @@ public class Computer extends Player implements Runnable {
 		double randomInt = new Random().nextInt(MAXIMUM - MINIMUM + 1);
 		
 		if (randomInt <= (m_difficulty)) {
-			System.out.println("Prob val: " + m_difficulty);
-			System.out.println("RNG produced: " + randomInt);
-			System.out.println("Less than probability, SUCCESS");
-			System.out.println("(Make smart move)");
+			if (m_test) {
+				System.out.println("Prob val: " + m_difficulty);
+				System.out.println("RNG produced: " + randomInt);
+				System.out.println("Less than probability, SUCCESS");
+				System.out.println("(Make smart move)");
+			}
 			
 			return makeSmartMove();
 		} else {
-			System.out.println("Prob val: " + m_difficulty);
-			System.out.println("RNG produced: " + randomInt);
-			System.out.println("More than probability, FAIL");
-			System.out.println("(Make stupid move)");
+			if (m_test) {
+				System.out.println("Prob val: " + m_difficulty);
+				System.out.println("RNG produced: " + randomInt);
+				System.out.println("More than probability, FAIL");
+				System.out.println("(Make stupid move)");
+			}
 			
 			return makeStupidMove();
 		}
