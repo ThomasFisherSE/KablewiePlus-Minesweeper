@@ -65,15 +65,19 @@ public class GameController implements MouseListener, ActionListener {
 	private JMenuItem m_exit;
 	private JMenuItem m_about;
 	private JMenuItem m_instructions;
+	
 	private JMenu m_loadGame;
 	private JMenuItem m_loadSlot1;
 	private JMenuItem m_loadSlot2;
 	private JMenuItem m_loadSlot3;
+	
 	private JMenu m_saveGame;
 	private JMenuItem m_saveSlot1;
 	private JMenuItem m_saveSlot2;
 	private JMenuItem m_saveSlot3;
+	
 	private JMenu m_playAutomatically;
+	private JMenuItem m_stopAi;
 	private JMenuItem m_easyDifficulty;
 	private JMenuItem m_normalDifficulty;
 	private JMenuItem m_hardDifficulty;
@@ -286,6 +290,8 @@ public class GameController implements MouseListener, ActionListener {
 		m_exit.addActionListener(this);
 		
 		m_playAutomatically = new JMenu("Play Automatically");
+		m_stopAi = new JMenuItem("Stop");
+		m_stopAi.addActionListener(this);
 		m_easyDifficulty = new JMenuItem("Easy Difficulty");
 		m_easyDifficulty.addActionListener(this);
 		m_normalDifficulty = new JMenuItem("Normal Difficulty");
@@ -295,6 +301,7 @@ public class GameController implements MouseListener, ActionListener {
 		m_customDifficulty = new JMenuItem("Custom Difficulty");
 		m_customDifficulty.addActionListener(this);
 		
+		m_playAutomatically.add(m_stopAi);
 		m_playAutomatically.add(m_easyDifficulty);
 		m_playAutomatically.add(m_normalDifficulty);
 		m_playAutomatically.add(m_hardDifficulty);
@@ -390,7 +397,11 @@ public class GameController implements MouseListener, ActionListener {
 			m_bomb.close();
 			m_menu.display();
 			
-		} else if (event.getSource() == m_easyDifficulty) {
+		} else if (event.getSource() == m_stopAi) {
+			if (m_computerPlayer.isRunning()) {
+				m_computerPlayer.toggleAi();
+			}
+	 	} else if (event.getSource() == m_easyDifficulty) {
 			if (m_computerPlayer == null) {
 				m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
 				setTime();
@@ -470,9 +481,7 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_saveSlot3) {
 			//pass in slot no. and board
 			m_savedFile.saveFile(3,m_board,m_player);
-		}
-		
-		if (event.getSource() == m_revealMines) {
+		} else if (event.getSource() == m_revealMines) {
             if(!m_minesRevealed){
                 m_board.showBombTile();
                 m_panelGame.repaint();

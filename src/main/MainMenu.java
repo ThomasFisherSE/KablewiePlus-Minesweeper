@@ -30,7 +30,31 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	private JTextField m_totalMinesText;
 	private JFrame m_frame;
 	private Kablewie m_kablewie;
-
+	
+	private final int GAME_X = 95;
+	/*
+	private final int GAME_Y = ;
+	private final int GAME_WIDTH = ;
+	private final int GAME_HEIGHT = ;
+	*/
+	
+	private final int LBL_COLUMN_X = 6;
+	private final int USERNAME_ROW_Y = 26;
+	
+	private final int LBL_WIDTH = 82;
+	private final int LBL_HEIGHT = 26;
+	
+	private final int TF_HEIGHT = 26;
+	private final int TF_WIDTH = 110;
+	
+	private final int TF_COLUMN_X = 98;
+	
+	private final int TOTAL_MINES_ROW_Y = 116;
+	private final int COLUMNS = 10;
+	
+	private final int BOARDSIZE_ROW_Y = 69;
+	
+	
 	/**
 	 * Constructor that sets variable values
 	 * and starts display of the menu.
@@ -58,16 +82,16 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	 */
 	public void createUserName(JPanel gamePanel) {
 		JLabel userName = new JLabel("User Name:");
-		userName.setBounds(6, 26, 82, 26);
+		userName.setBounds(LBL_COLUMN_X, USERNAME_ROW_Y, LBL_WIDTH, LBL_HEIGHT);
 		gamePanel.add(userName);
 
 		m_userNameText = new JTextField();
 		m_userNameText.addKeyListener(this);
 		m_userNameText.setBorder(null);
-		m_userNameText.setBounds(98, 26, 110, 26);
+		m_userNameText.setBounds(TF_COLUMN_X, USERNAME_ROW_Y, TF_WIDTH, TF_HEIGHT);
 		m_userNameText.setForeground(Color.RED);
 		gamePanel.add(m_userNameText);
-		m_userNameText.setColumns(10);
+		m_userNameText.setColumns(COLUMNS);
 	}
 
 	/**
@@ -77,17 +101,17 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	 */
 	public void createBoardSize(JPanel gamePanel) {
 		JLabel boardSize = new JLabel("Board Size:");
-		boardSize.setBounds(6, 69, 82, 26);
+		boardSize.setBounds(LBL_COLUMN_X, BOARDSIZE_ROW_Y, LBL_WIDTH, LBL_HEIGHT);
 		gamePanel.add(boardSize);
 
 		m_boardSizeText = new JTextField();
 		m_boardSizeText.addKeyListener(this);
 		m_boardSizeText.setText("10");
 		m_boardSizeText.setBorder(null);
-		m_boardSizeText.setBounds(98, 69, 110, 26);
+		m_boardSizeText.setBounds(TF_COLUMN_X, BOARDSIZE_ROW_Y, TF_WIDTH, TF_HEIGHT);
 		m_boardSizeText.setForeground(Color.RED);
 		gamePanel.add(m_boardSizeText);
-		m_boardSizeText.setColumns(10);
+		m_boardSizeText.setColumns(COLUMNS);
 	}
 
 	/**
@@ -97,17 +121,17 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	 */
 	public void createTotalMines(JPanel gamePanel) {
 		JLabel totalMines = new JLabel("Total Mines:");
-		totalMines.setBounds(6, 116, 82, 26);
+		totalMines.setBounds(LBL_COLUMN_X, TOTAL_MINES_ROW_Y, LBL_WIDTH, LBL_HEIGHT);
 		gamePanel.add(totalMines);
 
 		m_totalMinesText = new JTextField();
 		m_totalMinesText.addKeyListener(this);
 		m_totalMinesText.setText("10");
 		m_totalMinesText.setBorder(null);
-		m_totalMinesText.setBounds(98, 116, 110, 26);
+		m_totalMinesText.setBounds(TF_COLUMN_X, TOTAL_MINES_ROW_Y, TF_WIDTH, TF_HEIGHT);
 		m_totalMinesText.setForeground(Color.RED);
 		gamePanel.add(m_totalMinesText);
-		m_totalMinesText.setColumns(10);
+		m_totalMinesText.setColumns(COLUMNS);
 	}
 
 	/**
@@ -138,7 +162,7 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 		gamePanel.setBackground(Color.GRAY);
 		gamePanel.setBorder(
 				new TitledBorder(null, "Kablewie Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		gamePanel.setBounds(95, 27, 274, 210);
+		gamePanel.setBounds(GAME_X, 27, 274, 210);
 		m_frame.getContentPane().add(gamePanel);
 		gamePanel.setLayout(null);
 		createUserName(gamePanel);
@@ -157,7 +181,7 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 		m_frame.setTitle("Kablewie");
 		m_frame.setForeground(Color.RED);
 		m_frame.setBackground(Color.RED);
-		m_frame.getContentPane().setBackground(new Color(153, 180, 209));
+		m_frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		m_frame.getContentPane().setLayout(null);
 		
 		// Create and add the panel.

@@ -27,6 +27,9 @@ public class Computer extends Player implements Runnable {
 	public static final int NORMAL_PROBABILITY = 90; // i.e. 1/10 moves won't be perfect
 	public static final int EASY_PROBABILITY = 50; // i.e. only 50% chance to make a perfect move
 	
+	public boolean isRunning() {
+		return m_aiToggled;
+	}
 	
 	public boolean toggleAi() {
 		m_aiToggled = !m_aiToggled;

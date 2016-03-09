@@ -300,7 +300,7 @@ public class Board {
 		int hiddenTile = 0;
 		
 		for (int i = 0; i < m_board.size(); ++i) {
-			for (int j = 0; j < m_board.get(0).size(); ++j) {
+			for (int j = 0; j < m_board.size(); ++j) {
 				if (m_board.get(i).get(j).isHidden()) {
 					++hiddenTile;
 				}
