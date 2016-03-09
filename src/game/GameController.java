@@ -56,6 +56,7 @@ public class GameController implements MouseListener, ActionListener {
 	private long m_minuntesPlayed;
 	private long m_secoundPlayed;
 	private String m_timePassed;
+	private boolean m_flag = true;
 
 	private JMenuItem m_newGame;
 	private JMenuItem m_settings;
@@ -387,9 +388,7 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_easyDifficulty) {
 			if (m_computerPlayer == null) {
 				m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
-				int time = Integer.parseInt(JOptionPane.showInputDialog(
-						"Enter time (0 - 10 seconds) for between computer turns: "));
-				m_computerPlayer.setTime(time);
+				setTime();
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
@@ -398,9 +397,7 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_normalDifficulty) {
 			if (m_computerPlayer == null) {
 				m_computerPlayer = new Computer("AI", m_board, this, Computer.NORMAL_PROBABILITY);
-				int time = Integer.parseInt(JOptionPane.showInputDialog(
-						"Enter time (0 - 10 seconds) for between computer turns: "));
-				m_computerPlayer.setTime(time);
+				setTime();
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
@@ -409,9 +406,7 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_hardDifficulty) {
 			if (m_computerPlayer == null) {
 				m_computerPlayer = new Computer("AI", m_board, this, Computer.PERFECT_PROBABILITY);
-				int time = Integer.parseInt(JOptionPane.showInputDialog(
-						"Enter time (0 - 10 seconds) for between computer turns: "));
-				m_computerPlayer.setTime(time);
+				setTime();
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
@@ -422,9 +417,7 @@ public class GameController implements MouseListener, ActionListener {
 				int difficulty = Integer.parseInt(JOptionPane.showInputDialog(
 						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
 				m_computerPlayer = new Computer("AI", m_board, this, difficulty);
-				int time = Integer.parseInt(JOptionPane.showInputDialog(
-						"Enter time (0 - 10 seconds) for between computer turns: "));
-				m_computerPlayer.setTime(time);
+				setTime();
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
@@ -495,6 +488,23 @@ public class GameController implements MouseListener, ActionListener {
 				+ "mine. If the flag is placed on a tile\n" 
 				+ "that is deemed to be a mine then the number of mines "
 				+ "defused is increased.\n";
+	}
+	
+	public void setTime() {
+		do {
+			int time = Integer.parseInt(JOptionPane.showInputDialog(
+					"Enter time (0 - 10 seconds) for between computer turns: "));
+			if (time >= 0 && time <=10) {
+				m_computerPlayer.setTime(time);
+				m_flag = false;
+			} else if (!(time >= 0 && time <=10)) {
+				JOptionPane.showMessageDialog(null,
+						"Time values must be between 0 and 10 seconds",
+						"Value Error",
+						JOptionPane.WARNING_MESSAGE);
+			}
+		} while (m_flag);
+		m_flag = true;
 	}
 
 	/**
