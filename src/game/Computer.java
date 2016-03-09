@@ -16,8 +16,8 @@ public class Computer extends Player implements Runnable {
 	private GameController m_gameController;
 	private int m_difficulty;
 	private boolean m_test = true;
+	private int m_sleepTime = 500;
 	
-	private final int SLEEP_TIME = 2000;
 	private final int MAXIMUM = 100;
 	private final int MINIMUM = 1;
 	
@@ -30,6 +30,10 @@ public class Computer extends Player implements Runnable {
 	public boolean toggleAi() {
 		m_aiToggled = !m_aiToggled;
 		return m_aiToggled;
+	}
+	
+	public void setTime(int time) {
+		m_sleepTime = time*1000;
 	}
 	
 	public Computer(String name, Board board, GameController gc, int difficulty) {
@@ -45,7 +49,7 @@ public class Computer extends Player implements Runnable {
 		while (m_aiToggled) {
 			//Sleep here as computer will always have just made a move
 			try {
-				Thread.sleep(SLEEP_TIME); //Wait 3 seconds
+				Thread.sleep(m_sleepTime); //Wait 3 seconds
 			} catch (InterruptedException e) {
 				System.err.println("Failed to put thread to sleep.");
 			}

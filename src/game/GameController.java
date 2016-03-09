@@ -387,6 +387,9 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_easyDifficulty) {
 			if (m_computerPlayer == null) {
 				m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
+				int time = Integer.parseInt(JOptionPane.showInputDialog(
+						"Enter time (0 - 10 seconds) for between computer turns: "));
+				m_computerPlayer.setTime(time);
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
@@ -395,6 +398,9 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_normalDifficulty) {
 			if (m_computerPlayer == null) {
 				m_computerPlayer = new Computer("AI", m_board, this, Computer.NORMAL_PROBABILITY);
+				int time = Integer.parseInt(JOptionPane.showInputDialog(
+						"Enter time (0 - 10 seconds) for between computer turns: "));
+				m_computerPlayer.setTime(time);
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
@@ -403,6 +409,9 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_hardDifficulty) {
 			if (m_computerPlayer == null) {
 				m_computerPlayer = new Computer("AI", m_board, this, Computer.PERFECT_PROBABILITY);
+				int time = Integer.parseInt(JOptionPane.showInputDialog(
+						"Enter time (0 - 10 seconds) for between computer turns: "));
+				m_computerPlayer.setTime(time);
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
@@ -413,6 +422,9 @@ public class GameController implements MouseListener, ActionListener {
 				int difficulty = Integer.parseInt(JOptionPane.showInputDialog(
 						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
 				m_computerPlayer = new Computer("AI", m_board, this, difficulty);
+				int time = Integer.parseInt(JOptionPane.showInputDialog(
+						"Enter time (0 - 10 seconds) for between computer turns: "));
+				m_computerPlayer.setTime(time);
 			}
 			
 			Thread aiThread = new Thread(m_computerPlayer);
