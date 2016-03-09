@@ -44,6 +44,7 @@ public class GameController implements MouseListener, ActionListener {
 	private Board m_board;
 	private Human m_humanPlayer;
 	private Computer m_computerPlayer;
+	private Thread m_aiThread;
 	private SavedFile m_savedFile;
 	
 	private JFrame m_frame;
@@ -407,8 +408,8 @@ public class GameController implements MouseListener, ActionListener {
 				setTime();
 			}
 			
-			Thread aiThread = new Thread(m_computerPlayer);
-			aiThread.start();
+			m_aiThread = new Thread(m_computerPlayer);
+			m_aiThread.start();
 			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_normalDifficulty) {
 			if (m_computerPlayer == null) {
@@ -416,8 +417,8 @@ public class GameController implements MouseListener, ActionListener {
 				setTime();
 			}
 			
-			Thread aiThread = new Thread(m_computerPlayer);
-			aiThread.start();
+			m_aiThread = new Thread(m_computerPlayer);
+			m_aiThread.start();
 			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_hardDifficulty) {
 			if (m_computerPlayer == null) {
@@ -425,8 +426,8 @@ public class GameController implements MouseListener, ActionListener {
 				setTime();
 			}
 			
-			Thread aiThread = new Thread(m_computerPlayer);
-			aiThread.start();
+			m_aiThread = new Thread(m_computerPlayer);
+			m_aiThread.start();
 			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_customDifficulty) {
 			if (m_computerPlayer == null) {
@@ -436,8 +437,8 @@ public class GameController implements MouseListener, ActionListener {
 				setTime();
 			}
 			
-			Thread aiThread = new Thread(m_computerPlayer);
-			aiThread.start();
+			m_aiThread = new Thread(m_computerPlayer);
+			m_aiThread.start();
 			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_exit) {
 			
@@ -521,7 +522,7 @@ public class GameController implements MouseListener, ActionListener {
 	
 	public void setTime() {
 		do {
-			int time = Integer.parseInt(JOptionPane.showInputDialog(
+			double time = Double.parseDouble(JOptionPane.showInputDialog(
 					"Enter time (0 - 10 seconds) for between computer turns: "));
 			if (time >= 0 && time <=10) {
 				m_computerPlayer.setTime(time);
@@ -540,6 +541,20 @@ public class GameController implements MouseListener, ActionListener {
 	 * resets the game so it can be replayed
 	 */
 	private void reset() {
+		if (m_computerPlayer != null) {
+			if (m_computerPlayer.isRunning()) {
+				m_computerPlayer.toggleAi();
+				m_computerPlayer = null;
+				m_aiThread.interrupt();
+				
+				try {
+					m_aiThread.join();
+				} catch (InterruptedException e) {
+					System.err.println("Error occured when waiting for ai thread to finish");
+				}
+			}
+		}
+		
 		m_board.reset();
 		m_GameFinshed.setVisible(false);
 		m_panelGame.repaint();

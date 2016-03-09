@@ -36,8 +36,8 @@ public class Computer extends Player implements Runnable {
 		return m_aiToggled;
 	}
 	
-	public void setTime(int time) {
-		m_sleepTime = time*1000;
+	public void setTime(double time) {
+		m_sleepTime = (int) time*1000;
 	}
 	
 	public Computer(String name, Board board, GameController gc, int difficulty) {
@@ -45,11 +45,12 @@ public class Computer extends Player implements Runnable {
 		m_difficulty = difficulty;
 		m_board = board;
 		m_gameController = gc;
+	}
+	
+	public void run() {
 		makeStupidMove(); //Make first move
 		m_gameController.repaintAll();
-	}
-
-	public void run() {
+		
 		while (m_aiToggled) {
 			//Sleep here as computer will always have just made a move
 			try {
@@ -64,7 +65,7 @@ public class Computer extends Player implements Runnable {
 				if (makeMove()) foundValidMove = true;
 				m_gameController.repaintAll();	
 				checkGameOver();
-			} while (!foundValidMove);
+			} while (!foundValidMove && m_aiToggled);
 		}
 	}
 	
