@@ -244,9 +244,9 @@ public class Board {
 		x = x + 200;
 		
 		if (timePassed == null) {
-			g.drawString("Time : 00:00:00", x, y);
+			g.drawString("Time: 00:00:00", x, y);
 		} else {
-			g.drawString("Time :" + timePassed, x, y);
+			g.drawString("Time: " + timePassed, x, y);
 			setTimePassed(timePassed);
 		}
 		

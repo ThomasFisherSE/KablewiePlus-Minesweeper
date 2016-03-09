@@ -54,8 +54,8 @@ public class GameController implements MouseListener, ActionListener {
 
 	private Timer m_time;
 	private long m_hoursPlayed;
-	private long m_minuntesPlayed;
-	private long m_secoundPlayed;
+	private long m_minutesPlayed;
+	private long m_secondsPlayed;
 	private String m_timePassed;
 	private boolean m_flag = true;
 	private boolean m_minesRevealed = false;
@@ -87,6 +87,10 @@ public class GameController implements MouseListener, ActionListener {
 	private Clip m_tick;
 	private Clip m_bomb;
 	private Clip m_won;
+	
+	private final int MIN_TIME = 0;
+	private final int MAX_TIME = 10;
+	private final int DOUBLE_DIGITS = 10;
 
 	/**
 	 * Constructor
@@ -366,24 +370,40 @@ public class GameController implements MouseListener, ActionListener {
 		m_savedFile = new SavedFile();
 		if (event.getSource() == m_time) {
 			m_panelInfo.repaint();
-			m_secoundPlayed += m_time.getDelay() / 1000;
+			m_secondsPlayed += m_time.getDelay() / 1000;
 			
-			if (m_secoundPlayed >= 60) {
+			if (m_secondsPlayed >= 60) {
 				
-				m_minuntesPlayed = m_minuntesPlayed + 1;
-				m_secoundPlayed = 0;
+				m_minutesPlayed = m_minutesPlayed + 1;
+				m_secondsPlayed = 0;
 				
-				if (m_minuntesPlayed >= 60) {
+				if (m_minutesPlayed >= 60) {
 					m_hoursPlayed = m_hoursPlayed + 1;
-					m_minuntesPlayed = 0;
+					m_minutesPlayed = 0;
 				}
 			}
 			
-			m_timePassed = m_hoursPlayed 
-							+ " : " 
-							+ m_minuntesPlayed 
-							+ " : " 
-							+ m_secoundPlayed;
+			String hours = "" + m_hoursPlayed;
+			String minutes = ""+ m_minutesPlayed;
+			String seconds = "" + m_secondsPlayed;
+			
+			if (m_hoursPlayed < DOUBLE_DIGITS) {
+				hours = "0" + hours;
+			}
+			
+			if (m_minutesPlayed < DOUBLE_DIGITS) {
+				minutes = "0" + minutes;
+			}
+			
+			if (m_secondsPlayed < DOUBLE_DIGITS) {
+				seconds = "0" + seconds;
+			}
+			
+			m_timePassed = hours
+							+ ":" 
+							+ minutes
+							+ ":" 
+							+ seconds;
 			
 		} else if (event.getSource() == m_newGame) {
 			
@@ -524,10 +544,10 @@ public class GameController implements MouseListener, ActionListener {
 		do {
 			double time = Double.parseDouble(JOptionPane.showInputDialog(
 					"Enter time (0 - 10 seconds) for between computer turns: "));
-			if (time >= 0 && time <=10) {
+			if (time >= MIN_TIME && time <=MAX_TIME) {
 				m_computerPlayer.setTime(time);
 				m_flag = false;
-			} else if (!(time >= 0 && time <=10)) {
+			} else if (!(time >= MIN_TIME && time <=MAX_TIME)) {
 				JOptionPane.showMessageDialog(null,
 						"Time values must be between 0 and 10 seconds",
 						"Value Error",
@@ -560,8 +580,8 @@ public class GameController implements MouseListener, ActionListener {
 		m_panelGame.repaint();
 		m_panelInfo.repaint();
 		m_frame.repaint();
-		m_secoundPlayed = 0;
-		m_minuntesPlayed = 0;
+		m_secondsPlayed = 0;
+		m_minutesPlayed = 0;
 		m_hoursPlayed = 0;
 		m_timePassed = null;
 		m_won.stop();
