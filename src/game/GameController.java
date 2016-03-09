@@ -57,9 +57,11 @@ public class GameController implements MouseListener, ActionListener {
 	private long m_secoundPlayed;
 	private String m_timePassed;
 	private boolean m_flag = true;
+	private boolean m_minesRevealed = false;
 
 	private JMenuItem m_newGame;
 	private JMenuItem m_settings;
+	private JMenuItem m_revealMines;
 	private JMenuItem m_exit;
 	private JMenuItem m_about;
 	private JMenuItem m_instructions;
@@ -278,6 +280,8 @@ public class GameController implements MouseListener, ActionListener {
 		m_newGame.addActionListener(this);
 		m_settings = new JMenuItem("Settings");
 		m_settings.addActionListener(this);
+		m_revealMines = new JMenuItem("Reveal Mines");
+		m_revealMines.addActionListener(this);
 		m_exit = new JMenuItem("Exit");
 		m_exit.addActionListener(this);
 		
@@ -325,6 +329,7 @@ public class GameController implements MouseListener, ActionListener {
 		game.add(m_saveGame);
 		game.add(m_loadGame);
 		game.add(m_settings);
+		game.add(m_revealMines);
 		game.add(m_playAutomatically);
 		game.add(m_exit);
 				
@@ -466,6 +471,21 @@ public class GameController implements MouseListener, ActionListener {
 			//pass in slot no. and board
 			m_savedFile.saveFile(3,m_board,m_player);
 		}
+		
+		if (event.getSource() == m_revealMines) {
+            if(!m_minesRevealed){
+                m_board.showBombTile();
+                m_panelGame.repaint();
+                m_panelInfo.repaint();
+                m_minesRevealed = !m_minesRevealed;
+            }else if (m_minesRevealed){
+                m_board.hideBombTile();    
+                m_panelGame.repaint();
+                m_panelInfo.repaint();
+                m_minesRevealed = !m_minesRevealed;
+            }
+            
+        }
 	}
 
 	/**

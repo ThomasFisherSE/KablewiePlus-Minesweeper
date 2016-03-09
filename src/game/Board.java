@@ -326,6 +326,41 @@ public class Board {
 		
 		return defusedTile;
 	}
+	
+	public void showBombTile() {
+		
+		for (int y=0; y < m_columns - 1; y++ ){
+	            for (int x=0; x < m_rows - 1; x++){
+			
+	                if (m_board.get(y).get(x).isMine()) {
+
+	                    m_board.get(y).remove(x); // create a mine tile
+	                    m_board.get(y).add(x, new Mine(true, true, false, "images/mine.png"));
+	                    for (int i = 0; i < m_board.size(); ++i) {
+	                        for (int j = 0; j < m_board.get(0).size(); ++j) {
+	                            if (m_board.get(i).get(j).isMine() && !(i == y && j == x)) {
+	                                m_board.get(i).remove(j); // create a mine tile
+	                                m_board.get(i).add(j, new Mine(true, true, false, "images/mine.png"));
+	                            }
+	                        }
+	                    }	
+	                }
+	            }		
+		}
+	    }
+	    
+	    public void hideBombTile() {
+			
+	        for (int y=0; y < m_columns; y++ ){
+	            for (int x=0; x < m_rows; x++){
+
+	                if (m_board.get(y).get(x).isMine()) {                    
+	                    m_board.get(y).remove(x);
+	                    m_board.get(y).add(x, new Hidden(m_board.get(y).get(x).isMine(), true, false));
+	                }
+	            }		
+	        }
+	    }
 
 	/**
 	 * reset the game so that it can be played again
