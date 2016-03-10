@@ -57,7 +57,7 @@ public abstract class Tile {
 	/**
 	 * @return the mines near by the tile calls it
 	 */
-	public int getm_NearByMines() {
+	public int getNearbyMines() {
 		return m_nearbyMines;
 	}
 	

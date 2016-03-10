@@ -237,7 +237,7 @@ public class GameController implements MouseListener, ActionListener {
 	 * Called on mouse event
 	 */
 	public void mouseClicked(MouseEvent e) {
-		if (!(m_board.getm_GameLost())) {
+		if (!(m_board.getGameLost())) {
 			int xPos = (int) Math.floor(e.getX() / Tile.WIDTH);
 			int yPos = (int) Math.floor(e.getY() / Tile.HEIGHT);
 			
@@ -254,10 +254,10 @@ public class GameController implements MouseListener, ActionListener {
 				m_panelInfo.repaint();
 			}
 		}
-		if (m_board.getm_GameLost()) {
+		if (m_board.getGameLost()) {
 			setGameLost();
 		}
-		if (m_board.getm_GameWon()) {
+		if (m_board.getGameWon()) {
 			setGameWin();
 		}
 	}

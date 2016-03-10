@@ -70,11 +70,11 @@ public class Computer extends Player implements Runnable {
 	}
 	
 	private boolean checkGameOver() {
-		if (m_board.getm_GameLost()) {
+		if (m_board.getGameLost()) {
 			m_gameController.setGameLost();
 			m_aiToggled = false;
 			return true;
-		} else if (m_board.getm_GameWon()) {
+		} else if (m_board.getGameWon()) {
 			m_gameController.setGameWin();
 			m_aiToggled = false;
 			return true;
@@ -85,9 +85,9 @@ public class Computer extends Player implements Runnable {
 		
 	private boolean makePerfectMove() {
 				Random rnd = new Random();
-				int row = rnd.nextInt(m_board.getm_Board().size());
-				int column = rnd.nextInt(m_board.getm_Board().get(row).size());
-				Tile randomTile = m_board.getm_Board().get(row).get(column);
+				int row = rnd.nextInt(m_board.getBoard().size());
+				int column = rnd.nextInt(m_board.getBoard().get(row).size());
+				Tile randomTile = m_board.getBoard().get(row).get(column);
 				if (!randomTile.isMine() && randomTile.isHidden()) {
 					m_board.revealTile(column, row);
 					
@@ -153,9 +153,9 @@ public class Computer extends Player implements Runnable {
 		
 		while (findingHiddenTile) {
 			Random rnd = new Random();
-			int row = rnd.nextInt(m_board.getm_Board().size());
-			int column = rnd.nextInt(m_board.getm_Board().get(row).size());
-			Tile randomTile = m_board.getm_Board().get(row).get(column);
+			int row = rnd.nextInt(m_board.getBoard().size());
+			int column = rnd.nextInt(m_board.getBoard().get(row).size());
+			Tile randomTile = m_board.getBoard().get(row).get(column);
 			
 			if (randomTile.isHidden()) {
 				m_board.revealTile(column, row);

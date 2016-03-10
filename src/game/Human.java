@@ -19,7 +19,7 @@ public class Human extends Player  {
 		m_playersTurn = true;
 	}
 
-	public boolean getm_playersTurn() {
+	public boolean getPlayersTurn() {
 		return m_playersTurn;
 	}
 

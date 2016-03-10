@@ -69,7 +69,7 @@ public class SavedFile {
 			//Creating a copy of the tiles in the board
 			ArrayList<ArrayList<Tile>> boardData;
 			boardData = new ArrayList<ArrayList<Tile>>();
-			boardData = board.getm_Board();
+			boardData = board.getBoard();
 			
 			//Getting and saving the board size
 			int tileAmount = boardData.size();

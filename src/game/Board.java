@@ -52,21 +52,21 @@ public class Board {
 	/**
 	 * @return the value of m_gameLost which is true if the game is lost
 	 */
-	public boolean getm_GameLost() {
+	public boolean getGameLost() {
 		return m_gameLost;
 	}
 
 	/**
 	 * @return the board which has all the tile
 	 */
-	public ArrayList<ArrayList<Tile>> getm_Board() {
+	public ArrayList<ArrayList<Tile>> getBoard() {
 		return m_board;
 	}
 
 	/**
 	 * @return the value of m_gameWon which is true if the game is won
 	 */
-	public boolean getm_GameWon() {
+	public boolean getGameWon() {
 		return m_gameWon;
 	}
 

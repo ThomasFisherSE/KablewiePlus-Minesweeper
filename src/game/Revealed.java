@@ -41,7 +41,7 @@ public class Revealed extends Tile {
 					y * Tile.HEIGHT,
 					null);
 		
-		if (getm_NearByMines() > 0) {
+		if (getNearbyMines() > 0) {
 			/*
 			 * using Spacing so that the number is drawn in the center
 			 */
@@ -49,7 +49,7 @@ public class Revealed extends Tile {
 			int spacingY = 19;
 			int fontSize = 15;
 			g.setFont(new Font("Time new roman", Font.BOLD, fontSize));
-			g.drawString(Integer.toString(getm_NearByMines()),
+			g.drawString(Integer.toString(getNearbyMines()),
 											x * Tile.WIDTH + spacingX,
 											y * Tile.HEIGHT + spacingY);
 		}
