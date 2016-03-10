@@ -328,7 +328,6 @@ public class Board {
 					System.err.println("Board.java :: getDefusedTile() --> Index Out of Bounds \n"
 							+ "i:" + i + " j:" + j + " size: " + m_board.size());
 				}
-				
 			}
 		}
 		
@@ -364,7 +363,7 @@ public class Board {
 
 	                if (m_board.get(y).get(x).isMine()) {                    
 	                    m_board.get(y).remove(x);
-	                    m_board.get(y).add(x, new Hidden(m_board.get(y).get(x).isMine(), true, false));
+	                    m_board.get(y).add(x, new Hidden(true, true, false));
 	                }
 	            }		
 	        }

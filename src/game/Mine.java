@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 public class Mine extends Tile {
 
 	private ImageIcon m_mineImage;
+	private boolean m_visible = false;
 	
 	/**
 	 * Mine Constructor
