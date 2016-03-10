@@ -26,7 +26,7 @@ public class Board {
 	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
 	private String m_timePassed;
-	public ArrayList<Tile> revealedTiles;
+	private ArrayList<Tile> revealedTiles;
 	
 	/**
 	 * Constructor
@@ -284,8 +284,13 @@ public class Board {
 		
 		for (int i = 0; i < m_board.size(); ++i) {
 			for (int j = 0; j < m_board.size(); ++j) {
-				if (!(m_board.get(i).get(j).isHidden())) {
-					++revealedTile;
+				try {
+					if (!(m_board.get(i).get(j).isHidden())) {
+						++revealedTile;
+					}
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Board.java :: getHiddenTile() --> Index Out of Bounds \n"
+							+ "i:" + i + " j:" + j + " size: " + m_board.size());
 				}
 			}
 		}

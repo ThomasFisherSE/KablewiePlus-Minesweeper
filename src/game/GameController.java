@@ -79,10 +79,11 @@ public class GameController implements MouseListener, ActionListener {
 	
 	private JMenu m_playAutomatically;
 	private JMenuItem m_stopAi;
-	private JMenuItem m_easyDifficulty;
-	private JMenuItem m_normalDifficulty;
-	private JMenuItem m_hardDifficulty;
-	private JMenuItem m_customDifficulty;
+	private JMenuItem m_manyMistakes;
+	private JMenuItem m_someMistakes;
+	private JMenuItem m_noMistakes;
+	private JMenuItem m_cannotLose;
+	private JMenuItem m_customIntelligence;
 	
 	private Clip m_tick;
 	private Clip m_bomb;
@@ -197,7 +198,7 @@ public class GameController implements MouseListener, ActionListener {
 		m_GameFinshed.setIcon(new ImageIcon("images/GameWon.jpg"));
 		
 		String v = "You Have won\n time taken- " + m_timePassed;
-		JOptionPane.showMessageDialog(m_frame, v, "Congratulation", JOptionPane.YES_NO_CANCEL_OPTION);
+		JOptionPane.showMessageDialog(m_frame, v, "Congratulations", JOptionPane.YES_NO_CANCEL_OPTION);
 	}
 
 	/**
@@ -297,20 +298,23 @@ public class GameController implements MouseListener, ActionListener {
 		m_playAutomatically = new JMenu("Play Automatically");
 		m_stopAi = new JMenuItem("Stop");
 		m_stopAi.addActionListener(this);
-		m_easyDifficulty = new JMenuItem("Easy Difficulty");
-		m_easyDifficulty.addActionListener(this);
-		m_normalDifficulty = new JMenuItem("Normal Difficulty");
-		m_normalDifficulty.addActionListener(this);
-		m_hardDifficulty = new JMenuItem("Hard Difficulty");
-		m_hardDifficulty.addActionListener(this);
-		m_customDifficulty = new JMenuItem("Custom Difficulty");
-		m_customDifficulty.addActionListener(this);
+		m_manyMistakes = new JMenuItem("Low-Intelligence");
+		m_manyMistakes.addActionListener(this);
+		m_someMistakes = new JMenuItem("Normal Intelligence");
+		m_someMistakes.addActionListener(this);
+		m_noMistakes = new JMenuItem("High-Intelligence");
+		m_noMistakes.addActionListener(this);
+		m_cannotLose = new JMenuItem("Can't Lose (Cheating AI)");
+		m_cannotLose.addActionListener(this);
+		m_customIntelligence = new JMenuItem("Custom Intelligence");
+		m_customIntelligence.addActionListener(this);
 		
 		m_playAutomatically.add(m_stopAi);
-		m_playAutomatically.add(m_easyDifficulty);
-		m_playAutomatically.add(m_normalDifficulty);
-		m_playAutomatically.add(m_hardDifficulty);
-		m_playAutomatically.add(m_customDifficulty);
+		m_playAutomatically.add(m_manyMistakes);
+		m_playAutomatically.add(m_someMistakes);
+		m_playAutomatically.add(m_noMistakes);
+		m_playAutomatically.add(m_cannotLose);
+		m_playAutomatically.add(m_customIntelligence);
 		
 		m_loadGame = new JMenu("Load Game");
 		m_loadSlot1 = new JMenuItem("Slot 1");
@@ -431,7 +435,7 @@ public class GameController implements MouseListener, ActionListener {
 					System.err.println("Error occured when waiting for ai thread to finish");
 				}
 			}
-	 	} else if (event.getSource() == m_easyDifficulty) {
+	 	} else if (event.getSource() == m_manyMistakes) {
 	 		if (m_computerPlayer != null) {
 				if (m_computerPlayer.isRunning()) {
 					m_computerPlayer.toggleAi();
@@ -444,7 +448,7 @@ public class GameController implements MouseListener, ActionListener {
 			m_aiThread = new Thread(m_computerPlayer);
 			m_aiThread.start();
 			m_computerPlayer.toggleAi();
-		} else if (event.getSource() == m_normalDifficulty) {
+		} else if (event.getSource() == m_someMistakes) {
 			if (m_computerPlayer != null) {
 				if (m_computerPlayer.isRunning()) {
 					m_computerPlayer.toggleAi();
@@ -457,7 +461,7 @@ public class GameController implements MouseListener, ActionListener {
 			m_aiThread = new Thread(m_computerPlayer);
 			m_aiThread.start();
 			m_computerPlayer.toggleAi();
-		} else if (event.getSource() == m_hardDifficulty) {
+		} else if (event.getSource() == m_noMistakes) {
 			if (m_computerPlayer != null) {
 				if (m_computerPlayer.isRunning()) {
 					m_computerPlayer.toggleAi();
@@ -470,23 +474,36 @@ public class GameController implements MouseListener, ActionListener {
 			m_aiThread = new Thread(m_computerPlayer);
 			m_aiThread.start();
 			m_computerPlayer.toggleAi();
-		} else if (event.getSource() == m_customDifficulty) {
+		} else if (event.getSource() == m_cannotLose) {
 			if (m_computerPlayer != null) {
 				if (m_computerPlayer.isRunning()) {
 					m_computerPlayer.toggleAi();
 				}
 			}
 			
-			int difficulty;
+			m_computerPlayer = new Computer("AI", m_board, this, Computer.CANNOT_LOSE);
+			setTime();
 			
-			try {
-			difficulty = Integer.parseInt(JOptionPane.showInputDialog(
-						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
-			} catch (NumberFormatException e) {
-				difficulty = Computer.NORMAL_PROBABILITY;
+			m_aiThread = new Thread(m_computerPlayer);
+			m_aiThread.start();
+			m_computerPlayer.toggleAi();
+		} else if (event.getSource() == m_customIntelligence) {
+			if (m_computerPlayer != null) {
+				if (m_computerPlayer.isRunning()) {
+					m_computerPlayer.toggleAi();
+				}
 			}
 			
-			m_computerPlayer = new Computer("AI", m_board, this, difficulty);
+			int intelligence;
+			
+			try {
+			intelligence = Integer.parseInt(JOptionPane.showInputDialog(
+						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
+			} catch (NumberFormatException e) {
+				intelligence = Computer.NORMAL_PROBABILITY;
+			}
+			
+			m_computerPlayer = new Computer("AI", m_board, this, intelligence);
 			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
