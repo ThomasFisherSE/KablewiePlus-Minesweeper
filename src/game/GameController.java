@@ -423,6 +423,13 @@ public class GameController implements MouseListener, ActionListener {
 				if (m_computerPlayer.isRunning()) {
 					m_computerPlayer.toggleAi();
 				}
+				m_computerPlayer = null;
+				m_aiThread.interrupt();
+				try {
+					m_aiThread.join();
+				} catch (InterruptedException e) {
+					System.err.println("Error occured when waiting for ai thread to finish");
+				}
 			}
 	 	} else if (event.getSource() == m_easyDifficulty) {
 	 		if (m_computerPlayer != null) {
@@ -573,6 +580,9 @@ public class GameController implements MouseListener, ActionListener {
 				time = Double.parseDouble(JOptionPane.showInputDialog(
 						"Enter time (0 - 10 seconds) for between computer turns: "));
 			} catch (NumberFormatException e) {
+				time = Computer.DEFAULT_SLEEP_TIME;
+			} catch (NullPointerException e) {
+				// JOptionPane was probably closed.
 				time = Computer.DEFAULT_SLEEP_TIME;
 			}
 			

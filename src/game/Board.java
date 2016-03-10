@@ -301,10 +301,13 @@ public class Board {
 		
 		for (int i = 0; i < m_board.size(); ++i) {
 			for (int j = 0; j < m_board.size(); ++j) {
-				if (j < m_board.size() && i < m_board.size()) {
+				try {
 					if (m_board.get(i).get(j).isHidden()) {
 						++hiddenTile;
 					}
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Board.java :: getHiddenTile() --> Index Out of Bounds \n"
+							+ "i:" + i + " j:" + j + " size: " + m_board.size());
 				}
 			}
 		}
@@ -360,7 +363,6 @@ public class Board {
 			
 	        for (int y=0; y < m_columns; y++ ){
 	            for (int x=0; x < m_rows; x++){
-
 	                if (m_board.get(y).get(x).isMine()) {                    
 	                    m_board.get(y).remove(x);
 	                    m_board.get(y).add(x, new Hidden(true, true, false));
