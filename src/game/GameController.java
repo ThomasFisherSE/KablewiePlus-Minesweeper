@@ -419,43 +419,68 @@ public class GameController implements MouseListener, ActionListener {
 			m_menu.display();
 			
 		} else if (event.getSource() == m_stopAi) {
-			if (m_computerPlayer.isRunning()) {
-				m_computerPlayer.toggleAi();
+			if (m_computerPlayer != null) {
+				if (m_computerPlayer.isRunning()) {
+					m_computerPlayer.toggleAi();
+				}
 			}
 	 	} else if (event.getSource() == m_easyDifficulty) {
-			if (m_computerPlayer == null) {
-				m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
-				setTime();
+	 		if (m_computerPlayer != null) {
+				if (m_computerPlayer.isRunning()) {
+					m_computerPlayer.toggleAi();
+				}
 			}
+	 		
+			m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
+			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
 			m_aiThread.start();
 			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_normalDifficulty) {
-			if (m_computerPlayer == null) {
-				m_computerPlayer = new Computer("AI", m_board, this, Computer.NORMAL_PROBABILITY);
-				setTime();
+			if (m_computerPlayer != null) {
+				if (m_computerPlayer.isRunning()) {
+					m_computerPlayer.toggleAi();
+				}
 			}
+			
+			m_computerPlayer = new Computer("AI", m_board, this, Computer.NORMAL_PROBABILITY);
+			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
 			m_aiThread.start();
 			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_hardDifficulty) {
-			if (m_computerPlayer == null) {
-				m_computerPlayer = new Computer("AI", m_board, this, Computer.PERFECT_PROBABILITY);
-				setTime();
+			if (m_computerPlayer != null) {
+				if (m_computerPlayer.isRunning()) {
+					m_computerPlayer.toggleAi();
+				}
 			}
+			
+			m_computerPlayer = new Computer("AI", m_board, this, Computer.PERFECT_PROBABILITY);
+			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
 			m_aiThread.start();
 			m_computerPlayer.toggleAi();
 		} else if (event.getSource() == m_customDifficulty) {
-			if (m_computerPlayer == null) {
-				int difficulty = Integer.parseInt(JOptionPane.showInputDialog(
-						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
-				m_computerPlayer = new Computer("AI", m_board, this, difficulty);
-				setTime();
+			if (m_computerPlayer != null) {
+				if (m_computerPlayer.isRunning()) {
+					m_computerPlayer.toggleAi();
+				}
 			}
+			
+			int difficulty;
+			
+			try {
+			difficulty = Integer.parseInt(JOptionPane.showInputDialog(
+						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
+			} catch (NumberFormatException e) {
+				difficulty = Computer.NORMAL_PROBABILITY;
+			}
+			
+			m_computerPlayer = new Computer("AI", m_board, this, difficulty);
+			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
 			m_aiThread.start();
@@ -542,8 +567,15 @@ public class GameController implements MouseListener, ActionListener {
 	
 	public void setTime() {
 		do {
-			double time = Double.parseDouble(JOptionPane.showInputDialog(
-					"Enter time (0 - 10 seconds) for between computer turns: "));
+			double time;
+
+			try {
+				time = Double.parseDouble(JOptionPane.showInputDialog(
+						"Enter time (0 - 10 seconds) for between computer turns: "));
+			} catch (NumberFormatException e) {
+				time = Computer.DEFAULT_SLEEP_TIME;
+			}
+			
 			if (time >= MIN_TIME && time <=MAX_TIME) {
 				m_computerPlayer.setTime(time);
 				m_flag = false;

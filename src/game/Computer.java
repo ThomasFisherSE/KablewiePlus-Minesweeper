@@ -12,15 +12,19 @@ package game;
 import java.util.Random;
 
 public class Computer extends Player implements Runnable {
+	public static final int DEFAULT_SLEEP_TIME = 2;
+	private final int MAXIMUM = 100;
+	private final int MINIMUM = 1;
+	private final int MILLISEC_IN_SEC = 1000;
+	
 	private boolean m_aiToggled = false;
 	private Board m_board;
 	private GameController m_gameController;
 	private int m_difficulty;
 	private boolean m_test = true;
-	private int m_sleepTime = 500;
+	private int m_sleepTime = DEFAULT_SLEEP_TIME * 100;
 	
-	private final int MAXIMUM = 100;
-	private final int MINIMUM = 1;
+	
 	
 	// Common AI Difficulty Probabilities
 	public static final int PERFECT_PROBABILITY = 100; // i.e. will always play perfectly
@@ -37,7 +41,7 @@ public class Computer extends Player implements Runnable {
 	}
 	
 	public void setTime(double time) {
-		m_sleepTime = (int) time*1000;
+		m_sleepTime = (int) (time*MILLISEC_IN_SEC);
 	}
 	
 	public Computer(String name, Board board, GameController gc, int difficulty) {
@@ -48,7 +52,7 @@ public class Computer extends Player implements Runnable {
 	}
 	
 	public void run() {
-		makeStupidMove(); //Make first move
+		makeMove(); //Make first move
 		m_gameController.repaintAll();
 		
 		while (m_aiToggled) {

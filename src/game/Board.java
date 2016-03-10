@@ -283,7 +283,7 @@ public class Board {
 		int revealedTile = 0;
 		
 		for (int i = 0; i < m_board.size(); ++i) {
-			for (int j = 0; j < m_board.get(0).size(); ++j) {
+			for (int j = 0; j < m_board.size(); ++j) {
 				if (!(m_board.get(i).get(j).isHidden())) {
 					++revealedTile;
 				}
@@ -301,8 +301,10 @@ public class Board {
 		
 		for (int i = 0; i < m_board.size(); ++i) {
 			for (int j = 0; j < m_board.size(); ++j) {
-				if (m_board.get(i).get(j).isHidden()) {
-					++hiddenTile;
+				if (j < m_board.size() && i < m_board.size()) {
+					if (m_board.get(i).get(j).isHidden()) {
+						++hiddenTile;
+					}
 				}
 			}
 		}
@@ -317,10 +319,16 @@ public class Board {
 		int defusedTile = 0;
 		
 		for (int i = 0; i < m_board.size(); ++i) {
-			for (int j = 0; j < m_board.get(0).size(); ++j) {
-				if (m_board.get(i).get(j).isDefused() && m_board.get(i).get(j).isMine()) {
-					++defusedTile;
+			for (int j = 0; j < m_board.size(); ++j) {
+				try {
+					if (m_board.get(i).get(j).isDefused() && m_board.get(i).get(j).isMine()) {
+						++defusedTile;
+					}
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Board.java :: getDefusedTile() --> Index Out of Bounds \n"
+							+ "i:" + i + " j:" + j + " size: " + m_board.size());
 				}
+				
 			}
 		}
 		
