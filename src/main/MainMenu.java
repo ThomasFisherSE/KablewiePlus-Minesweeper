@@ -31,13 +31,10 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	private JFrame m_frame;
 	private Kablewie m_kablewie;
 	
-	private final int GAME_X = 95;
-	/*
-	private final int GAME_Y = ;
-	private final int GAME_WIDTH = ;
-	private final int GAME_HEIGHT = ;
-	*/
-	
+	private final int GAME_PANEL_X = 95;
+	private final int GAME_PANEL_Y = 27;
+	private final int GAME_PANEL_WIDTH = 274;
+	private final int GAME_PANEL_HEIGHT = 210;
 	private final int LBL_COLUMN_X = 6;
 	private final int USERNAME_ROW_Y = 26;
 	
@@ -53,6 +50,18 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	private final int COLUMNS = 10;
 	
 	private final int BOARDSIZE_ROW_Y = 69;
+	private final int START_BUTTON_X = 110;
+	private final int START_BUTTON_Y = 160;
+	private final int BUTTON_WIDTH = 100;
+	private final int BUTTON_HEIGHT = 32;
+	private final int FONT_SIZE = 10;
+	private final int FRAME_WIDTH = 440;
+	private final int FRAME_HEIGHT = 320;
+	private final int MIN_BOARD_SIZE = 0;
+	private final int MAX_BOARD_SIZE = 30;
+	private final int MIN_MINES = 0;
+	private final int MAX_MINES = MAX_BOARD_SIZE * MAX_BOARD_SIZE;
+	private final int SPACING = 8;
 	
 	
 	/**
@@ -142,10 +151,10 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	public void createStartGameBtn(JPanel gamePanel) {
 		JButton startGame = new JButton("Start Game");
 		startGame.setIcon(null);
-		startGame.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 10));
+		startGame.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, FONT_SIZE));
 		startGame.setForeground(Color.BLACK);
 		startGame.setBackground(Color.DARK_GRAY);
-		startGame.setBounds(110, 160, 100, 32);
+		startGame.setBounds(START_BUTTON_X, START_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
 		gamePanel.add(startGame);
 
 		startGame.addMouseListener(this);		
@@ -162,7 +171,7 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 		gamePanel.setBackground(Color.GRAY);
 		gamePanel.setBorder(
 				new TitledBorder(null, "Kablewie Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		gamePanel.setBounds(GAME_X, 27, 274, 210);
+		gamePanel.setBounds(GAME_PANEL_X, GAME_PANEL_Y, GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
 		m_frame.getContentPane().add(gamePanel);
 		gamePanel.setLayout(null);
 		createUserName(gamePanel);
@@ -177,7 +186,7 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	public void display() {
 		// Frame options for menu.
 		m_frame.setResizable(false);
-		m_frame.setSize(440, 320);
+		m_frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		m_frame.setTitle("Kablewie");
 		m_frame.setForeground(Color.RED);
 		m_frame.setBackground(Color.RED);
@@ -202,15 +211,15 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 		} catch (Exception e) {
 			return;
 		}
-		if (!(boardSize > 0 && boardSize <= 30)
-				|| !(numMines < boardSize * boardSize && numMines <= 150 && numMines > 0)) {
+		if (!(boardSize > MIN_BOARD_SIZE && boardSize <= MAX_BOARD_SIZE)
+				|| !(numMines < boardSize * boardSize && numMines <= MAX_MINES && numMines > MIN_MINES)) {
 			m_totalMinesText.setText(m_boardSizeText.getText());
 			return;
 		}
 		Board board = new Board(boardSize, boardSize, numMines);
 		Player player = new Human(username);
-		m_frame.setSize(boardSize * 30 + 50, boardSize * 30 + 105);
-		m_frame.setMinimumSize(new Dimension(5 * 30 + 50 + 130, 5 * 30 + 105));
+		m_frame.setSize((boardSize * 30) + SPACING, boardSize * 30 + 105);
+		//m_frame.setMinimumSize(new Dimension(5 * 30 + 50 + 130, 5 * 30 + 105));
 		m_kablewie.startGame(board, player, this);
 	}
 

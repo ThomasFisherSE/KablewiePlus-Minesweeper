@@ -241,7 +241,7 @@ public class Board {
 		g.setColor(Color.RED);
 		g.drawString("Name : " + player.getUsername(), x, y);
 		
-		x = x + 200;
+		x = x + 180;
 		
 		if (timePassed == null) {
 			g.drawString("Time: 00:00:00", x, y);
@@ -255,14 +255,14 @@ public class Board {
 		g.setColor(Color.BLUE);
 		g.drawString("Defused Mine : " + getDefusedTile(), x, y);
 		
-		x = x + 200;
+		x = x + 180;
 		g.drawString("Mines Present : " + m_mineCount, x, y);
 		
 		y = 48;
 		x = 1;
 		g.drawString("Hidden Square : " + getHiddenTile(), x, y);
 		
-		x = x + 200;
+		x = x + 180;
 		g.drawString("Revealed Square : " + getRevealedTile(), x, y);
 	}
 
