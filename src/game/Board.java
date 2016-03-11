@@ -14,8 +14,6 @@ package game;
 import java.awt.*;
 import java.util.*;
 
-import java.lang.Math;
-
 public class Board {
 
 	private int m_rows;
@@ -26,7 +24,6 @@ public class Board {
 	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
 	private String m_timePassed;
-	private ArrayList<Tile> revealedTiles;
 	
 	/**
 	 * Constructor
