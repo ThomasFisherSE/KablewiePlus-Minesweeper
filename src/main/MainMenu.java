@@ -1,6 +1,6 @@
 /**
  * @file MainMenu.java
- * @author Eromosele Gideon
+ * @author Eromosele Gideon Victoria Charvis
  * @date 7 December 2015
  *
  * Handles creation of the main menu
@@ -214,6 +214,9 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 		if (!(boardSize > MIN_BOARD_SIZE && boardSize <= MAX_BOARD_SIZE)
 				|| !(numMines < boardSize * boardSize && numMines <= MAX_MINES && numMines > MIN_MINES)) {
 			m_totalMinesText.setText(m_boardSizeText.getText());
+			return;
+		}
+		if (username.length() <=0 || username.length() >12) {
 			return;
 		}
 		Board board = new Board(boardSize, boardSize, numMines);
