@@ -29,8 +29,9 @@ public class SavedFile {
 	final static int HIDDEN_TILE = 4;
 	final static int REVEALED_TILE = 5;
 	final static int BOARDSIZE = 6;
-		
+	
 	/**
+	 *  Loads the game data from file
 	 *  
 	 * @param slot the number slot for the file to be loaded from
 	 */
@@ -38,8 +39,7 @@ public class SavedFile {
 		/*Getting the file name from the slot chosen*/
 		String fileName = ("SaveFile" + slot + ".csv");
 		
-		/*Checking if the file exists*/
-		if (!new File(fileName).isFile() || new File(fileName).length()==0) {
+		if (!validLoadFile(fileName)) {
 			return;
 		}
 		
@@ -112,6 +112,7 @@ public class SavedFile {
 	}
 	
 	/**
+	 * Saves the game data to file
 	 * 
 	 * @param slot the number slot for the game to be saved into
 	 * @param board the board of the game to be saved
@@ -179,6 +180,26 @@ public class SavedFile {
 	}
 	
 	/**
+	 * Used to see if the file being accessed is allowed
+	 * 
+	 * @param fileName the name of the file
+	 * @return if the file is valid for the game
+	 */
+	public boolean validLoadFile(String fileName) {
+		/*if file is one of the accepted ones*/
+		if (fileName.equalsIgnoreCase("SaveFile1.csv")|| 
+				fileName.equalsIgnoreCase("SaveFile2.csv")
+				||fileName.equalsIgnoreCase("SaveFile3.csv")) {
+			/*Checking if the file exists*/
+			if (!new File(fileName).isFile() || new File(fileName).length()==0) {
+				return false;
+			} else return true;
+		} 
+			return false;
+		
+	}
+	
+	/**
 	 * 
 	 * @param line ArrayList containing the saved data
 	 * @param loadedBoard the board loaded from file
@@ -208,16 +229,5 @@ public class SavedFile {
 		String loadedTime = line.get(TIME);
 		loadedBoard.loadGraphics();
 		loadedGame.startLoadedGame(loadedBoard, loadedPlayer, loadedTime);
-	}
-	
-	/**
-	 * Used for unit testing
-	 * @param args a String Array of arguments passed from the command line.
-	 */
-	public static void main(String[] args) {
-	//unit testing
-		
-	//integration testing
-		
 	}
 }
