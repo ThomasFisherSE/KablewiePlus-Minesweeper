@@ -14,6 +14,8 @@ package game;
 import java.awt.*;
 import java.util.*;
 
+import java.lang.Math;
+
 public class Board {
 
 	private int m_rows;
@@ -24,6 +26,7 @@ public class Board {
 	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
 	private String m_timePassed;
+	public ArrayList<Tile> revealedTiles;
 	
 	/**
 	 * Constructor
@@ -44,6 +47,26 @@ public class Board {
 		// Setup the board.
 		setBoardDimensions();
 		placeMines();
+	}
+
+	/**
+	 * Constructor
+	 * 
+	 * @param bRows an int for the number of rows
+	 * @param bColumns an int for the number of columns
+	 * @param numMines an int for number of mines
+	 */
+	public Board(int boardSize, int numMines) {
+		// Set Class variables
+		this.m_mineCount = numMines;
+		this.m_rows = boardSize;
+		this.m_columns = boardSize;
+		
+		// Create a revealed tile for the sake of method calls.
+		m_reveal = new Revealed(false, false, false);
+		
+		// Setup the board.
+		setBoardDimensions();
 	}
 
 	/**
@@ -162,7 +185,62 @@ public class Board {
 			}
 		}
 	}
-
+	
+	public void loadGraphics() {
+		//for every tile in the game set the graphics
+		for (int j=0;j<m_board.size();j++) {
+			for (int i=0;i<m_board.size();i++) {
+				
+				boolean isMine = m_board.get(j).get(i).isMine();
+				boolean isDefused = m_board.get(j).get(i).isDefused();
+				boolean isHidden = m_board.get(j).get(i).isHidden();
+				
+				/*if diffused set diffused image else if revealed set revealed image*/
+				if (m_board.get(j).get(i).isDefused()) {
+					m_board.get(j).remove(i);
+					m_board.get(j).add(i, new Defused(isMine, isHidden, isDefused));
+				} else if (m_board.get(j).get(i).isHidden()==false) {
+					if (!(isDefused)) {
+						
+						m_board.get(j).remove(i);
+						m_board.get(j).add(i, new Revealed(isMine, isHidden, isDefused));
+						
+						/*Updates the tile images with numbers*/
+						m_board.get(j).get(i).setHidden(true);
+						m_reveal.revealPosition(m_board, j, i);
+						haveWon();
+					}
+				}
+			}
+		}
+		
+	}
+	
+	/**
+	 * Sets the states of the loaded tiles
+	 */
+	public void setState(int column, int row, String state, boolean isProperty) {
+		if (state.equalsIgnoreCase("D")) {
+			if (isProperty){
+				m_board.get(row).get(column).setDefused(true);
+			} else {
+				m_board.get(row).get(column).setDefused(false);
+			}
+		} else if (state.equalsIgnoreCase("M")) {
+			if (isProperty){
+				m_board.get(row).get(column).setMine(true);
+			} else {
+				m_board.get(row).get(column).setMine(false);
+			}
+		} else if (state.equalsIgnoreCase("H")) {
+			if (isProperty){
+				m_board.get(row).get(column).setHidden(true);
+			} else {
+				m_board.get(row).get(column).setHidden(false);
+			}
+		}
+	}
+	
 	/**
 	 * This method is used to defuse tiles on the board
 	 * after a users turn, storing whether the tile was
