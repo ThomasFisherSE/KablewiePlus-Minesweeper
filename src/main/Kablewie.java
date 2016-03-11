@@ -1,6 +1,6 @@
 /**
  * @file Kablewie.java
- * @author Thomas Phelps
+ * @author Thomas Phelps, Victoria Charvis
  * @date 4 December 2015
  *
  * Starts the game then creates and
@@ -69,5 +69,11 @@ public class Kablewie {
 		m_frame.getContentPane().removeAll();
 		new GameController(board, player, m_frame, menu);
 	}
+	
+	public void startLoadedGame(Board board, Player player, String time){
+		m_frame.getContentPane().removeAll();
+		new GameController(board, player, time, m_frame);
+	}
+
 
 }
