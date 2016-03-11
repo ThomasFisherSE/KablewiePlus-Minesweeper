@@ -209,15 +209,4 @@ public class SavedFile {
 		loadedBoard.loadGraphics();
 		loadedGame.startLoadedGame(loadedBoard, loadedPlayer, loadedTime);
 	}
-	
-	/**
-	 * Used for unit testing
-	 * @param args a String Array of arguments passed from the command line.
-	 */
-	public static void main(String[] args) {
-	//unit testing
-		
-	//integration testing
-		
-	}
 }
