@@ -10,36 +10,39 @@ import main.*;
 import org.junit.Test;
 
 public class ComputerUnitTests {
+	IntegrationTests interactingClass = new IntegrationTests();
+	
 	@Test
 	public void testLowIntelligencePreset() {
-		Computer tester = new Computer("AI", createBoard(), createGameController(), Computer.EASY_PROBABILITY);
+		Computer tester = new Computer("AI", interactingClass.createBoard(), interactingClass.createGameController(), Computer.EASY_PROBABILITY);
 		
 		assertEquals("Test if the correct intelligence is set by clicking the Low-Intelligence preset",
 				Computer.EASY_PROBABILITY, tester.getIntelligence());
 	}
 	
-	public Board createBoard() {
-		return new Board(10,10,10);
+	@Test
+	public void testNormalIntelligencePreset() {
+		Computer tester = new Computer("AI", interactingClass.createBoard(), interactingClass.createGameController(), Computer.NORMAL_PROBABILITY);
+		
+		assertEquals("Test if the correct intelligence is set by clicking the Low-Intelligence preset",
+				Computer.NORMAL_PROBABILITY, tester.getIntelligence());
 	}
 	
-	public GameController createGameController() {
-		return new GameController(createBoard(), createHuman(), createFrame(), createMainMenu());
+	@Test
+	public void testHighIntelligencePreset() {
+		Computer tester = new Computer("AI", interactingClass.createBoard(), interactingClass.createGameController(), Computer.PERFECT_PROBABILITY);
+		
+		assertEquals("Test if the correct intelligence is set by clicking the Low-Intelligence preset",
+				Computer.PERFECT_PROBABILITY, tester.getIntelligence());
 	}
 	
-	public MainMenu createMainMenu() {
-		return new MainMenu(createFrame(), new Kablewie());
+	@Test
+	public void testCantLosePreset() {
+		Computer tester = new Computer("AI", interactingClass.createBoard(), interactingClass.createGameController(), Computer.CANNOT_LOSE);
+		
+		assertEquals("Test if the correct intelligence is set by clicking the Low-Intelligence preset",
+				Computer.CANNOT_LOSE, tester.getIntelligence());
 	}
 	
-	
-	public JFrame createFrame() {
-		return new JFrame("testFrame");
-	}
-	
-    public Computer createComputer() {
-        return new Computer("AI", createBoard(), createGameController(), 0);
-    }
-    
-    public Human createHuman() {
-    	return new Human("testPlayer");
-    }
+
 }
