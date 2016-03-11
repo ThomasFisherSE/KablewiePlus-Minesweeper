@@ -10,6 +10,7 @@
 
 package game;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import main.MainMenu;
+import main.Kablewie;
 
 /* 
  * Suppress serial ID warning as ID would not
@@ -92,6 +94,11 @@ public class GameController implements MouseListener, ActionListener {
 	private final int MIN_TIME = 0;
 	private final int MAX_TIME = 10;
 	private final int DOUBLE_DIGITS = 10;
+	private final int BOARD_WIDTH = 315;
+	private final int BOARD_HEIGHT = 400;
+	private final int TIMER_DELAY = 1000;
+	
+	private boolean m_loaded;
 
 	/**
 	 * Constructor
@@ -108,14 +115,51 @@ public class GameController implements MouseListener, ActionListener {
 		this.m_player = player;
 		this.m_frame = frame;
 		this.m_menu = menu;
+
+		m_frame.setSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT));
+		
+		m_timePassed = "00:00:00";
+		m_loaded = false;
 		
 		setInfo();
 		startGame();
 		setSound();
 
-		m_time = new Timer(1000, this);
+		m_time = new Timer(IMER_DELAY, this);
 		m_time.start();
 		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+
+	/**
+	 * Constructor
+	 * 
+	 * @param board a Board object for containing the tiles.
+	 * @param player a Player object
+	 * @param time the loaded time passed
+	 * @param frame a JFrame to add the JPanel to
+	 */
+	public GameController(Board board, Player player, String time, JFrame frame) {
+		// Set Class variables
+		this.m_board = board;
+		this.m_player = player;
+		this.m_timePassed = time;
+		this.m_frame = frame;
+		
+		m_frame.setSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT));
+		
+		m_loaded = true;
+		
+		setInfo();
+		startGame();
+		setSound();
+
+		m_time = new Timer(TIMER_DELAY, this);
+		m_time.start();
+		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		m_panelGame.repaint();
+		m_panelInfo.repaint();
+		
 	}
 
 	/**
@@ -376,6 +420,15 @@ public class GameController implements MouseListener, ActionListener {
 			m_panelInfo.repaint();
 			m_secondsPlayed += m_time.getDelay() / 1000;
 			
+			if (m_loaded) {
+				String prevTime = m_timePassed.replaceAll("[^0-9]","");
+				int prev = Integer.parseInt(prevTime);
+				m_secondsPlayed += prev + m_time.getDelay() / TIMER_DELAY;
+				m_loaded = false;
+			} else {
+				m_secondsPlayed += m_time.getDelay() / TIMER_DELAY;
+			}
+			
 			if (m_secondsPlayed >= 60) {
 				
 				m_minutesPlayed = m_minutesPlayed + 1;
@@ -420,6 +473,12 @@ public class GameController implements MouseListener, ActionListener {
 			m_tick.close();
 			m_won.close();
 			m_bomb.close();
+			if (m_menu == null) {
+				Kablewie kablewie = new Kablewie();
+				m_frame.dispose();
+			} else {
+				m_menu.display();
+			}
 			m_menu.display();
 			
 		} else if (event.getSource() == m_stopAi) {
@@ -532,24 +591,39 @@ public class GameController implements MouseListener, ActionListener {
 											"About",
 											JOptionPane.PLAIN_MESSAGE);
 
-		} else if (event.getSource() == m_GameFinshed) {
-			reset();
 		} else if (event.getSource() == m_loadSlot1) {
-			System.out.println("Slot 1 selected");
-		} else if (event.getSource() == m_loadSlot2) {//slot, board, player, menu
-			
-			System.out.println("Slot 2 selected");
+			//checks if file exists
+			if (new File("SaveFile1.csv").isFile()) {
+				//pass in slot number
+				m_savedFile.loadFile(1);
+				//Check if file exists
+				m_tick.stop();
+				m_frame.dispose();
+			}
+		} else if (event.getSource() == m_loadSlot2) {
+			//checks if file exists
+			if (new File("SaveFile2.csv").isFile()) {
+				//pass in slot number
+				m_savedFile.loadFile(2);
+				m_tick.stop();
+				m_frame.dispose();
+			}
 		} else if (event.getSource() == m_loadSlot3) {
-			
-			System.out.println("Slot 3 selected");
+			//checks if file exists
+			if (new File("SaveFile3.csv").isFile()) {
+				//pass in slot number
+				m_savedFile.loadFile(3);
+				m_tick.stop();
+				m_frame.dispose();
+			}
 		} else if (event.getSource() == m_saveSlot1) {
-			//pass in slot no.and board
+			//pass in slot number, board and player
 			m_savedFile.saveFile(1,m_board,m_player);
 		} else if (event.getSource() == m_saveSlot2) {
-			//pass in slot no. and board
+			//pass in slot number, board and player
 			m_savedFile.saveFile(2,m_board,m_player);
 		} else if (event.getSource() == m_saveSlot3) {
-			//pass in slot no. and board
+			//pass in slot number, board and player
 			m_savedFile.saveFile(3,m_board,m_player);
 		} else if (event.getSource() == m_revealMines) {
             if(!m_minesRevealed){
