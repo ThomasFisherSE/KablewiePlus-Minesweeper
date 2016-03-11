@@ -119,15 +119,7 @@ public class Board {
 	private void setTimePassed(String time) {
 		m_timePassed = time;
 	}
-	
-	/**
-	 * Gets the time passed
-	 */
-	public String getTimePassed() {
-		return m_timePassed;
-	}
-	
-	
+
 	/**
 	 * Sets the dimensions of the board
 	 */
