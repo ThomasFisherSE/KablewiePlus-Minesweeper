@@ -216,9 +216,7 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 			m_totalMinesText.setText(m_boardSizeText.getText());
 			return;
 		}
-		if (username.length() <=0 || username.length() >12) {
-			return;
-		}
+		
 		Board board = new Board(boardSize, boardSize, numMines);
 		Player player = new Human(username);
 		m_frame.setSize((boardSize * 30) + SPACING, boardSize * 30 + 105);
