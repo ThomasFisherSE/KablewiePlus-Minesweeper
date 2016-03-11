@@ -304,8 +304,4 @@ public class Computer extends Player implements Runnable {
 			
 		return true;
 	}
-
-	public int getIntelligence() {
-		return m_intelligence;
-	}
 }

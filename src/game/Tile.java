@@ -1,6 +1,6 @@
 /**
  * @file Tile.java
- * @author Ethan Davies, A5 Victoria Charvis
+ * @author Ethan Davies
  * @date 7 December 2015
  *
  * A class for a generic tile
@@ -59,30 +59,6 @@ public abstract class Tile {
 	 */
 	public int getNearbyMines() {
 		return m_nearbyMines;
-	}
-	
-	/**
-	 * 
-	 * @param isDefused sets if tile is defused
-	 */
-	public void setDefused(boolean isDefused) {
-		this.m_isDefused = isDefused;
-	}
-	
-	/**
-	 * 
-	 * @param isMine sets if tile is a mine
-	 */
-	public void setMine(boolean isMine) {
-		this.m_isMine = isMine;
-	}
-	
-	/**
-	 * 
-	 * @param isHidden sets if tile is hidden
-	 */
-	public void setHidden(boolean isHidden) {
-		this.m_isHidden = isHidden;
 	}
 	
 	/**
