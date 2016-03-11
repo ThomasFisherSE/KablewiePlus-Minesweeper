@@ -68,7 +68,14 @@ public class Board {
 		// Setup the board.
 		setBoardDimensions();
 	}
-
+	
+	/**
+	 * @return the board which has all the tile
+	 */
+	public ArrayList<ArrayList<Tile>> getm_Board() {
+		return m_board;
+	}
+	
 	/**
 	 * @return the value of m_gameLost which is true if the game is lost
 	 */
