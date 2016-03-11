@@ -82,6 +82,20 @@ public class Board {
 	}
 	
 	/**
+	 * Gets the row count
+	 */
+	public int getRows() {
+		return m_rows;
+	}
+	
+	/**
+	 * Gets the column count
+	 */
+	public int getColumns() {
+		return m_columns;
+	}
+	
+	/**
 	 * Sets the time passed
 	 * 
 	 * @param time time elapsed in current game
@@ -199,7 +213,7 @@ public class Board {
 	 * 
 	 * @return true if x, y are in range
 	 */
-	private boolean inLimit(int x, int y) {
+	public boolean inLimit(int x, int y) {
 		return !(x >= m_board.size()
 				|| y >= m_board.get(0).size()
 				|| x < 0
