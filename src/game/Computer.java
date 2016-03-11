@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class Computer extends Player implements Runnable {
-	public static final int DEFAULT_SLEEP_TIME = 2;
+	
 	private final int MAXIMUM = 100;
 	private final int MINIMUM = 1;
 	private final int MILLISEC_IN_SEC = 1000;
@@ -23,27 +23,60 @@ public class Computer extends Player implements Runnable {
 	private Board m_board;
 	private GameController m_gameController;
 	private int m_intelligence;
-	private boolean m_test = true;
+	private boolean m_test = false;
 	private int m_sleepTime = DEFAULT_SLEEP_TIME * 100;
 	private ArrayList<Tile> m_knownSmartMoves = new ArrayList<Tile>();
 	private ArrayList<Tile> m_knownBombs = new ArrayList<Tile>();
 	
 	
 	// Common AI Probability Presets
+	// Cheating AI, knows where each mine is
 	public static final int CANNOT_LOSE = -1;
-	public static final int PERFECT_PROBABILITY = 100; // i.e. will always play perfectly
-	public static final int NORMAL_PROBABILITY = 90; // i.e. 1/10 moves won't be perfect
-	public static final int EASY_PROBABILITY = 50; // i.e. only 50% chance to make a perfect move
 	
+	// Will always make smart moves where possible
+	public static final int PERFECT_PROBABILITY = 100; 
+	
+	// 1/10 moves won't be perfect
+	public static final int NORMAL_PROBABILITY = 90; 
+	
+	// Only 50% chance to make a perfect move
+	public static final int EASY_PROBABILITY = 50; 
+	
+	// The default time in seconds between turns
+	public static final int DEFAULT_SLEEP_TIME = 2;
+	/**
+	 * Accessor method for the current intelligence of the ai
+	 * 
+	 * @return int, the intelligence of the ai
+	 */
+	public int getIntelligence() {
+		return m_intelligence;
+	}
+	
+	/**
+	 *  Accessor method for if the computer ai is running currently
+	 *  
+	 *  @return boolean, true if ai is toggled, false if not
+	 */
 	public boolean isRunning() {
 		return m_aiToggled;
 	}
 	
+	/**
+	 *  Mutator method for toggling the ai on or off
+	 *  
+	 *  @return boolean, true if the ai is now toggled on, false if it's off
+	 */
 	public boolean toggleAi() {
 		m_aiToggled = !m_aiToggled;
 		return m_aiToggled;
 	}
 	
+	/**
+	 *  Mutator method for time between turns
+	 *  
+	 *  @param time a double, the time in seconds between turns
+	 */
 	public void setTime(double time) {
 		m_sleepTime = (int) (time*MILLISEC_IN_SEC);
 	}
@@ -54,7 +87,7 @@ public class Computer extends Player implements Runnable {
 	 * @param name a String, the name given to the computer player
 	 * @param board a Board object, the board the computer player will make moves on
 	 * @param gc a GameController object, the class in charge of setting up games
-	 * @param intelligence an integer, the chance out of 100 that a smart move will be made
+	 * @param intelligence an integer, the chance out of 100 a smart move will be made
 	 */
 	public Computer(String name, Board board, GameController gc, int intelligence) {
 		super(name);
@@ -193,11 +226,13 @@ public class Computer extends Player implements Runnable {
 			for (int j = 0; j < m_board.getBoard().size(); j++) {
 				Tile tile = m_board.getBoard().get(i).get(j);
 				
-				ArrayList<Tile> surroundingTiles = tile.getTileArround(m_board.getBoard(), i, j);
+				ArrayList<Tile> surroundingTiles = tile.getTileArround(
+						m_board.getBoard(), i, j);
 				int flagged = 0;
 				int hidden = 0;
 				
-				for(Iterator<Tile> iter = surroundingTiles.iterator(); iter.hasNext(); ) {
+				for(Iterator<Tile> iter = surroundingTiles.iterator(); 
+						iter.hasNext(); ) {
 				    Tile outerTile = iter.next();
 				    
 				    if (outerTile.isDefused()) {
@@ -207,31 +242,38 @@ public class Computer extends Player implements Runnable {
 					if (outerTile.isHidden()) {
 						hidden++;
 					} else {
-						//If an outer tile is already revealed, it can't be used, so remove it
+						//If an outer tile is already revealed, 
+						// it can't be used, so remove it
 						iter.remove();
 					}
 				}
 				
-				if ((tile.calculateNearbyMines(tile, surroundingTiles) == flagged) && !tile.isHidden()) {
+				if ((tile.calculateNearbyMines(tile, surroundingTiles) 
+						== flagged) && !tile.isHidden()) {
 					//All bombs have been found
 					for (Tile outerTile: surroundingTiles) {
-						if (outerTile.isHidden() && !m_knownSmartMoves.contains(outerTile) && !outerTile.isMine()) {
+						if (outerTile.isHidden() && 
+								!m_knownSmartMoves.contains(outerTile) && 
+								!outerTile.isMine()) {
 							m_knownSmartMoves.add(outerTile);
 						}
 					}
 				}
 				
-				if ((tile.calculateNearbyMines(tile, surroundingTiles) == (flagged + hidden)) && !tile.isHidden()) {
+				if ((tile.calculateNearbyMines(tile, surroundingTiles) == 
+						(flagged + hidden)) && !tile.isHidden()) {
 					//All surrounding tiles must be bombs, so flag them
 					for (Tile outerTile: surroundingTiles) {
-						if (outerTile.isHidden() && !outerTile.isDefused() && !m_knownBombs.contains(outerTile)) {
+						if (outerTile.isHidden() && !outerTile.isDefused() &&
+								!m_knownBombs.contains(outerTile)) {
 							m_knownBombs.add(outerTile);
 						}
 					}
 				}
 				
-				if (surroundingTiles.size() == 0 && !m_knownBombs.contains(tile) && tile.isHidden()) {
-					//No hidden surrounding tiles, so centre tile must be a bomb
+				if (surroundingTiles.size() == 0 &&
+						!m_knownBombs.contains(tile) && tile.isHidden()) {
+					//No hidden surrounding tiles, centre tile must be a bomb
 					m_knownBombs.add(tile);
 				}
 			}
@@ -251,7 +293,7 @@ public class Computer extends Player implements Runnable {
 			
 			for (int i = 0; i < m_board.getBoard().size(); i++) {
 				for (int j = 0; j < m_board.getBoard().size(); j++) {
-					if (m_board.getBoard().get(i).get(j).equals(tileToDefuse)) {
+					if (m_board.getBoard().get(i).get(j).equals(tileToDefuse)){
 						m_board.defusedTile(j, i);
 						
 						m_knownBombs.remove(0);
@@ -265,7 +307,7 @@ public class Computer extends Player implements Runnable {
 			
 			for (int i = 0; i < m_board.getBoard().size(); i++) {
 				for (int j = 0; j < m_board.getBoard().size(); j++) {
-					if (m_board.getBoard().get(i).get(j).equals(tileToReveal)) {
+					if (m_board.getBoard().get(i).get(j).equals(tileToReveal)){
 						m_board.revealTile(j, i);
 						
 						m_knownSmartMoves.remove(0);
@@ -274,7 +316,8 @@ public class Computer extends Player implements Runnable {
 			}
 		} else {
 			if (m_test) {
-				System.out.println("No smart moves available, make stupid move.");
+				System.out.println("No smart moves available, "
+						+ "make stupid move.");
 			}
 			return makeStupidMove();
 		}
@@ -303,9 +346,5 @@ public class Computer extends Player implements Runnable {
 		}
 			
 		return true;
-	}
-
-	public int getIntelligence() {
-		return m_intelligence;
 	}
 }

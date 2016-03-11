@@ -28,6 +28,9 @@ public class Board {
 	private String m_timePassed;
 	public ArrayList<Tile> revealedTiles;
 	
+	public static final int DEFAULT_SIZE = 10;
+	public static final int DEFAULT_MINES = 10;
+	
 	/**
 	 * Constructor
 	 * 

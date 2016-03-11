@@ -10,8 +10,13 @@ import main.Kablewie;
 import main.MainMenu;
 
 public class IntegrationTests {
+	
+	public static void main(String[] args) {
+		new Kablewie();
+	}
+	
 	public Board createBoard() {
-		return new Board(10,10,10);
+		return new Board(Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES);
 	}
 	
 	public GameController createGameController() {
