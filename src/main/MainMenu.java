@@ -1,6 +1,6 @@
 /**
  * @file MainMenu.java
- * @author Eromosele Gideon
+ * @author A3 Eromosele Gideon A5 Thomas Fisher
  * @date 7 December 2015
  *
  * Handles creation of the main menu

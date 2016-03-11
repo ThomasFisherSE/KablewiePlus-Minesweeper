@@ -21,11 +21,8 @@ public class Player {
 		this.m_username = username;
 	}
 	
-	protected void takeTurn() {
-		// Placeholder for turn
-	}
-	
 	/**
+	 * Accessor method for username
 	 * @return the username of the player
 	 */
 	public String getUsername() {

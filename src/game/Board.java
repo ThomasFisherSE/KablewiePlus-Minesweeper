@@ -30,6 +30,7 @@ public class Board {
 	
 	public static final int DEFAULT_SIZE = 10;
 	public static final int DEFAULT_MINES = 10;
+	private final int FONT_SIZE = 12;
 	
 	/**
 	 * Constructor
@@ -142,7 +143,8 @@ public class Board {
 	/**
 	 * Sets the states of the loaded tiles
 	 */
-	public void setState(int column, int row, String state, boolean isProperty) {
+	public void setState(int column, int row, String state, 
+			boolean isProperty) {
 		if (state.equalsIgnoreCase("D")) {
 			if (isProperty){
 				m_board.get(row).get(column).setDefused(true);
@@ -173,17 +175,18 @@ public class Board {
 				boolean isDefused = m_board.get(j).get(i).isDefused();
 				boolean isHidden = m_board.get(j).get(i).isHidden();
 				
-				/*if diffused set diffused image else if revealed set revealed image*/
+				//Setting correct images
 				if (m_board.get(j).get(i).isDefused()) {
 					m_board.get(j).remove(i);
-					m_board.get(j).add(i, new Defused(isMine, isHidden, isDefused));
+					m_board.get(j).add(i, new Defused(isMine, isHidden, 
+							isDefused));
 				} else if (m_board.get(j).get(i).isHidden()==false) {
 					if (!(isDefused)) {
 						
 						m_board.get(j).remove(i);
-						m_board.get(j).add(i, new Revealed(isMine, isHidden, isDefused));
+						m_board.get(j).add(i, new Revealed(isMine, isHidden, 
+								isDefused));
 						
-						/*Updates the tile images with numbers*/
 						m_board.get(j).get(i).setHidden(true);
 						m_reveal.revealPosition(m_board, j, i);
 						haveWon();
@@ -227,7 +230,8 @@ public class Board {
 		
 		if (inLimit(y, x) && !(m_board.get(y).get(x).isDefused())) {
 			
-			if (m_board.get(y).get(x).isHidden() && !(m_board.get(y).get(x).isMine())) {
+			if (m_board.get(y).get(x).isHidden() && 
+					!(m_board.get(y).get(x).isMine())) {
 				
 				m_reveal.revealPosition(m_board, y, x);
 				haveWon();
@@ -236,12 +240,14 @@ public class Board {
 				this.m_gameWon = false;
 				this.m_gameLost = true;
 				m_board.get(y).remove(x); // create a mine tile
-				m_board.get(y).add(x, new Mine(true, true, false, "images/mineX.jpg"));
+				m_board.get(y).add(x, new Mine(true, true, false, 
+						"images/mineX.jpg"));
 				for (int i = 0; i < m_board.size(); ++i) {
 					for (int j = 0; j < m_board.get(0).size(); ++j) {
 						if (m_board.get(i).get(j).isMine() && !(i == y && j == x)) {
 							m_board.get(i).remove(j); // create a mine tile
-							m_board.get(i).add(j, new Mine(true, true, false, "images/mine.png"));
+							m_board.get(i).add(j, new Mine(true, true, false, 
+									"images/mine.png"));
 						}
 					}
 				}	
@@ -314,7 +320,7 @@ public class Board {
 	 * @param timePassed a String with the time that has passed.
 	 */
 	public void renderInfo(Graphics g, Player player, String timePassed) {
-		Font timeNewRoman = new Font("Time new roman", Font.BOLD, 12);
+		Font timeNewRoman = new Font("Time new roman", Font.BOLD, FONT_SIZE);
 		
 		// Positioning Values.
 		int x = 1;
@@ -353,7 +359,8 @@ public class Board {
 	 * checks if the game have been won or not
 	 */
 	public void haveWon() {
-		if (getRevealedTile() + getDefusedTile() == m_board.size() * m_board.size()) {
+		if (getRevealedTile() + getDefusedTile() == m_board.size() *
+				m_board.size()) {
 			m_gameLost = false;
 			m_gameWon = true;
 		}
@@ -372,7 +379,8 @@ public class Board {
 						++revealedTile;
 					}
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Board.java :: getHiddenTile() --> Index Out of Bounds \n"
+					System.err.println("Board.java :: getHiddenTile() --> "
+							+ "Index Out of Bounds \n"
 							+ "i:" + i + " j:" + j + " size: " + m_board.size());
 				}
 			}
@@ -394,7 +402,8 @@ public class Board {
 						++hiddenTile;
 					}
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Board.java :: getHiddenTile() --> Index Out of Bounds \n"
+					System.err.println("Board.java :: getHiddenTile() --> "
+							+ "Index Out of Bounds \n"
 							+ "i:" + i + " j:" + j + " size: " + m_board.size());
 				}
 			}
@@ -416,7 +425,8 @@ public class Board {
 						++defusedTile;
 					}
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Board.java :: getDefusedTile() --> Index Out of Bounds \n"
+					System.err.println("Board.java :: getDefusedTile() --> "
+							+ "Index Out of Bounds \n"
 							+ "i:" + i + " j:" + j + " size: " + m_board.size());
 				}
 			}
@@ -433,12 +443,15 @@ public class Board {
 	                if (m_board.get(y).get(x).isMine()) {
 
 	                    m_board.get(y).remove(x); // create a mine tile
-	                    m_board.get(y).add(x, new Mine(true, true, false, "images/mine.png"));
+	                    m_board.get(y).add(x, new Mine(true, true, false, 
+	                    		"images/mine.png"));
 	                    for (int i = 0; i < m_board.size(); ++i) {
 	                        for (int j = 0; j < m_board.get(0).size(); ++j) {
-	                            if (m_board.get(i).get(j).isMine() && !(i == y && j == x)) {
-	                                m_board.get(i).remove(j); // create a mine tile
-	                                m_board.get(i).add(j, new Mine(true, true, false, "images/mine.png"));
+	                            if (m_board.get(i).get(j).isMine() && 
+	                            		!(i == y && j == x)) {
+	                                m_board.get(i).remove(j);
+	                                m_board.get(i).add(j, new Mine(true, true,
+	                                		false, "images/mine.png"));
 	                            }
 	                        }
 	                    }	

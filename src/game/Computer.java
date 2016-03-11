@@ -1,7 +1,6 @@
 /**
  * @file Computer.java
- * @author Thomas Fisher, Ethan Davies
- * A3 Author: Zongbo Xu
+ * @author A5 Thomas Fisher, Ethan Davies  A3 Zongbo Xu
  * @date 5 December 2015
  *
  * A class for computer players.
