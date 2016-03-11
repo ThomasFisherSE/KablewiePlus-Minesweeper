@@ -1,7 +1,7 @@
 /**
  * @file Computer.java
-
- * @author Zongbo Xu
+ * @author Thomas Fisher, Ethan Davies
+ * A3 Author: Zongbo Xu
  * @date 5 December 2015
  *
  * A class for computer players.
@@ -48,6 +48,14 @@ public class Computer extends Player implements Runnable {
 		m_sleepTime = (int) (time*MILLISEC_IN_SEC);
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param name a String, the name given to the computer player
+	 * @param board a Board object, the board the computer player will make moves on
+	 * @param gc a GameController object, the class in charge of setting up games
+	 * @param intelligence an integer, the chance out of 100 that a smart move will be made
+	 */
 	public Computer(String name, Board board, GameController gc, int intelligence) {
 		super(name);
 		m_intelligence = intelligence;
@@ -55,6 +63,9 @@ public class Computer extends Player implements Runnable {
 		m_gameController = gc;
 	}
 	
+	/**
+	 *  Run the ai
+	 */
 	public void run() {
 		makeMove(); //Make first move
 		m_gameController.repaintAll();
@@ -77,6 +88,11 @@ public class Computer extends Player implements Runnable {
 		}
 	}
 	
+	/**
+	 *  Check if the computer has put the game in a state where it is over
+	 *  
+	 *  @return boolean, true if game is over, false if not
+	 */
 	private boolean checkGameOver() {
 		if (m_board.getGameLost()) {
 			m_gameController.setGameLost();
@@ -90,7 +106,12 @@ public class Computer extends Player implements Runnable {
 			return false;
 		}
 	}
-		
+	
+	/**
+	 *  Make a perfect move where the AI cheats (knows where mines are)
+	 *  
+	 *  @return boolean, true if a move has been made, false if not
+	 */
 	private boolean makePerfectMove() {
 				Random rnd = new Random();
 				int row = rnd.nextInt(m_board.getBoard().size());
@@ -124,6 +145,11 @@ public class Computer extends Player implements Runnable {
 				}
 	}
 	
+	/**
+	 * Decide what type of move is most appropriate and make it based
+	 * 
+	 * @return boolean, true if move has been made, false if not
+	 */
 	private boolean makeMove() {
 		double randomInt = new Random().nextInt(MAXIMUM - MINIMUM + 1);
 		
@@ -156,6 +182,9 @@ public class Computer extends Player implements Runnable {
 		return false;
 	}
 	
+	/**
+	 *  Generate a list of safe, smart moves
+	 */
 	private void generateMoveLists() {
 		m_knownSmartMoves.clear();
 		m_knownBombs.clear();
@@ -209,6 +238,11 @@ public class Computer extends Player implements Runnable {
 		}
 	}
 	
+	/**
+	 *  Make a smart move based on a generated list of smart moves
+	 *  
+	 *  @return boolean, true if move has been made, false if not
+	 */
 	private boolean makeSmartMove() {
 		generateMoveLists();
 		
@@ -248,6 +282,11 @@ public class Computer extends Player implements Runnable {
 		return true;
 	}
 	
+	/**
+	 *  Make a stupid move, where it is possible that a mine can be revealed
+	 *  
+	 *  @return boolean, true if move has been made, false if not
+	 */
 	private boolean makeStupidMove() {
 		boolean findingHiddenTile = true;
 		
