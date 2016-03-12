@@ -14,8 +14,6 @@ package game;
 import java.awt.*;
 import java.util.*;
 
-import java.lang.Math;
-
 public class Board {
 
 	private int m_rows;

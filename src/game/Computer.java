@@ -23,7 +23,7 @@ public class Computer extends Player implements Runnable {
 	private GameController m_gameController;
 	private int m_intelligence;
 	private boolean m_test = false;
-	private int m_sleepTime = DEFAULT_SLEEP_TIME * 100;
+	private int m_sleepTime = (int) (DEFAULT_SLEEP_TIME * 100);
 	private ArrayList<Tile> m_knownSmartMoves = new ArrayList<Tile>();
 	private ArrayList<Tile> m_knownBombs = new ArrayList<Tile>();
 	
@@ -42,7 +42,10 @@ public class Computer extends Player implements Runnable {
 	public static final int EASY_PROBABILITY = 50; 
 	
 	// The default time in seconds between turns
-	public static final int DEFAULT_SLEEP_TIME = 2;
+	public static final double DEFAULT_SLEEP_TIME = 2;
+	
+	//The time to wait between turns when testing
+	public static final double TEST_SLEEP_TIME = 0.01;
 	/**
 	 * Accessor method for the current intelligence of the ai
 	 * 
@@ -101,6 +104,7 @@ public class Computer extends Player implements Runnable {
 	public void run() {
 		makeMove(); //Make first move
 		m_gameController.repaintAll();
+		checkGameOver();
 		
 		while (m_aiToggled) {
 			//Sleep here as computer will always have just made a move

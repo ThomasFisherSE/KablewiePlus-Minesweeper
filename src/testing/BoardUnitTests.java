@@ -2,16 +2,11 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import javax.swing.JFrame;
-
 import org.junit.Test;
 
 import game.Board;
 import game.Computer;
 import game.GameController;
-import game.Human;
-import main.Kablewie;
-import main.MainMenu;
 
 public class BoardUnitTests {
 	IntegrationTests interactingClass = new IntegrationTests();
@@ -21,7 +16,17 @@ public class BoardUnitTests {
 		Board tester = interactingClass.createBoard();
 		GameController gc = new GameController(tester, interactingClass.createHuman(), interactingClass.createFrame(), interactingClass.createMainMenu());
 		Computer testComputer = new Computer("AI", tester, gc, Computer.CANNOT_LOSE);
-		testComputer.run();
+		Thread testThread = new Thread(testComputer);
+		testThread.start();
+		testComputer.setTime(0.01);
+		testComputer.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("BoardUnitTests :: testBoardComplete() --> Error interrupting thread.");
+		}
+		
 		assertEquals("Test if the board has been completed and the game is won",
 				true, tester.getGameWon()); 
 		//Currently not testing correctly, not returning a completed board.

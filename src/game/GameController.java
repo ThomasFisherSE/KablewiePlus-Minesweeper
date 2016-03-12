@@ -44,7 +44,6 @@ public class GameController implements MouseListener, ActionListener {
 	private MainMenu m_menu;
 	private Player m_player;
 	private Board m_board;
-	private Human m_humanPlayer;
 	private Computer m_computerPlayer;
 	private Thread m_aiThread;
 	private SavedFile m_savedFile;
@@ -267,12 +266,6 @@ public class GameController implements MouseListener, ActionListener {
 		m_frame.getContentPane().add(m_panelGame);
 		m_frame.setJMenuBar(myMenu());
 		
-		try {
-			m_humanPlayer = (Human) m_player;
-		} catch (ClassCastException e) {
-			// Player was not human.
-		}
-		
 		m_frame.validate();
 		m_frame.repaint();
 
@@ -480,7 +473,7 @@ public class GameController implements MouseListener, ActionListener {
 			catch (Exception e){}
 			
 			if (m_menu == null) {
-				Kablewie kablewie = new Kablewie();
+				new Kablewie();
 				m_frame.dispose();
 			} else {
 				m_menu.display();

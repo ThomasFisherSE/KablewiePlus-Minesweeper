@@ -12,7 +12,18 @@ import main.MainMenu;
 public class IntegrationTests {
 	
 	public static void main(String[] args) {
-		new Kablewie();
+		BoardUnitTests boardTests = new BoardUnitTests();
+		boardTests.testBoardBounds();
+		boardTests.testBoardComplete();
+		boardTests.testBoardIncomplete();
+		boardTests.testBoardInitialization();
+		
+		ComputerUnitTests computerTests = new ComputerUnitTests();
+		computerTests.testCantLosePreset();
+		computerTests.testHighIntelligencePreset();
+		computerTests.testLowIntelligencePreset();
+		computerTests.testNormalIntelligencePreset();
+		
 	}
 	
 	public Board createBoard() {
