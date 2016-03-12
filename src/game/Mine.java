@@ -2,8 +2,10 @@
  * @file Mine.java
  * @author Josh Townsend
  * @date 7 December 2015
+ * @see Tile.java
+ * @brief A Mine tile
  *
- * A Mine tile
+ * A Mine tile, inherits from Tile
  */
 
 package game;
@@ -12,11 +14,10 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 public class Mine extends Tile {
-
-	private ImageIcon m_mineImage;
 	
 	/**
 	 * Mine Constructor
+	 * 
 	 * @param isMine a boolean is mine or not
 	 * @param isHidden a boolean is hidden or not
 	 * @param isDefused a boolean is defused or not
@@ -45,5 +46,7 @@ public class Mine extends Tile {
 					y * Tile.HEIGHT,
 					null);
 	}
+
+	private ImageIcon m_mineImage;
 
 }
