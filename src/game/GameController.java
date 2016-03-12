@@ -2,6 +2,8 @@
  * @file GameController.java
  * @author A4 Peter Jenkins, A5 Thomas Fisher, Victoria Charvis
  * @date 29 February 2016
+ * @see Kablewie.java
+ * @brief Controls the game
  *
  * Controls the flow of the game takes the
  * click of the user and passes the position
@@ -40,136 +42,56 @@ import main.Kablewie;
  */
 @SuppressWarnings("serial")
 public class GameController implements MouseListener, ActionListener {
-
-	private MainMenu m_menu;
-	private Player m_player;
-	private Board m_board;
-	private Computer m_computerPlayer;
-	private Thread m_aiThread;
-	private SavedFile m_savedFile;
-	
-	private JFrame m_frame;
-	private JPanel m_panelGame;
-	private JPanel m_panelInfo;
-	private JButton m_GameFinshed;
-
-	private Timer m_time;
-	private long m_hoursPlayed;
-	private long m_minutesPlayed;
-	private long m_secondsPlayed;
-	private String m_timePassed;
-	private boolean m_flag = true;
-	private boolean m_minesRevealed = false;
-
-	private JMenuItem m_newGame;
-	private JMenuItem m_settings;
-	private JMenuItem m_revealMines;
-	private JMenuItem m_exit;
-	private JMenuItem m_about;
-	private JMenuItem m_instructions;
-	
-	private JMenu m_loadGame;
-	private JMenuItem m_loadSlot1;
-	private JMenuItem m_loadSlot2;
-	private JMenuItem m_loadSlot3;
-	
-	private JMenu m_saveGame;
-	private JMenuItem m_saveSlot1;
-	private JMenuItem m_saveSlot2;
-	private JMenuItem m_saveSlot3;
-	
-	private JMenu m_playAutomatically;
-	private JMenuItem m_stopAi;
-	private JMenuItem m_manyMistakes;
-	private JMenuItem m_someMistakes;
-	private JMenuItem m_noMistakes;
-	private JMenuItem m_cannotLose;
-	private JMenuItem m_customIntelligence;
-	
-	private Clip m_tick;
-	private Clip m_bomb;
-	private Clip m_won;
-	
-	private boolean m_test = false;
-	
-	private final int MIN_TIME = 0;
-	private final int MAX_TIME = 10;
-	private final int DOUBLE_DIGITS = 10;
-	private final int BOARD_WIDTH = 315;
-	private final int BOARD_HEIGHT = 400;
-	private final int TIMER_DELAY = 1000;
-	private final int SPACING = 8;
-
-	private boolean m_loaded;
 	
 	/**
-	 * Mutator method to set current instance as part of a test
+	 * Builds a String of the instructions
+	 * 
+	 * @return a String of the instructions
 	 */
-	public void asTest() {
-		m_test = true;
+	private String getInstructions() {
+		return "Information:\n" 
+				+ "The goal of the game is to defuse all the mines on the "
+				+ "board without revealing\n " 
+				+ "a mine, if a mine is revealed by the player then the game "
+				+ "will be over and the player will deemed to " 
+				+ "have lost the game.\n" 
+				+ "How to play:\n"
+				+ "The user can left click to reveal a tile on the board.\n"
+				+ "If the user wishes to defuse a tile then the user would " 
+				+ "right click in\n"
+				+ "order to place a flag on the board and defuse a possible "
+				+ "mine. If the flag is placed on a tile\n" 
+				+ "that is deemed to be a mine then the number of mines "
+				+ "defused is increased.\n";
 	}
 	
 	/**
-	 * Constructor
-	 * 
-	 * @param board a Board object for containing the tiles.
-	 * @param player a Player object
-	 * @param frame a JFrame to add the JPanel to
-	 * @param menu the mainmenu so it
+	 * Show the animation when game is lost
 	 */
-	public GameController(Board board, Player player, 
-							JFrame frame, MainMenu menu) {
-		// Set Class variables
-		this.m_board = board;
-		this.m_player = player;
-		this.m_frame = frame;
-		this.m_menu = menu;
-		
-		m_frame.setMinimumSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT));
-		
-		m_timePassed = "00:00:00";
-		m_loaded = false;
-		
-		setInfo();
-		startGame();
-		setSound();
-
-		m_time = new Timer(1000, this);
-		m_time.start();
-		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
-		
+	public void setGameLost() {
+		m_bomb.loop(1);
+		m_time.stop();
+		m_tick.stop();
+		m_GameFinshed.setVisible(true);
+		m_GameFinshed.setIcon(new ImageIcon("images/gameLost.jpg"));
 	}
 	
 	/**
-	 * Constructor
-	 * 
-	 * @param board a Board object for containing the tiles.
-	 * @param player a Player object
-	 * @param time the loaded time passed
-	 * @param frame a JFrame to add the JPanel to
+	 * Show the animation when game is won
 	 */
-	public GameController(Board board, Player player, String time, JFrame frame) {
-		// Set Class variables
-		this.m_board = board;
-		this.m_player = player;
-		this.m_timePassed = time;
-		this.m_frame = frame;
+	public void setGameWin() {
+		m_won.loop(1);
+		m_time.stop();
+		m_tick.stop();
+		m_GameFinshed.setVisible(true);
+		m_GameFinshed.setIcon(new ImageIcon("images/GameWon.jpg"));
 		
-		m_frame.setSize((m_board.getBoard().size() * 30) +
-				SPACING, m_board.getBoard().size() * 30 + 105);
+		String v = "You Have won\n time taken- " + m_timePassed;
 		
-		m_loaded = true;
+		if (!m_test) {
+			JOptionPane.showMessageDialog(m_frame, v, "Congratulations", JOptionPane.YES_NO_CANCEL_OPTION);
+		}
 		
-		setInfo();
-		startGame();
-		setSound();
-		
-		m_time = new Timer(TIMER_DELAY, this);
-		m_time.start();
-		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
-		
-		m_panelGame.repaint();
-		m_panelInfo.repaint();
 	}
 	
 	/**
@@ -199,7 +121,7 @@ public class GameController implements MouseListener, ActionListener {
 		m_frame.validate();
 		m_frame.repaint();
 	}
-
+	
 	/**
 	 * Set the sounds up
 	 */
@@ -229,194 +151,37 @@ public class GameController implements MouseListener, ActionListener {
 		} catch (Exception x) {
 		}
 	}
-
+	
 	/**
-	 * Show the animation when game is lost
+	 * Sets the time
 	 */
-	public void setGameLost() {
-		m_bomb.loop(1);
-		m_time.stop();
-		m_tick.stop();
-		m_GameFinshed.setVisible(true);
-		m_GameFinshed.setIcon(new ImageIcon("images/gameLost.jpg"));
-	}
+	public void setTime() {
+		do {
+			double time;
 
-	/**
-	 * Show the animation when game is won
-	 */
-	public void setGameWin() {
-		m_won.loop(1);
-		m_time.stop();
-		m_tick.stop();
-		m_GameFinshed.setVisible(true);
-		m_GameFinshed.setIcon(new ImageIcon("images/GameWon.jpg"));
-		
-		String v = "You Have won\n time taken- " + m_timePassed;
-		
-		if (!m_test) {
-			JOptionPane.showMessageDialog(m_frame, v, "Congratulations", JOptionPane.YES_NO_CANCEL_OPTION);
-		}
-		
-	}
-
-	/**
-	 * Called when the game starts. Loads the JPanel
-	 * and starts the players turn.
-	 */
-
-	private void startGame() {
-		
-		m_panelGame = new JPanel() {
-			@Override
-			public void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				m_board.render(g);
+			try {
+				time = Double.parseDouble(JOptionPane.showInputDialog(
+						"Enter time (0 - 10 seconds) for between computer turns: "));
+			} catch (NumberFormatException e) {
+				time = Computer.DEFAULT_SLEEP_TIME;
+			} catch (NullPointerException e) {
+				// JOptionPane was probably closed.
+				time = Computer.DEFAULT_SLEEP_TIME;
 			}
-		};
-
-		m_panelGame.addMouseListener(this);
-		m_panelGame.setBounds(0, 50, m_frame.getWidth(), m_frame.getHeight());
-		m_frame.getContentPane().add(m_panelGame);
-		m_frame.setJMenuBar(myMenu());
-		
-		m_frame.validate();
-		m_frame.repaint();
-
-		m_panelGame.repaint();
-		//m_humanPlayer.takeTurn();
-	}
-
-	/**
-	 * Called on mouse event
-	 */
-	public void mouseClicked(MouseEvent e) {
-		if (!(m_board.getGameLost())) {
-			int xPos = (int) Math.floor(e.getX() / Tile.WIDTH);
-			int yPos = (int) Math.floor(e.getY() / Tile.HEIGHT);
 			
-			if (e.getButton() == MouseEvent.BUTTON1) {
-				// Work out the positions in the Array of the mouse click
-				
-				m_board.revealTile(xPos, yPos);
-				m_panelGame.repaint();
-				m_panelInfo.repaint();
-			} else if (e.getButton() == MouseEvent.BUTTON3) {
-				
-				m_board.defusedTile(xPos, yPos);
-				m_panelGame.repaint();
-				m_panelInfo.repaint();
+			if (time >= MIN_TIME && time <=MAX_TIME) {
+				m_computerPlayer.setTime(time);
+				m_flag = false;
+			} else if (!(time >= MIN_TIME && time <=MAX_TIME)) {
+				JOptionPane.showMessageDialog(null,
+						"Time values must be between 0 and 10 seconds",
+						"Value Error",
+						JOptionPane.WARNING_MESSAGE);
 			}
-		}
-		if (m_board.getGameLost()) {
-			setGameLost();
-		}
-		if (m_board.getGameWon()) {
-			setGameWin();
-		}
+		} while (m_flag);
+		m_flag = true;
 	}
-
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	public void mouseExited(MouseEvent e) {
-	}
-
-	public void mousePressed(MouseEvent e) {
-	}
-
-	public void mouseReleased(MouseEvent arg0) {
-	}
-
-	/**
-	 * Builds a JMenuBar with options 
-	 * 
-	 * @return - a JMenuBar Object
-	 * @see Tony Gaddis and Godfrey Muganda, chapter 13.8,page 813 
-	 * from "Starting out with Java from control structures through data structures, 1st edition
-	 */
-	private JMenuBar myMenu() {
-		JMenuBar menu = new JMenuBar();
-		JMenu game = new JMenu("Game");
-		
-		m_newGame = new JMenuItem("New Game");
-		m_newGame.addActionListener(this);
-		m_settings = new JMenuItem("Settings");
-		m_settings.addActionListener(this);
-		m_revealMines = new JMenuItem("Reveal Mines");
-		m_revealMines.addActionListener(this);
-		m_exit = new JMenuItem("Exit");
-		m_exit.addActionListener(this);
-		
-		m_playAutomatically = new JMenu("Play Automatically");
-		m_stopAi = new JMenuItem("Stop");
-		m_stopAi.addActionListener(this);
-		m_manyMistakes = new JMenuItem("Low-Intelligence");
-		m_manyMistakes.addActionListener(this);
-		m_someMistakes = new JMenuItem("Normal Intelligence");
-		m_someMistakes.addActionListener(this);
-		m_noMistakes = new JMenuItem("High-Intelligence");
-		m_noMistakes.addActionListener(this);
-		m_cannotLose = new JMenuItem("Can't Lose (Cheating AI)");
-		m_cannotLose.addActionListener(this);
-		m_customIntelligence = new JMenuItem("Custom Intelligence");
-		m_customIntelligence.addActionListener(this);
-		
-		m_playAutomatically.add(m_stopAi);
-		m_playAutomatically.add(m_manyMistakes);
-		m_playAutomatically.add(m_someMistakes);
-		m_playAutomatically.add(m_noMistakes);
-		m_playAutomatically.add(m_cannotLose);
-		m_playAutomatically.add(m_customIntelligence);
-		
-		m_loadGame = new JMenu("Load Game");
-		m_loadSlot1 = new JMenuItem("Slot 1");
-		m_loadSlot1.addActionListener(this);
-		m_loadSlot2 = new JMenuItem("Slot 2");
-		m_loadSlot2.addActionListener(this);
-		m_loadSlot3 = new JMenuItem("Slot 3");
-		m_loadSlot3.addActionListener(this);
-		
-		m_saveGame = new JMenu("Save Game");
-		m_saveGame.addActionListener(this);
-		m_saveSlot1 = new JMenuItem("Slot 1");
-		m_saveSlot1.addActionListener(this);
-		m_saveSlot2 = new JMenuItem("Slot 2");
-		m_saveSlot2.addActionListener(this);
-		m_saveSlot3 = new JMenuItem("Slot 3");
-		m_saveSlot3.addActionListener(this);
-		
-		m_loadGame.add(m_loadSlot1);
-		m_loadGame.add(m_loadSlot2);
-		m_loadGame.add(m_loadSlot3);
-		
-		m_saveGame.add(m_saveSlot1);
-		m_saveGame.add(m_saveSlot2);
-		m_saveGame.add(m_saveSlot3);
-		
-		game.add(m_newGame);
-		game.add(m_saveGame);
-		game.add(m_loadGame);
-		game.add(m_settings);
-		game.add(m_revealMines);
-		game.add(m_playAutomatically);
-		game.add(m_exit);
-				
-		JMenu help = new JMenu("Help");
-		
-		m_about = new JMenuItem("About");
-		m_about.addActionListener(this);
-		m_instructions = new JMenuItem("Instructions");
-		m_instructions.addActionListener(this);
-		
-		help.add(m_about);
-		help.add(m_instructions);
-		menu.add(game);
-		menu.add(help);
-		
-		return menu;
-
-	}
-
+	
 	/**
 	 * Called by Time or JMenuBar
 	 * 
@@ -652,58 +417,235 @@ public class GameController implements MouseListener, ActionListener {
             
         }
 	}
-
+	
 	/**
-	 * Builds a String of the instructions
-	 * 
-	 * @return a String of the instructions
+	 * Mutator method to set current instance as part of a test
 	 */
-	private String getInstructions() {
-		return "Information:\n" 
-				+ "The goal of the game is to defuse all the mines on the "
-				+ "board without revealing\n " 
-				+ "a mine, if a mine is revealed by the player then the game "
-				+ "will be over and the player will deemed to " 
-				+ "have lost the game.\n" 
-				+ "How to play:\n"
-				+ "The user can left click to reveal a tile on the board.\n"
-				+ "If the user wishes to defuse a tile then the user would " 
-				+ "right click in\n"
-				+ "order to place a flag on the board and defuse a possible "
-				+ "mine. If the flag is placed on a tile\n" 
-				+ "that is deemed to be a mine then the number of mines "
-				+ "defused is increased.\n";
+	public void asTest() {
+		m_test = true;
 	}
 	
-	public void setTime() {
-		do {
-			double time;
+	/**
+	 * Constructor
+	 * 
+	 * @param board a Board object for containing the tiles.
+	 * @param player a Player object
+	 * @param frame a JFrame to add the JPanel to
+	 * @param menu a mainmenu object
+	 */
+	public GameController(Board board, Player player, 
+							JFrame frame, MainMenu menu) {
+		// Set Class variables
+		this.m_board = board;
+		this.m_player = player;
+		this.m_frame = frame;
+		this.m_menu = menu;
+		
+		m_frame.setMinimumSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT));
+		
+		m_timePassed = "00:00:00";
+		m_loaded = false;
+		
+		setInfo();
+		startGame();
+		setSound();
 
-			try {
-				time = Double.parseDouble(JOptionPane.showInputDialog(
-						"Enter time (0 - 10 seconds) for between computer turns: "));
-			} catch (NumberFormatException e) {
-				time = Computer.DEFAULT_SLEEP_TIME;
-			} catch (NullPointerException e) {
-				// JOptionPane was probably closed.
-				time = Computer.DEFAULT_SLEEP_TIME;
-			}
-			
-			if (time >= MIN_TIME && time <=MAX_TIME) {
-				m_computerPlayer.setTime(time);
-				m_flag = false;
-			} else if (!(time >= MIN_TIME && time <=MAX_TIME)) {
-				JOptionPane.showMessageDialog(null,
-						"Time values must be between 0 and 10 seconds",
-						"Value Error",
-						JOptionPane.WARNING_MESSAGE);
-			}
-		} while (m_flag);
-		m_flag = true;
+		m_time = new Timer(1000, this);
+		m_time.start();
+		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param board a Board object for containing the tiles.
+	 * @param player a Player object
+	 * @param time the loaded time passed
+	 * @param frame a JFrame to add the JPanel to
+	 */
+	public GameController(Board board, Player player, String time, 
+			JFrame frame) {
+		// Set Class variables
+		this.m_board = board;
+		this.m_player = player;
+		this.m_timePassed = time;
+		this.m_frame = frame;
+		
+		m_frame.setSize((m_board.getBoard().size() * 30) +
+				SPACING, m_board.getBoard().size() * 30 + 105);
+		
+		m_loaded = true;
+		
+		setInfo();
+		startGame();
+		setSound();
+		
+		m_time = new Timer(TIMER_DELAY, this);
+		m_time.start();
+		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		m_panelGame.repaint();
+		m_panelInfo.repaint();
 	}
 
 	/**
-	 * resets the game so it can be replayed
+	 * Called on mouse event
+	 */
+	public void mouseClicked(MouseEvent e) {
+		if (!(m_board.getGameLost())) {
+			int xPos = (int) Math.floor(e.getX() / Tile.WIDTH);
+			int yPos = (int) Math.floor(e.getY() / Tile.HEIGHT);
+			
+			if (e.getButton() == MouseEvent.BUTTON1) {
+				// Work out the positions in the Array of the mouse click
+				
+				m_board.revealTile(xPos, yPos);
+				m_panelGame.repaint();
+				m_panelInfo.repaint();
+			} else if (e.getButton() == MouseEvent.BUTTON3) {
+				
+				m_board.defusedTile(xPos, yPos);
+				m_panelGame.repaint();
+				m_panelInfo.repaint();
+			}
+		}
+		if (m_board.getGameLost()) {
+			setGameLost();
+		}
+		if (m_board.getGameWon()) {
+			setGameWin();
+		}
+	}
+	
+	/**
+	 * Unused but included due to implements.
+	 * @param e unused MouseEvent
+	 */
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	/**
+	 * Unused but included due to implements.
+	 * @param e unused MouseEvent
+	 */
+	public void mouseExited(MouseEvent e) {
+	}
+
+	/**
+	 * Unused but included due to implements.
+	 * @param e unused MouseEvent
+	 */
+	public void mousePressed(MouseEvent e) {
+	}
+
+	/**
+	 * Unused but included due to implements.
+	 * @param arg0 unused MouseEvent
+	 */
+	public void mouseReleased(MouseEvent arg0) {
+	}
+	
+	/**
+	 * Builds a JMenuBar with options 
+	 * 
+	 * @return - a JMenuBar Object
+	 * @see Tony Gaddis and Godfrey Muganda, chapter 13.8,page 813 
+	 * from "Starting out with Java from control structures through data structures, 1st edition
+	 */
+	private JMenuBar myMenu() {
+		JMenuBar menu = new JMenuBar();
+		JMenu game = new JMenu("Game");
+		
+		m_newGame = new JMenuItem("New Game");
+		m_newGame.addActionListener(this);
+		m_settings = new JMenuItem("Settings");
+		m_settings.addActionListener(this);
+		m_revealMines = new JMenuItem("Reveal Mines");
+		m_revealMines.addActionListener(this);
+		m_exit = new JMenuItem("Exit");
+		m_exit.addActionListener(this);
+		
+		m_playAutomatically = new JMenu("Play Automatically");
+		m_stopAi = new JMenuItem("Stop");
+		m_stopAi.addActionListener(this);
+		m_manyMistakes = new JMenuItem("Low-Intelligence");
+		m_manyMistakes.addActionListener(this);
+		m_someMistakes = new JMenuItem("Normal Intelligence");
+		m_someMistakes.addActionListener(this);
+		m_noMistakes = new JMenuItem("High-Intelligence");
+		m_noMistakes.addActionListener(this);
+		m_cannotLose = new JMenuItem("Can't Lose (Cheating AI)");
+		m_cannotLose.addActionListener(this);
+		m_customIntelligence = new JMenuItem("Custom Intelligence");
+		m_customIntelligence.addActionListener(this);
+		
+		m_playAutomatically.add(m_stopAi);
+		m_playAutomatically.add(m_manyMistakes);
+		m_playAutomatically.add(m_someMistakes);
+		m_playAutomatically.add(m_noMistakes);
+		m_playAutomatically.add(m_cannotLose);
+		m_playAutomatically.add(m_customIntelligence);
+		
+		m_loadGame = new JMenu("Load Game");
+		m_loadSlot1 = new JMenuItem("Slot 1");
+		m_loadSlot1.addActionListener(this);
+		m_loadSlot2 = new JMenuItem("Slot 2");
+		m_loadSlot2.addActionListener(this);
+		m_loadSlot3 = new JMenuItem("Slot 3");
+		m_loadSlot3.addActionListener(this);
+		
+		m_saveGame = new JMenu("Save Game");
+		m_saveGame.addActionListener(this);
+		m_saveSlot1 = new JMenuItem("Slot 1");
+		m_saveSlot1.addActionListener(this);
+		m_saveSlot2 = new JMenuItem("Slot 2");
+		m_saveSlot2.addActionListener(this);
+		m_saveSlot3 = new JMenuItem("Slot 3");
+		m_saveSlot3.addActionListener(this);
+		
+		m_loadGame.add(m_loadSlot1);
+		m_loadGame.add(m_loadSlot2);
+		m_loadGame.add(m_loadSlot3);
+		
+		m_saveGame.add(m_saveSlot1);
+		m_saveGame.add(m_saveSlot2);
+		m_saveGame.add(m_saveSlot3);
+		
+		game.add(m_newGame);
+		game.add(m_saveGame);
+		game.add(m_loadGame);
+		game.add(m_settings);
+		game.add(m_revealMines);
+		game.add(m_playAutomatically);
+		game.add(m_exit);
+				
+		JMenu help = new JMenu("Help");
+		
+		m_about = new JMenuItem("About");
+		m_about.addActionListener(this);
+		m_instructions = new JMenuItem("Instructions");
+		m_instructions.addActionListener(this);
+		
+		help.add(m_about);
+		help.add(m_instructions);
+		menu.add(game);
+		menu.add(help);
+		
+		return menu;
+
+	}
+	
+	/*
+	 * Repaints panels
+	 */
+	public void repaintAll() {
+		m_panelGame.repaint();
+		m_panelInfo.repaint();
+	}
+	
+	/**
+	 * Resets the game so it can be replayed
 	 */
 	private void reset() {
 		if (m_computerPlayer != null) {
@@ -742,8 +684,91 @@ public class GameController implements MouseListener, ActionListener {
 		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
-	public void repaintAll() {
+	/**
+	 * Called when the game starts. Loads the JPanel
+	 * and starts the players turn.
+	 */
+	private void startGame() {
+		
+		m_panelGame = new JPanel() {
+			@Override
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				m_board.render(g);
+			}
+		};
+
+		m_panelGame.addMouseListener(this);
+		m_panelGame.setBounds(0, 50, m_frame.getWidth(), m_frame.getHeight());
+		m_frame.getContentPane().add(m_panelGame);
+		m_frame.setJMenuBar(myMenu());
+		
+		m_frame.validate();
+		m_frame.repaint();
+
 		m_panelGame.repaint();
-		m_panelInfo.repaint();
+		//m_humanPlayer.takeTurn();
 	}
+
+	private MainMenu m_menu;
+	private Player m_player;
+	private Board m_board;
+	private Computer m_computerPlayer;
+	private Thread m_aiThread;
+	private SavedFile m_savedFile;
+	
+	private JFrame m_frame;
+	private JPanel m_panelGame;
+	private JPanel m_panelInfo;
+	private JButton m_GameFinshed;
+
+	private Timer m_time;
+	private long m_hoursPlayed;
+	private long m_minutesPlayed;
+	private long m_secondsPlayed;
+	private String m_timePassed;
+	private boolean m_flag = true;
+	private boolean m_minesRevealed = false;
+
+	private JMenuItem m_newGame;
+	private JMenuItem m_settings;
+	private JMenuItem m_revealMines;
+	private JMenuItem m_exit;
+	private JMenuItem m_about;
+	private JMenuItem m_instructions;
+	
+	private JMenu m_loadGame;
+	private JMenuItem m_loadSlot1;
+	private JMenuItem m_loadSlot2;
+	private JMenuItem m_loadSlot3;
+	
+	private JMenu m_saveGame;
+	private JMenuItem m_saveSlot1;
+	private JMenuItem m_saveSlot2;
+	private JMenuItem m_saveSlot3;
+	
+	private JMenu m_playAutomatically;
+	private JMenuItem m_stopAi;
+	private JMenuItem m_manyMistakes;
+	private JMenuItem m_someMistakes;
+	private JMenuItem m_noMistakes;
+	private JMenuItem m_cannotLose;
+	private JMenuItem m_customIntelligence;
+	
+	private Clip m_tick;
+	private Clip m_bomb;
+	private Clip m_won;
+	
+	private boolean m_test = false;
+	
+	private final int MIN_TIME = 0;
+	private final int MAX_TIME = 10;
+	private final int DOUBLE_DIGITS = 10;
+	private final int BOARD_WIDTH = 315;
+	private final int BOARD_HEIGHT = 400;
+	private final int TIMER_DELAY = 1000;
+	private final int SPACING = 8;
+
+	private boolean m_loaded;
+	
 }
