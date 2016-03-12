@@ -1,9 +1,9 @@
 /**
  * @file Board.java
-
  * @author A4 Ethan Davies A5 Victoria Charvis
  * @date 7 December 2015
- *
+ * @see Tile.java
+ * 
  * Contain the Information of the current Board
  * and various helper methods for manipulating
  * the board.
@@ -15,25 +15,6 @@ import java.awt.*;
 import java.util.*;
 
 public class Board {
-
-	private int m_rows;
-	private int m_columns;
-	private int m_mineCount;
-	private boolean m_gameWon = false;
-	private boolean m_gameLost = false;
-	private ArrayList<ArrayList<Tile>> m_board;
-	private Revealed m_reveal;
-	private String m_timePassed;
-	public ArrayList<Tile> revealedTiles;
-	
-	public static final int DEFAULT_SIZE = 10;
-	public static final int DEFAULT_MINES = DEFAULT_SIZE;
-	public static final int MAX_SIZE = 30;
-	public static final int MAX_MINES = MAX_SIZE - 1;
-	public static final int MIN_SIZE = 2;
-	public static final int MIN_MINES = 1;
-	
-	private final int FONT_SIZE = 12;
 	
 	/**
 	 * Constructor
@@ -59,8 +40,7 @@ public class Board {
 	/**
 	 * Constructor
 	 * 
-	 * @param bRows an int for the number of rows
-	 * @param bColumns an int for the number of columns
+	 * @param boardSize the size of the board
 	 * @param numMines an int for number of mines
 	 */
 	public Board(int boardSize, int numMines) {
@@ -77,6 +57,49 @@ public class Board {
 	}
 	
 	/**
+	 * Returns the board
+	 * 
+	 * @return the board which has all the tiles
+	 */
+	public ArrayList<ArrayList<Tile>> getBoard() {
+		return m_board;
+	}
+	
+	/**
+	 * Gets the column count
+	 * 
+	 * @return the column count
+ 	 */
+ 	public int getColumns() {
+	 	return m_columns;
+	 }
+ 	
+ 	/**
+	 * @return an int with the number of defused tiles
+	 */
+	public int getDefusedTile() {
+		int defusedTile = 0;
+		
+		for (int i = 0; i < m_board.size(); ++i) {
+			for (int j = 0; j < m_board.size(); ++j) {
+				try {
+					if (m_board.get(i).get(j).isDefused() && m_board.get(i).get(j).isMine()) {
+						++defusedTile;
+					}
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Board.java :: getDefusedTile() --> "
+							+ "Index Out of Bounds \n"
+							+ "i:" + i + " j:" + j + " size: " + m_board.size());
+				}
+			}
+		}
+		
+		return defusedTile;
+	}
+ 	
+	/**
+	 * Returns if game is lost
+	 * 
 	 * @return the value of m_gameLost which is true if the game is lost
 	 */
 	public boolean getGameLost() {
@@ -84,45 +107,85 @@ public class Board {
 	}
 
 	/**
-	 * @return the board which has all the tile
-	 */
-	public ArrayList<ArrayList<Tile>> getBoard() {
-		return m_board;
-	}
-
-	/**
-	  * Gets the row count
-	  */
-	 public int getRows() {
-	 	return m_rows;
-	 }
-	 	
-	 /**
-	 * Gets the column count
- 	 */
- 	public int getColumns() {
-	 	return m_columns;
-	 }
-	
-	/**
+	 * Returns if the game is won
+	 * 
 	 * @return the value of m_gameWon which is true if the game is won
 	 */
 	public boolean getGameWon() {
 		return m_gameWon;
 	}
-
-	/**
-	 * Gets the time passed
-	 */
-	public String getTimePassed() {
-		return m_timePassed;
-	}
 	
 	/**
+	 * @return an int with the number of hidden tiles
+	 */
+	public int getHiddenTile() {
+		int hiddenTile = 0;
+		
+		for (int i = 0; i < m_board.size(); ++i) {
+			for (int j = 0; j < m_board.size(); ++j) {
+				try {
+					if (m_board.get(i).get(j).isHidden()) {
+						++hiddenTile;
+					}
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Board.java :: getHiddenTile() --> "
+							+ "Index Out of Bounds \n"
+							+ "i:" + i + " j:" + j + " size: " + m_board.size());
+				}
+			}
+		}
+		
+		return hiddenTile;
+	}
+
+	/**
 	 * Gets the mine count
+	 * 
+	 * @return the mine count
 	 */
 	public int getMineCount() {
 		return m_mineCount;
+	}
+	
+	/**
+	 * @return an int with the number of revealed tiles
+	 */
+	public int getRevealedTile() {
+		int revealedTile = 0;
+		
+		for (int i = 0; i < m_board.size(); ++i) {
+			for (int j = 0; j < m_board.size(); ++j) {
+				try {
+					if (!(m_board.get(i).get(j).isHidden())) {
+						++revealedTile;
+					}
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Board.java :: getHiddenTile() --> "
+							+ "Index Out of Bounds \n"
+							+ "i:" + i + " j:" + j + " size: " + m_board.size());
+				}
+			}
+		}
+		
+		return revealedTile;
+	}
+	
+	/**
+	  * Gets the row count
+	  * 
+	  * @return the row count
+	  */
+	 public int getRows() {
+	 	return m_rows;
+	 }
+
+	/**
+	 * Gets the time passed
+	 * 
+	 * @return value of the time passed
+	 */
+	public String getTimePassed() {
+		return m_timePassed;
 	}
 	
 	/**
@@ -142,9 +205,12 @@ public class Board {
 		}
 	}
 
-
 	/**
 	 * Sets the states of the loaded tiles
+	 * 
+	 * @param column the column the tile is in
+	 * @param row the row the tile is in
+	 * @param state the state the tile is in(Diffused,Hidden,Mine)
 	 */
 	public void setState(int column, int row, String state, 
 			boolean isProperty) {
@@ -165,95 +231,6 @@ public class Board {
 				m_board.get(row).get(column).setHidden(true);
 			} else {
 				m_board.get(row).get(column).setHidden(false);
-			}
-		}
-	}
-
-	public void loadGraphics() {
-		//for every tile in the game set the graphics
-		for (int j=0;j<m_board.size();j++) {
-			for (int i=0;i<m_board.size();i++) {
-				
-				boolean isMine = m_board.get(j).get(i).isMine();
-				boolean isDefused = m_board.get(j).get(i).isDefused();
-				boolean isHidden = m_board.get(j).get(i).isHidden();
-				
-				//Setting correct images
-				if (m_board.get(j).get(i).isDefused()) {
-					m_board.get(j).remove(i);
-					m_board.get(j).add(i, new Defused(isMine, isHidden, 
-							isDefused));
-				} else if (m_board.get(j).get(i).isHidden()==false) {
-					if (!(isDefused)) {
-						
-						m_board.get(j).remove(i);
-						m_board.get(j).add(i, new Revealed(isMine, isHidden, 
-								isDefused));
-						
-						m_board.get(j).get(i).setHidden(true);
-						m_reveal.revealPosition(m_board, j, i);
-						haveWon();
-					}
-				}
-			}
-		}
-		
-	}
-	
-	/**
-	 * Place the mines onto the board.
-	 */
-	private void placeMines() {
-		// This places the mines in random areas on the board(In the array)
-		Random rnd = new Random();
-		int mineCount = this.m_mineCount;
-		while (mineCount > 0) {
-			int row = rnd.nextInt(m_board.size());
-			int column = rnd.nextInt(m_board.get(row).size());
-
-			if (m_board.get(row).get(column).isMine()) {
-
-			} else {
-				m_board.get(row).get(column).setTileType(true, true);
-				mineCount--;
-			}
-		}
-	}
-
-	/**
-	 * This method is used to reveal tiles on the board
-	 * after a users turn, and then takes action based
-	 * on what tile is revealed.
-	 * 
-	 * @param x an int which is the X position of the click
-	 * @param y an int which is the Y position of the click
-	 */
-	public void revealTile(int x, int y) {
-		
-		
-		if (inLimit(y, x) && !(m_board.get(y).get(x).isDefused())) {
-			
-			if (m_board.get(y).get(x).isHidden() && 
-					!(m_board.get(y).get(x).isMine())) {
-				
-				m_reveal.revealPosition(m_board, y, x);
-				haveWon();
-				
-			} else if (m_board.get(y).get(x).isMine()) {
-				this.m_gameWon = false;
-				this.m_gameLost = true;
-				m_board.get(y).remove(x); // create a mine tile
-				m_board.get(y).add(x, new Mine(true, true, false, 
-						"images/mineX.jpg"));
-				for (int i = 0; i < m_board.size(); ++i) {
-					for (int j = 0; j < m_board.get(0).size(); ++j) {
-						if (m_board.get(i).get(j).isMine() && !(i == y && j == x)) {
-							m_board.get(i).remove(j); // create a mine tile
-							m_board.get(i).add(j, new Mine(true, true, false, 
-									"images/mine.png"));
-						}
-					}
-				}	
 			}
 		}
 	}
@@ -285,7 +262,32 @@ public class Board {
 			}
 		}
 	}
-
+	
+	/**
+	 * checks if the game have been won or not
+	 */
+	public void haveWon() {
+		if (getRevealedTile() + getDefusedTile() == m_board.size() *
+				m_board.size()) {
+			m_gameLost = false;
+			m_gameWon = true;
+		}
+	}
+	
+	/**
+	 * Hides all bomb tiles on the board
+	 */
+	 public void hideBombTile() {
+		 for (int y=0; y < m_columns; y++ ){
+			 for (int x=0; x < m_rows; x++){
+				 if (m_board.get(y).get(x).isMine()) {                    
+					 m_board.get(y).remove(x);
+	                 m_board.get(y).add(x, new Hidden(true, true, false));
+	              }
+	         }		
+	     }
+	 }
+	 
 	/**
 	 * it check if x,y are in the range of the board or not
 	 * 
@@ -299,6 +301,39 @@ public class Board {
 				|| y >= m_board.get(0).size()
 				|| x < 0
 				|| y < 0);
+	}
+	
+	/**
+	 * Loads the graphics
+	 */
+	public void loadGraphics() {
+		//for every tile in the game set the graphics
+		for (int j=0;j<m_board.size();j++) {
+			for (int i=0;i<m_board.size();i++) {
+				
+				boolean isMine = m_board.get(j).get(i).isMine();
+				boolean isDefused = m_board.get(j).get(i).isDefused();
+				boolean isHidden = m_board.get(j).get(i).isHidden();
+				
+				//Setting correct images
+				if (m_board.get(j).get(i).isDefused()) {
+					m_board.get(j).remove(i);
+					m_board.get(j).add(i, new Defused(isMine, isHidden, 
+							isDefused));
+				} else if (m_board.get(j).get(i).isHidden()==false) {
+					if (!(isDefused)) {
+						
+						m_board.get(j).remove(i);
+						m_board.get(j).add(i, new Revealed(isMine, isHidden, 
+								isDefused));
+						
+						m_board.get(j).get(i).setHidden(true);
+						m_reveal.revealPosition(m_board, j, i);
+						haveWon();
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -314,7 +349,7 @@ public class Board {
 			}
 		}
 	}
-
+	
 	/**
 	 * Renders the games UI
 	 * 
@@ -357,87 +392,59 @@ public class Board {
 		x = x + 180;
 		g.drawString("Revealed Square : " + getRevealedTile(), x, y);
 	}
-
+	
 	/**
-	 * checks if the game have been won or not
+	 * Resets the game so that it can be played again
 	 */
-	public void haveWon() {
-		if (getRevealedTile() + getDefusedTile() == m_board.size() *
-				m_board.size()) {
-			m_gameLost = false;
-			m_gameWon = true;
-		}
-	}
-
-	/**
-	 * @return a int with the number of revealed tiles
-	 */
-	public int getRevealedTile() {
-		int revealedTile = 0;
-		
-		for (int i = 0; i < m_board.size(); ++i) {
-			for (int j = 0; j < m_board.size(); ++j) {
-				try {
-					if (!(m_board.get(i).get(j).isHidden())) {
-						++revealedTile;
-					}
-				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Board.java :: getHiddenTile() --> "
-							+ "Index Out of Bounds \n"
-							+ "i:" + i + " j:" + j + " size: " + m_board.size());
-				}
-			}
-		}
-		
-		return revealedTile;
-	}
-
-	/**
-	 * @return a int with the number of hidden tiles
-	 */
-	public int getHiddenTile() {
-		int hiddenTile = 0;
-		
-		for (int i = 0; i < m_board.size(); ++i) {
-			for (int j = 0; j < m_board.size(); ++j) {
-				try {
-					if (m_board.get(i).get(j).isHidden()) {
-						++hiddenTile;
-					}
-				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Board.java :: getHiddenTile() --> "
-							+ "Index Out of Bounds \n"
-							+ "i:" + i + " j:" + j + " size: " + m_board.size());
-				}
-			}
-		}
-		
-		return hiddenTile;
-	}
-
-	/**
-	 * @return a int with the number of defused tiles
-	 */
-	public int getDefusedTile() {
-		int defusedTile = 0;
-		
-		for (int i = 0; i < m_board.size(); ++i) {
-			for (int j = 0; j < m_board.size(); ++j) {
-				try {
-					if (m_board.get(i).get(j).isDefused() && m_board.get(i).get(j).isMine()) {
-						++defusedTile;
-					}
-				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Board.java :: getDefusedTile() --> "
-							+ "Index Out of Bounds \n"
-							+ "i:" + i + " j:" + j + " size: " + m_board.size());
-				}
-			}
-		}
-		
-		return defusedTile;
+	public void reset() {
+		m_board.clear();
+		setBoardDimensions();
+		placeMines();
+		m_gameLost = false;
+		m_gameWon = false;
 	}
 	
+	/**
+	 * This method is used to reveal tiles on the board
+	 * after a users turn, and then takes action based
+	 * on what tile is revealed.
+	 * 
+	 * @param x an int which is the X position of the click
+	 * @param y an int which is the Y position of the click
+	 */
+	public void revealTile(int x, int y) {
+		
+		
+		if (inLimit(y, x) && !(m_board.get(y).get(x).isDefused())) {
+			
+			if (m_board.get(y).get(x).isHidden() && 
+					!(m_board.get(y).get(x).isMine())) {
+				
+				m_reveal.revealPosition(m_board, y, x);
+				haveWon();
+				
+			} else if (m_board.get(y).get(x).isMine()) {
+				this.m_gameWon = false;
+				this.m_gameLost = true;
+				m_board.get(y).remove(x); // create a mine tile
+				m_board.get(y).add(x, new Mine(true, true, false, 
+						"images/mineX.jpg"));
+				for (int i = 0; i < m_board.size(); ++i) {
+					for (int j = 0; j < m_board.get(0).size(); ++j) {
+						if (m_board.get(i).get(j).isMine() && !(i == y && j == x)) {
+							m_board.get(i).remove(j); // create a mine tile
+							m_board.get(i).add(j, new Mine(true, true, false, 
+									"images/mine.png"));
+						}
+					}
+				}	
+			}
+		}
+	}
+	
+	/**
+	 * Shows all bomb tiles on the board
+	 */
 	public void showBombTile() {
 		
 		for (int y=0; y < m_columns - 1; y++ ){
@@ -461,28 +468,44 @@ public class Board {
 	                }
 	            }		
 		}
-	    }
-	    
-	    public void hideBombTile() {
-			
-	        for (int y=0; y < m_columns; y++ ){
-	            for (int x=0; x < m_rows; x++){
-	                if (m_board.get(y).get(x).isMine()) {                    
-	                    m_board.get(y).remove(x);
-	                    m_board.get(y).add(x, new Hidden(true, true, false));
-	                }
-	            }		
-	        }
-	    }
+	 }
 
 	/**
-	 * reset the game so that it can be played again
+	 * Place the mines onto the board.
 	 */
-	public void reset() {
-		m_board.clear();
-		setBoardDimensions();
-		placeMines();
-		m_gameLost = false;
-		m_gameWon = false;
+	private void placeMines() {
+		// This places the mines in random areas on the board(In the array)
+		Random rnd = new Random();
+		int mineCount = this.m_mineCount;
+		while (mineCount > 0) {
+			int row = rnd.nextInt(m_board.size());
+			int column = rnd.nextInt(m_board.get(row).size());
+
+			if (m_board.get(row).get(column).isMine()) {
+
+			} else {
+				m_board.get(row).get(column).setTileType(true, true);
+				mineCount--;
+			}
+		}
 	}
+	
+	private int m_rows;
+	private int m_columns;
+	private int m_mineCount;
+	private boolean m_gameWon = false;
+	private boolean m_gameLost = false;
+	private ArrayList<ArrayList<Tile>> m_board;
+	private Revealed m_reveal;
+	private String m_timePassed;
+	public ArrayList<Tile> revealedTiles;
+	
+	public static final int DEFAULT_SIZE = 10;
+	public static final int DEFAULT_MINES = DEFAULT_SIZE;
+	public static final int MAX_SIZE = 30;
+	public static final int MAX_MINES = MAX_SIZE - 1;
+	public static final int MIN_SIZE = 2;
+	public static final int MIN_MINES = 1;
+	
+	private final int FONT_SIZE = 12;
 }
