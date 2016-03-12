@@ -2,8 +2,10 @@
  * @file Player.java
  * @author Ceri Westcott
  * @date 5 December 2015
+ * @see Human.java, Computer.java
+ * @brief A class for a generic player
  *
- * A class for a generic player
+ * A class for a generic player, inherited by Human and Computer players
  */ 
 
 package game;
