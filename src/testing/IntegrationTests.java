@@ -27,6 +27,11 @@ public class IntegrationTests {
 			computerTests.testMaxIntelligence();
 			computerTests.testMinIntelligence();
 			
+			SavedFileUnitTests savedFileTests = new SavedFileUnitTests();
+			savedFileTests.FileShouldLoadCorrectly();
+			savedFileTests.FileShouldSaveCorrectly();
+			savedFileTests.GameShouldStart();
+			
 			System.out.println("Tests were successful.");
 		} catch (Exception e) {
 			System.err.println("A test failed: \n" + e);
@@ -64,5 +69,9 @@ public class IntegrationTests {
     
     public Player createPlayer() {
     	return new Player("testPlayer");
+    }
+    
+    public SavedFile createSavedFile() {
+    	return new SavedFile();
     }
 }
