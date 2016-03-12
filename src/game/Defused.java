@@ -2,8 +2,10 @@
  * @file Defused.java
  * @author Josh Townsend
  * @date 7 December 2015
+ * @see Tile.java
+ * @brief A Defused Tile
  *
- * A Defused Tile
+ * A Defused Tile, inherits from Tile
  */
 
 package game;
@@ -12,8 +14,6 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 public class Defused extends Tile {
-
-	private ImageIcon m_defused;
 
 	/**
 	 * Constructor
@@ -28,7 +28,7 @@ public class Defused extends Tile {
 	}
 
 	/**
-	 *  render the tile
+	 * Render the tile
 	 *  
 	 * @param g a Graphics object used to render
 	 * @param x the X coordinate to render at
@@ -40,5 +40,7 @@ public class Defused extends Tile {
 					y * Tile.HEIGHT,
 					null);
 	}
-
+	
+	private ImageIcon m_defused;
+	
 }
