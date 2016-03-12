@@ -2,8 +2,10 @@
  * @file Hidden.java
  * @author Thomas Williams
  * @date 7 December 2015
+ * @see Tile.java
+ * @brief A hidden Tile
  *
- * A hidden Tile
+ * A hidden Tile, inherits from Tile
  */ 
 
 package game;
@@ -12,11 +14,10 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 public class Hidden extends Tile {
-
-	private ImageIcon m_hidden;
 	
 	/**
 	 * Hidden Constructor
+	 * 
 	 * @param isMine a boolean is mine or not
 	 * @param isHidden a boolean is hidden or not
 	 * @param isDefused a boolean is defused or not
@@ -28,7 +29,7 @@ public class Hidden extends Tile {
 	}
 	
 	/**
-	 *  render the tile
+	 * Render the tile
 	 *  
 	 * @param g a Graphics object used to render
 	 * @param x the X coordinate to render at
@@ -39,8 +40,7 @@ public class Hidden extends Tile {
 					x * Tile.WIDTH,
 					y * Tile.HEIGHT,
 					null);
-		
-		
 	}
 
+	private ImageIcon m_hidden;
 }
