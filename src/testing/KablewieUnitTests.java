@@ -13,10 +13,13 @@ public class KablewieUnitTests {
 		Kablewie tester = new Kablewie();
 		assertEquals("Test whether the kablewie class displays",true,tester.startGame(interactingClass.createBoard(), interactingClass.createPlayer(), interactingClass.createMainMenu()));	
 	}
+	
+	
 	@Test
 	public void testStartLoadedGame() {
 		Kablewie tester = new Kablewie();	
-		assertEquals("Test whether the kablewie class displays",true,tester.startGame(interactingClass.createBoard(), interactingClass.createPlayer(), interactingClass.createMainMenu()));	
+		String time = null;
+		assertEquals("Test whether the kablewie class displays",true,tester.startLoadedGame(interactingClass.createBoard(), interactingClass.createPlayer(),time));	
 
 	}
 		
