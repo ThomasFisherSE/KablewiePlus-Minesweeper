@@ -2,8 +2,10 @@
  * @file Revealed.java
  * @author Anshul Kumar
  * @date 5 December 2015
+ * @see Tile.java
+ * @brief A Revealed tile
  *
- * A Revealed Tile
+ * A Revealed Tile, inherits from Tile
  */ 
 
 package game;
@@ -15,24 +17,13 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 public class Revealed extends Tile {
-
-	private final ImageIcon m_revealedImage;
 	
 	/**
-	 * Constructor
+	 * Draw the number of mines near by the tile which is clicked
 	 * 
-	 * @param isMine a boolean is mine or not
-	 * @param isHidden a boolean is hidden or not
-	 * @param isDefused a boolean is defused or not
-	 */
-	public Revealed(boolean isMine, boolean isHidden, boolean isDefused) {
-		// Always set hidden to false as its the revealed tile.
-		super(isMine, false, isDefused);
-		m_revealedImage = new ImageIcon("images/revealed.png");
-	}
-
-	/**
-	 * draw the number of mines near by the tile which is clicked
+	 * @param g a Graphics object used to render
+	 * @param x the x position of the tile
+	 * @param y the y position of the tile
 	 */
 	public void render(Graphics g, int x, int y) {
 
@@ -53,6 +44,19 @@ public class Revealed extends Tile {
 											x * Tile.WIDTH + spacingX,
 											y * Tile.HEIGHT + spacingY);
 		}
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param isMine a boolean is mine or not
+	 * @param isHidden a boolean is hidden or not
+	 * @param isDefused a boolean is defused or not
+	 */
+	public Revealed(boolean isMine, boolean isHidden, boolean isDefused) {
+		// Always set hidden to false as its the revealed tile.
+		super(isMine, false, isDefused);
+		m_revealedImage = new ImageIcon("images/revealed.png");
 	}
 
 	/**
@@ -103,4 +107,5 @@ public class Revealed extends Tile {
 		}
 	}
 
+	private final ImageIcon m_revealedImage;
 }
