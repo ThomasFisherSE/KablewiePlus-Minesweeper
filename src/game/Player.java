@@ -11,8 +11,6 @@
 package game;
 
 public class Player {
-
-	private String m_username;
 	
 	/**
 	 * Constructor
@@ -30,5 +28,7 @@ public class Player {
 	public String getUsername() {
 		return m_username;
 	}
+
+	private String m_username;
 	
 }
