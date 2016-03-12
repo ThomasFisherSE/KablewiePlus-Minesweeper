@@ -90,6 +90,8 @@ public class GameController implements MouseListener, ActionListener {
 	private Clip m_bomb;
 	private Clip m_won;
 	
+	private boolean m_test = false;
+	
 	private final int MIN_TIME = 0;
 	private final int MAX_TIME = 10;
 	private final int DOUBLE_DIGITS = 10;
@@ -99,6 +101,13 @@ public class GameController implements MouseListener, ActionListener {
 	private final int SPACING = 8;
 
 	private boolean m_loaded;
+	
+	/**
+	 * Mutator method to set current instance as part of a test
+	 */
+	public void asTest() {
+		m_test = true;
+	}
 	
 	/**
 	 * Constructor
@@ -243,7 +252,11 @@ public class GameController implements MouseListener, ActionListener {
 		m_GameFinshed.setIcon(new ImageIcon("images/GameWon.jpg"));
 		
 		String v = "You Have won\n time taken- " + m_timePassed;
-		JOptionPane.showMessageDialog(m_frame, v, "Congratulations", JOptionPane.YES_NO_CANCEL_OPTION);
+		
+		if (!m_test) {
+			JOptionPane.showMessageDialog(m_frame, v, "Congratulations", JOptionPane.YES_NO_CANCEL_OPTION);
+		}
+		
 	}
 
 	/**

@@ -14,8 +14,7 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardComplete() {
 		Board tester = interactingClass.createBoard();
-		GameController gc = new GameController(tester, interactingClass.createHuman(), interactingClass.createFrame(), interactingClass.createMainMenu());
-		Computer testComputer = new Computer("AI", tester, gc, Computer.CANNOT_LOSE);
+		Computer testComputer = new Computer("AI", tester, interactingClass.createGameController(), Computer.CANNOT_LOSE);
 		Thread testThread = new Thread(testComputer);
 		testThread.start();
 		testComputer.setTime(Computer.TEST_SLEEP_TIME);
@@ -34,8 +33,7 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardIncomplete() {
 		Board tester = interactingClass.createBoard();
-		GameController gc = new GameController(tester, interactingClass.createHuman(), interactingClass.createFrame(), interactingClass.createMainMenu());
-		Computer testComputer = new Computer("AI", tester, gc, Computer.EASY_PROBABILITY);
+		Computer testComputer = new Computer("AI", tester, interactingClass.createGameController(), Computer.EASY_PROBABILITY);
 		testComputer.run();
 		assertEquals("Test if the board has been completed and the game is won",
 				false, tester.getGameWon()); 

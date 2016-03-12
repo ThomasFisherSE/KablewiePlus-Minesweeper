@@ -2,8 +2,6 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import java.awt.Window;
-
 import game.*;
 import org.junit.Test;
 

@@ -1,9 +1,6 @@
 package testing;
 
-import java.awt.Window;
-
 import javax.swing.JFrame;
-
 import game.*;
 import main.*;
 
@@ -31,11 +28,11 @@ public class IntegrationTests {
 			computerTests.testMinIntelligence();
 			
 			System.out.println("Tests were successful.");
-			System.exit(0);
 		} catch (Exception e) {
 			System.err.println("A test failed: \n" + e);
 		}
 		
+		System.exit(0);
 	}
 	
 	public Board createBoard() {
@@ -43,7 +40,9 @@ public class IntegrationTests {
 	}
 	
 	public GameController createGameController() {
-		return new GameController(createBoard(), createHuman(), createFrame(), createMainMenu());
+		GameController gc = new GameController(createBoard(), createHuman(), createFrame(), createMainMenu());
+		gc.asTest();
+		return gc;
 	}
 	
 	public MainMenu createMainMenu() {

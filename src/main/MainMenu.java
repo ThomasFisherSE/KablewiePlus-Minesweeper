@@ -89,18 +89,26 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	 * 
 	 * @param gamePanel the panel to add elements to. 
 	 */
-	public void createUserName(JPanel gamePanel) {
-		JLabel userName = new JLabel("User Name:");
-		userName.setBounds(LBL_COLUMN_X, USERNAME_ROW_Y, LBL_WIDTH, LBL_HEIGHT);
-		gamePanel.add(userName);
+	public boolean  createUserName(JPanel gamePanel) {
+		try {
+			JLabel userName = new JLabel("User Name:");
+			userName.setBounds(LBL_COLUMN_X, USERNAME_ROW_Y, LBL_WIDTH, LBL_HEIGHT);
+			gamePanel.add(userName);
 
-		m_userNameText = new JTextField();
-		m_userNameText.addKeyListener(this);
-		m_userNameText.setBorder(null);
-		m_userNameText.setBounds(TF_COLUMN_X, USERNAME_ROW_Y, TF_WIDTH, TF_HEIGHT);
-		m_userNameText.setForeground(Color.RED);
-		gamePanel.add(m_userNameText);
-		m_userNameText.setColumns(COLUMNS);
+			m_userNameText = new JTextField();
+			m_userNameText.addKeyListener(this);
+			m_userNameText.setBorder(null);
+			m_userNameText.setBounds(TF_COLUMN_X, USERNAME_ROW_Y, TF_WIDTH, TF_HEIGHT);
+			m_userNameText.setForeground(Color.RED);
+			gamePanel.add(m_userNameText);
+			m_userNameText.setColumns(COLUMNS);
+			
+			return true;
+		} catch (Exception e) {
+			System.err.println(e);
+			return false;
+		}
+		
 	}
 
 	/**
@@ -108,19 +116,27 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	 * 
 	 * @param gamePanel the panel to add elements to. 
 	 */
-	public void createBoardSize(JPanel gamePanel) {
-		JLabel boardSize = new JLabel("Board Size:");
-		boardSize.setBounds(LBL_COLUMN_X, BOARDSIZE_ROW_Y, LBL_WIDTH, LBL_HEIGHT);
-		gamePanel.add(boardSize);
+	public boolean createBoardSize(JPanel gamePanel) {
+		try {
+			JLabel boardSize = new JLabel("Board Size:");
+			boardSize.setBounds(LBL_COLUMN_X, BOARDSIZE_ROW_Y, LBL_WIDTH, LBL_HEIGHT);
+			gamePanel.add(boardSize);
 
-		m_boardSizeText = new JTextField();
-		m_boardSizeText.addKeyListener(this);
-		m_boardSizeText.setText("10");
-		m_boardSizeText.setBorder(null);
-		m_boardSizeText.setBounds(TF_COLUMN_X, BOARDSIZE_ROW_Y, TF_WIDTH, TF_HEIGHT);
-		m_boardSizeText.setForeground(Color.RED);
-		gamePanel.add(m_boardSizeText);
-		m_boardSizeText.setColumns(COLUMNS);
+			m_boardSizeText = new JTextField();
+			m_boardSizeText.addKeyListener(this);
+			m_boardSizeText.setText("10");
+			m_boardSizeText.setBorder(null);
+			m_boardSizeText.setBounds(TF_COLUMN_X, BOARDSIZE_ROW_Y, TF_WIDTH, TF_HEIGHT);
+			m_boardSizeText.setForeground(Color.RED);
+			gamePanel.add(m_boardSizeText);
+			m_boardSizeText.setColumns(COLUMNS);
+			
+			return true;
+		} catch (Exception e) {
+			System.err.println(e);
+			return false;
+		}
+		
 	}
 
 	/**
