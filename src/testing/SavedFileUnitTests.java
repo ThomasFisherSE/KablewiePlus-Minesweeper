@@ -33,7 +33,7 @@ public class SavedFileUnitTests {
 		//invalid input (not possible in running program)
 		assertEquals("Shouldn't accept reading from wrong file format", tester.validLoadFile("SaveFile1.txt") , false);
 		//invalid input (not possible in running program)
-		assertEquals("Shouldn't accept reading from file", tester.validLoadFile("SaveFile5.csv") ,false);
+		assertEquals("Shouldn't accept reading from 'non-slot' file", tester.validLoadFile("SaveFile5.csv") ,false);
 	}
 	
 	@Test
@@ -70,7 +70,7 @@ public class SavedFileUnitTests {
 		saved.add("0");//example revealed amount
 		//as default all tiles are hidden(T) and diffused(F)
 		for (int i=0; i<90;i++) {
-			saved.add("FTT");
+			saved.add("FFT");
 		}
 		//as default there are 10 mines
 		for (int i=0; i<10;i++) {
@@ -89,7 +89,7 @@ public class SavedFileUnitTests {
 		saved.add("0");//example revealed amount
 		//as default all tiles are hidden(T) and diffused(F)
 		for (int i=0; i<90;i++) {
-			saved.add("FTT");
+			saved.add("FFT");
 		}
 		//as default there are 10 mines
 		for (int i=0; i<10;i++) {
