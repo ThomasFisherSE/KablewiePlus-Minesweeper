@@ -2,14 +2,13 @@
  * @file SavedFile.java
  * @author Victoria Charvis
  * @date 29th February 2016
- * @brief Saves current game
- * 
- * Saves the current game into the selected CSV file
- * Loads a selected game from a selected CSV file
- * 
  * @see Tony Gaddis and Godfrey Muganda, chapter 4.10
  * from "Starting out with Java from control structures through data structures
  * 1st edition
+ * @brief Saves and loads selected game
+ * 
+ * Saves the current game into the selected CSV file
+ * Loads a selected game from a selected CSV file
  */
 
 package game;
@@ -22,16 +21,8 @@ import main.Kablewie;
 
 public class SavedFile {
 	
-	final static int USERNAME = 0;
-	final static int TIME = 1;
-	final static int DIFFUSED_TILE = 2;
-	final static int MINE_COUNT = 3;
-	final static int HIDDEN_TILE = 4;
-	final static int REVEALED_TILE = 5;
-	final static int BOARDSIZE = 6;
-	
 	/**
-	 *  Loads the game data from file
+	 * Loads the game data from file
 	 *  
 	 * @param slot the number slot for the file to be loaded from
 	 * @return if loading was successful
@@ -184,26 +175,7 @@ public class SavedFile {
 	}
 	
 	/**
-	 * Used to see if the file being accessed is allowed
-	 * 
-	 * @param fileName the name of the file
-	 * @return if the file is valid for the game
-	 */
-	public boolean validLoadFile(String fileName) {
-		/*if file is one of the accepted ones*/
-		if (fileName.equalsIgnoreCase("SaveFile1.csv")|| 
-				fileName.equalsIgnoreCase("SaveFile2.csv")
-				||fileName.equalsIgnoreCase("SaveFile3.csv")) {
-			/*Checking if the file exists*/
-			if (!new File(fileName).isFile() || new File(fileName).length()==0) {
-				return false;
-			} else return true;
-		} 
-			return false;
-		
-	}
-	
-	/**
+	 * Starts a loaded game so the player can resume playing
 	 * 
 	 * @param line ArrayList containing the saved data
 	 * @param loadedBoard the board loaded from file
@@ -236,4 +208,33 @@ public class SavedFile {
 		loadedGame.startLoadedGame(loadedBoard, loadedPlayer, loadedTime);
 		return true;
 	}
+	
+	/**
+	 * Used to see if the file being accessed is allowed
+	 * 
+	 * @param fileName the name of the file
+	 * @return if the file is valid for the game
+	 */
+	public boolean validLoadFile(String fileName) {
+		/*if file is one of the accepted ones*/
+		if (fileName.equalsIgnoreCase("SaveFile1.csv")|| 
+				fileName.equalsIgnoreCase("SaveFile2.csv")
+				||fileName.equalsIgnoreCase("SaveFile3.csv")) {
+			/*Checking if the file exists*/
+			if (!new File(fileName).isFile() || new File(fileName).length()==0) {
+				return false;
+			} else return true;
+		} 
+			return false;
+		
+	}
+
+	final static int USERNAME = 0;
+	final static int TIME = 1;
+	final static int DIFFUSED_TILE = 2;
+	final static int MINE_COUNT = 3;
+	final static int HIDDEN_TILE = 4;
+	final static int REVEALED_TILE = 5;
+	final static int BOARDSIZE = 6;
+
 }
