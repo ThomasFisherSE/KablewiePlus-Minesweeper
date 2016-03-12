@@ -34,13 +34,14 @@ public class SavedFile {
 	 *  Loads the game data from file
 	 *  
 	 * @param slot the number slot for the file to be loaded from
+	 * @return if loading was successful
 	 */
-	public void loadFile(int slot) {
+	public boolean loadFile(int slot) {
 		/*Getting the file name from the slot chosen*/
 		String fileName = ("SaveFile" + slot + ".csv");
 		
 		if (!validLoadFile(fileName)) {
-			return;
+			return false;
 		}
 		
 		try{
@@ -109,6 +110,7 @@ public class SavedFile {
 			startup(line, loadedBoard, loadedPlayer);
 		}
 		catch (Exception e) {}
+		return true;
 	}
 	
 	/**
@@ -117,8 +119,9 @@ public class SavedFile {
 	 * @param slot the number slot for the game to be saved into
 	 * @param board the board of the game to be saved
 	 * @param player the player of the game to be saved
+	 * @return if saving was successful
 	 */
-	public void saveFile(int slot, Board board, Player player) {
+	public boolean saveFile(int slot, Board board, Player player) {
 		String fileName = ("SaveFile" + slot + ".csv");
 		try {
 			
@@ -177,6 +180,7 @@ public class SavedFile {
 		}
 		
 		catch (Exception e) {}
+		return true;
 	}
 	
 	/**
@@ -204,24 +208,25 @@ public class SavedFile {
 	 * @param line ArrayList containing the saved data
 	 * @param loadedBoard the board loaded from file
 	 * @param loadedPlayer the player loaded from file
+	 * @return if the game was started successfully
 	 */
-	private void startup(ArrayList<String> line, Board loadedBoard,
+	public boolean startup(ArrayList<String> line, Board loadedBoard,
 			Player loadedPlayer) {
 		/*Used to check file read in correctly*/
 		if (Integer.parseInt(line.get(DIFFUSED_TILE)) 
 				!= loadedBoard.getDefusedTile()) {
 			/*error reading file*/
-			return;
+			return false;
 		}
 		if (Integer.parseInt(line.get(HIDDEN_TILE)) 
 				!= loadedBoard.getHiddenTile()) {
 			/*error reading file*/
-			return;
+			return false;
 		}
 		if (Integer.parseInt(line.get(REVEALED_TILE)) 
 				!= loadedBoard.getRevealedTile()) {
 			/*error reading file*/
-			return;
+			return false;
 		}
 		
 		/*Enables player to continue playing game*/
@@ -229,5 +234,6 @@ public class SavedFile {
 		String loadedTime = line.get(TIME);
 		loadedBoard.loadGraphics();
 		loadedGame.startLoadedGame(loadedBoard, loadedPlayer, loadedTime);
+		return true;
 	}
 }
