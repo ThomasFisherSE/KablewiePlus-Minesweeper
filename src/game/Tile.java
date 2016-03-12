@@ -2,8 +2,10 @@
  * @file Tile.java
  * @author Ethan Davies, A5 Victoria Charvis
  * @date 7 December 2015
+ * @see Mine.java, Hidden.java, Revealed.java, Defused.java
+ * @brief A class for a generic tile
  *
- * A class for a generic tile
+ * An abstract class for a generic tile, inherited by Mine, Hidden, Revealed and Defused
  */
 
 package game;
@@ -12,47 +14,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class Tile {
-	// Static values for WIDTH and HEIGHT
-	public static final int WIDTH = 30;
-	public static final int HEIGHT = 30;
-
-	private boolean m_isMine = false;
-	private boolean m_isHidden = false;
-	private boolean m_isDefused = false;
-	private int m_nearbyMines;
-	
-	/**
-	 * Tile Constructor
-	 * @param isMine a boolean is mine or not
-	 * @param isHidden a boolean is hidden or not
-	 * @param isDefused a boolean is defused or not
-	 */
-	public Tile(boolean isMine, boolean isHidden, boolean isDefused){
-		this.m_isMine = isMine;
-		this.m_isHidden = isHidden;
-		this.m_isDefused=isDefused;
-	}
-	
-	/**
-	 * @return isMine which is true if the tile is a mine 
-	 */
-	public boolean isMine() {
-		return m_isMine;
-	}
-	
-	/**
-	 * @return isMine which is true if the tile is a mine 
-	 */
-	public boolean isHidden() {
-		return m_isHidden;
-	}
-	
-	/**
-	 * @return isMine which is true if the tile is a mine 
-	 */
-	public boolean isDefused() {
-		return m_isDefused;
-	}
 	
 	/**
 	 * @return the mines near by the tile calls it
@@ -62,48 +23,12 @@ public abstract class Tile {
 	}
 	
 	/**
-	 * 
-	 * @param isDefused sets if tile is defused
-	 */
-	public void setDefused(boolean isDefused) {
-		this.m_isDefused = isDefused;
-	}
-	
-	/**
-	 * 
-	 * @param isMine sets if tile is a mine
-	 */
-	public void setMine(boolean isMine) {
-		this.m_isMine = isMine;
-	}
-	
-	/**
-	 * 
-	 * @param isHidden sets if tile is hidden
-	 */
-	public void setHidden(boolean isHidden) {
-		this.m_isHidden = isHidden;
-	}
-
-	
-	/**
-	 * Change the Tile type
-	 * 
-	 * @param isMine a boolean for if its a mine
-	 * @param isHidden a boolean for if it is hidden
-	 */
-	public void setTileType(boolean isMine, boolean isHidden) {
-		this.m_isMine = isMine;
-		this.m_isHidden = isHidden;
-	}
-	
-	/**
 	 * Gets the tiles that are around a set position
 	 * 
 	 * @param board a Board object that contains all the tiles
 	 * @param i the row to get around
 	 * @param j the column to get around
-	 * @return
+	 * @return ArrayList of the tiles around a set position
 	 */
 	public ArrayList<Tile> getTileArround(ArrayList<ArrayList<Tile>> board,
 											int i, int j) {
@@ -136,6 +61,27 @@ public abstract class Tile {
 	}
 	
 	/**
+	 * @param isDefused sets if tile is defused
+	 */
+	public void setDefused(boolean isDefused) {
+		this.m_isDefused = isDefused;
+	}
+	
+	/**
+	 * @param isHidden sets if tile is hidden
+	 */
+	public void setHidden(boolean isHidden) {
+		this.m_isHidden = isHidden;
+	}
+	
+	/**
+	 * @param isMine sets if tile is a mine
+	 */
+	public void setMine(boolean isMine) {
+		this.m_isMine = isMine;
+	}
+	
+	/**
 	 * Calculates the number of mines around a tile
 	 * 
 	 * @param tile a Tile thats being checked
@@ -157,6 +103,38 @@ public abstract class Tile {
 	}
 	
 	/**
+	 * @return isDefused which is true if the tile is defused
+	 */
+	public boolean isDefused() {
+		return m_isDefused;
+	}
+	
+	/**
+	 * @return isHidden which is true if the tile is hidden 
+	 */
+	public boolean isHidden() {
+		return m_isHidden;
+	}
+	
+	/**
+	 * @return isMine which is true if the tile is a mine 
+	 */
+	public boolean isMine() {
+		return m_isMine;
+	}
+	
+	/**
+	 * Change the Tile type
+	 * 
+	 * @param isMine a boolean for if its a mine
+	 * @param isHidden a boolean for if it is hidden
+	 */
+	public void setTileType(boolean isMine, boolean isHidden) {
+		this.m_isMine = isMine;
+		this.m_isHidden = isHidden;
+	}
+	
+	/**
 	 *  render the tile
 	 *  
 	 * @param g a Graphics object used to render
@@ -164,5 +142,26 @@ public abstract class Tile {
 	 * @param y the Y coordinate to render at
 	 */
 	public abstract void render(Graphics g, int x, int y);
+	
+	/**
+	 * Tile Constructor
+	 * @param isMine a boolean is mine or not
+	 * @param isHidden a boolean is hidden or not
+	 * @param isDefused a boolean is defused or not
+	 */
+	public Tile(boolean isMine, boolean isHidden, boolean isDefused){
+		this.m_isMine = isMine;
+		this.m_isHidden = isHidden;
+		this.m_isDefused=isDefused;
+	}
+
+		//Static values for WIDTH and HEIGHT
+		public static final int WIDTH = 30;
+		public static final int HEIGHT = 30;
+
+		private boolean m_isMine = false;
+		private boolean m_isHidden = false;
+		private boolean m_isDefused = false;
+		private int m_nearbyMines;
 
 }
