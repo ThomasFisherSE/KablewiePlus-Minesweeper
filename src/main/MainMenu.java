@@ -216,30 +216,34 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 	}
 
 
-	public void startGame() {
-		String username = m_userNameText.getText();
-		int boardSize;
-		int numMines;
-
+	public boolean startGame() {
 		try {
+			String username = m_userNameText.getText();
+			int boardSize;
+			int numMines;
+
 			boardSize = Integer.parseInt(m_boardSizeText.getText());
 			numMines = Integer.parseInt(m_totalMinesText.getText());
+			
+			if (!(boardSize > MIN_BOARD_SIZE && boardSize <= MAX_BOARD_SIZE)
+					|| !(numMines < boardSize * boardSize && numMines <= MAX_MINES && numMines > MIN_MINES)) {
+				m_totalMinesText.setText(m_boardSizeText.getText());
+				return false;
+			}
+			if (username.length() <=0 || username.length() >12) {
+				return false;
+			}
+			Board board = new Board(boardSize, boardSize, numMines);
+			Player player = new Human(username);
+			m_frame.setSize((boardSize * 30) + SPACING, boardSize * 30 + 105);
+			//m_frame.setMinimumSize(new Dimension(5 * 30 + 50 + 130, 5 * 30 + 105));
+			m_kablewie.startGame(board, player, this);
+			return true;
 		} catch (Exception e) {
-			return;
+			System.out.println(e);
+			return false;
 		}
-		if (!(boardSize > MIN_BOARD_SIZE && boardSize <= MAX_BOARD_SIZE)
-				|| !(numMines < boardSize * boardSize && numMines <= MAX_MINES && numMines > MIN_MINES)) {
-			m_totalMinesText.setText(m_boardSizeText.getText());
-			return;
-		}
-		if (username.length() <=0 || username.length() >12) {
-			return;
-		}
-		Board board = new Board(boardSize, boardSize, numMines);
-		Player player = new Human(username);
-		m_frame.setSize((boardSize * 30) + SPACING, boardSize * 30 + 105);
-		//m_frame.setMinimumSize(new Dimension(5 * 30 + 50 + 130, 5 * 30 + 105));
-		m_kablewie.startGame(board, player, this);
+		
 	}
 
 	/**
