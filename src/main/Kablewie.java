@@ -1,7 +1,9 @@
 /**
  * @file Kablewie.java
- * @author Thomas Phelps, Victoria Charvis
+ * @author A4 Thomas Phelps A5 Victoria Charvis
  * @date 4 December 2015
+ * @see MainMenu.java
+ * @brief Starts the game
  *
  * Starts the game then creates and
  * calls the other components.
@@ -20,18 +22,6 @@ import game.GameController;
 import game.Player;
 
 public class Kablewie {
-
-	private JFrame m_frame;
-
-	/**
-	 * Initialisation method.
-	 * 
-	 * @param args a String Array of arguments passed from the command line.
-	 */
-	public static void main(String[] args) {
-		// Create a Kablewie instance to escape static scope.
-		new Kablewie();
-	}
 
 	/**
 	 * Method for creating a JFrame for the mainMenu
@@ -55,6 +45,16 @@ public class Kablewie {
 		m_frame.setVisible(true);
 		new MainMenu(m_frame, this);
 	}
+	
+	/**
+	 * Initialisation method.
+	 * 
+	 * @param args a String Array of arguments passed from the command line.
+	 */
+	public static void main(String[] args) {
+		// Create a Kablewie instance to escape static scope.
+		new Kablewie();
+	}
 
 	/**
 	 * Simple method for passing board and player information to the game
@@ -64,6 +64,7 @@ public class Kablewie {
 	 * @param player
 	 * 
 	 * @see GameController.java
+	 * @return if the game started successfully
 	 */
 	public boolean startGame(Board board, Player player, MainMenu menu) {
 		try {
@@ -76,6 +77,13 @@ public class Kablewie {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param board the loaded board
+	 * @param player the loaded player
+	 * @param time the loaded time
+	 * @return if the loaded game started successfully
+	 */
 	public boolean startLoadedGame(Board board, Player player, String time){
 		try {
 			m_frame.getContentPane().removeAll();
@@ -87,6 +95,7 @@ public class Kablewie {
 		}
 		
 	}
-
+	
+	private JFrame m_frame;
 
 }
