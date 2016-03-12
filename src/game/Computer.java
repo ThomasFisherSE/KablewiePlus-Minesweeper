@@ -129,7 +129,7 @@ public class Computer extends Player implements Runnable {
 	 *  
 	 *  @return boolean, true if game is over, false if not
 	 */
-	private boolean checkGameOver() {
+	public boolean checkGameOver() {
 		if (m_board.getGameLost()) {
 			m_gameController.setGameLost();
 			m_aiToggled = false;

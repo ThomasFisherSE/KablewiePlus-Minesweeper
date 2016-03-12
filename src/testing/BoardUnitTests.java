@@ -18,7 +18,7 @@ public class BoardUnitTests {
 		Computer testComputer = new Computer("AI", tester, gc, Computer.CANNOT_LOSE);
 		Thread testThread = new Thread(testComputer);
 		testThread.start();
-		testComputer.setTime(0.01);
+		testComputer.setTime(Computer.TEST_SLEEP_TIME);
 		testComputer.toggleAi();
 		
 		try {
@@ -29,7 +29,6 @@ public class BoardUnitTests {
 		
 		assertEquals("Test if the board has been completed and the game is won",
 				true, tester.getGameWon()); 
-		//Currently not testing correctly, not returning a completed board.
 	}
 	
 	@Test

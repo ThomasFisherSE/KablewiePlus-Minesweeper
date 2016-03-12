@@ -1,6 +1,9 @@
 package testing;
 
 import static org.junit.Assert.*;
+
+import javax.swing.JOptionPane;
+
 import game.*;
 import org.junit.Test;
 
@@ -37,6 +40,141 @@ public class ComputerUnitTests {
 		
 		assertEquals("Test if the correct intelligence is set by clicking the Low-Intelligence preset",
 				Computer.CANNOT_LOSE, tester.getIntelligence());
+	}
+	
+	@Test
+	public void testAiOnLargeBoard() {
+		Computer tester = new Computer("AI", new Board(
+				Board.MAX_SIZE, Board.MAX_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(), Computer.PERFECT_PROBABILITY);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testAiOnLargeBoard() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion on a large board", true, tester.checkGameOver());
+	}
+	
+	@Test
+	public void testAiOnDefaultBoard() {
+		Computer tester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(), Computer.PERFECT_PROBABILITY);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testAiOnDefaultBoard() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion on a default sized board", true, tester.checkGameOver());
+	}
+	
+	@Test
+	public void testAiOnSmallBoard() {
+		Computer tester = new Computer("AI", new Board(
+				Board.MIN_SIZE, Board.MIN_SIZE, Board.MIN_SIZE), 
+				interactingClass.createGameController(), Computer.PERFECT_PROBABILITY);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testAiOnSmallBoard() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion on a small sized board", true, tester.checkGameOver());
+	}
+	
+	@Test
+	public void testAiWithMaxMines() {
+		Computer tester = new Computer("AI", new Board(
+				Board.MAX_SIZE, Board.MAX_SIZE, Board.MAX_MINES), 
+				interactingClass.createGameController(), Computer.PERFECT_PROBABILITY);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testAiWithMaxMines() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion with the max number of mines", 
+				true, tester.checkGameOver());
+	}
+	
+	@Test
+	public void testAiWithDefaultMines() {
+		Computer tester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(), Computer.PERFECT_PROBABILITY);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testAiWithDefaultMines() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion with the default number of mines", 
+				true, tester.checkGameOver());
+	}
+	
+	@Test
+	public void testAiWithMinMines() {
+		Computer tester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.MIN_MINES), 
+				interactingClass.createGameController(), Computer.PERFECT_PROBABILITY);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testAiWithMinMines() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion with the min number of mines", 
+				true, tester.checkGameOver());
 	}
 	
 

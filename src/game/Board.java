@@ -27,7 +27,12 @@ public class Board {
 	public ArrayList<Tile> revealedTiles;
 	
 	public static final int DEFAULT_SIZE = 10;
-	public static final int DEFAULT_MINES = 10;
+	public static final int DEFAULT_MINES = DEFAULT_SIZE;
+	public static final int MAX_SIZE = 30;
+	public static final int MAX_MINES = MAX_SIZE - 1;
+	public static final int MIN_SIZE = 2;
+	public static final int MIN_MINES = 1;
+	
 	private final int FONT_SIZE = 12;
 	
 	/**
