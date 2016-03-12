@@ -2,8 +2,6 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import javax.swing.JOptionPane;
-
 import game.*;
 import org.junit.Test;
 
@@ -177,5 +175,49 @@ public class ComputerUnitTests {
 				true, tester.checkGameOver());
 	}
 	
-
+	@Test
+	public void testMinIntelligence() {
+		Computer tester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(), Computer.MINIMUM_INTELLIGENCE);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testMinIntelligence() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion with the min intelligence", 
+				true, tester.checkGameOver());
+	}
+	
+	@Test
+	public void testMaxIntelligence() {
+		Computer tester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(), Computer.MAXIMUM_INTELLIGENCE);
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testMaxIntelligence() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion with the max intelligence", 
+				true, tester.checkGameOver());
+	}
 }

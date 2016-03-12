@@ -14,8 +14,7 @@ import java.util.Random;
 
 public class Computer extends Player implements Runnable {
 	
-	private final int MAXIMUM = 100;
-	private final int MINIMUM = 1;
+	
 	private final int MILLISEC_IN_SEC = 1000;
 	
 	private boolean m_aiToggled = false;
@@ -27,6 +26,8 @@ public class Computer extends Player implements Runnable {
 	private ArrayList<Tile> m_knownSmartMoves = new ArrayList<Tile>();
 	private ArrayList<Tile> m_knownBombs = new ArrayList<Tile>();
 	
+	public static final int MAXIMUM_INTELLIGENCE = 100;
+	public static final int MINIMUM_INTELLIGENCE = 1;
 	
 	// Common AI Probability Presets
 	// Cheating AI, knows where each mine is
@@ -187,7 +188,7 @@ public class Computer extends Player implements Runnable {
 	 * @return boolean, true if move has been made, false if not
 	 */
 	private boolean makeMove() {
-		double randomInt = new Random().nextInt(MAXIMUM - MINIMUM + 1);
+		double randomInt = new Random().nextInt(MAXIMUM_INTELLIGENCE - MINIMUM_INTELLIGENCE + 1);
 		
 		if (randomInt <= (m_intelligence)) {
 			if (m_test) {
