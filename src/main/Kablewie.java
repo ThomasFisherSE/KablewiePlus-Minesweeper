@@ -65,14 +65,27 @@ public class Kablewie {
 	 * 
 	 * @see GameController.java
 	 */
-	public void startGame(Board board, Player player, MainMenu menu) {
-		m_frame.getContentPane().removeAll();
-		new GameController(board, player, m_frame, menu);
+	public boolean startGame(Board board, Player player, MainMenu menu) {
+		try {
+			m_frame.getContentPane().removeAll();
+			new GameController(board, player, m_frame, menu);
+			return true;
+		} catch (Exception e) {
+			System.err.println(e);
+			return false;
+		}
 	}
 	
-	public void startLoadedGame(Board board, Player player, String time){
-		m_frame.getContentPane().removeAll();
-		new GameController(board, player, time, m_frame);
+	public boolean startLoadedGame(Board board, Player player, String time){
+		try {
+			m_frame.getContentPane().removeAll();
+			new GameController(board, player, time, m_frame);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
 	}
 
 

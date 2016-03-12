@@ -1,28 +1,40 @@
 package testing;
 
+import java.awt.Window;
+
 import javax.swing.JFrame;
 
-import game.Board;
-import game.Computer;
-import game.GameController;
-import game.Human;
-import main.Kablewie;
-import main.MainMenu;
+import game.*;
+import main.*;
 
 public class IntegrationTests {
-	
 	public static void main(String[] args) {
-		BoardUnitTests boardTests = new BoardUnitTests();
-		boardTests.testBoardBounds();
-		boardTests.testBoardComplete();
-		boardTests.testBoardIncomplete();
-		boardTests.testBoardInitialization();
 		
-		ComputerUnitTests computerTests = new ComputerUnitTests();
-		computerTests.testCantLosePreset();
-		computerTests.testHighIntelligencePreset();
-		computerTests.testLowIntelligencePreset();
-		computerTests.testNormalIntelligencePreset();
+		try {
+			BoardUnitTests boardTests = new BoardUnitTests();
+			boardTests.testBoardBounds();
+			boardTests.testBoardComplete();
+			boardTests.testBoardIncomplete();
+			boardTests.testBoardInitialization();
+			
+			ComputerUnitTests computerTests = new ComputerUnitTests();
+			computerTests.testCantLosePreset();
+			computerTests.testHighIntelligencePreset();
+			computerTests.testLowIntelligencePreset();
+			computerTests.testNormalIntelligencePreset();
+			computerTests.testAiOnDefaultBoard();
+			computerTests.testAiOnLargeBoard();
+			computerTests.testAiWithDefaultMines();
+			computerTests.testAiWithMaxMines();
+			computerTests.testAiWithMinMines();
+			computerTests.testMaxIntelligence();
+			computerTests.testMinIntelligence();
+			
+			System.out.println("Tests were successful.");
+			System.exit(0);
+		} catch (Exception e) {
+			System.err.println("A test failed: \n" + e);
+		}
 		
 	}
 	
@@ -49,5 +61,9 @@ public class IntegrationTests {
     
     public Human createHuman() {
     	return new Human("testPlayer");
+    }
+    
+    public Player createPlayer() {
+    	return new Player("testPlayer");
     }
 }
