@@ -11,7 +11,7 @@ public class KablewieUnitTests {
 	@Test
 	public void testStartGame() {
 		Kablewie tester = new Kablewie();
-		assertEquals("Test whether the kablewie class displays",true,tester.startGame(interactingClass.createBoard(), interactingClass.createPlayer(), interactingClass.createMainMenu()));	
+		assertEquals("Test whether the kablewie class displays the game frames",true,tester.startGame(interactingClass.createBoard(), interactingClass.createPlayer(), interactingClass.createMainMenu()));	
 	}
 	
 	
@@ -19,7 +19,7 @@ public class KablewieUnitTests {
 	public void testStartLoadedGame() {
 		Kablewie tester = new Kablewie();	
 		String time = null;
-		assertEquals("Test whether the kablewie class displays",true,tester.startLoadedGame(interactingClass.createBoard(), interactingClass.createPlayer(),time));	
+		assertEquals("Test whether the kablewie class displays the game frames",true,tester.startLoadedGame(interactingClass.createBoard(), interactingClass.createPlayer(),time));	
 
 	}
 		
