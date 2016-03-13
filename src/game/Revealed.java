@@ -19,6 +19,19 @@ import javax.swing.ImageIcon;
 public class Revealed extends Tile {
 	
 	/**
+	 * Constructor
+	 * 
+	 * @param isMine a boolean is mine or not
+	 * @param isHidden a boolean is hidden or not
+	 * @param isDefused a boolean is defused or not
+	 */
+	public Revealed(boolean isMine, boolean isHidden, boolean isDefused) {
+		// Always set hidden to false as its the revealed tile.
+		super(isMine, false, isDefused);
+		m_revealedImage = new ImageIcon("images/revealed.png");
+	}
+	
+	/**
 	 * Draw the number of mines near by the tile which is clicked
 	 * 
 	 * @param g a Graphics object used to render
@@ -44,19 +57,6 @@ public class Revealed extends Tile {
 											x * Tile.WIDTH + spacingX,
 											y * Tile.HEIGHT + spacingY);
 		}
-	}
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param isMine a boolean is mine or not
-	 * @param isHidden a boolean is hidden or not
-	 * @param isDefused a boolean is defused or not
-	 */
-	public Revealed(boolean isMine, boolean isHidden, boolean isDefused) {
-		// Always set hidden to false as its the revealed tile.
-		super(isMine, false, isDefused);
-		m_revealedImage = new ImageIcon("images/revealed.png");
 	}
 
 	/**
