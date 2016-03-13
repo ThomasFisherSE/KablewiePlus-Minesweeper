@@ -23,9 +23,10 @@ public class MainMenuUnitTests {
 	public void startGameTest1() {
 		MainMenu test = new MainMenu(interactingClass.createFrame(),
 				new Kablewie());
-		
-		// The statement is set to false, if and only if
-		// inputs to start game is true
+		/**
+		* The statement is set to false, if and only if
+	        * inputs to start game is true
+		*/
 		assertEquals("Test if the inputs are valid to start Game", false, 
 				test.startGame());
 	}
@@ -37,9 +38,10 @@ public class MainMenuUnitTests {
 	public void startGameTest2() {
 		MainMenu test = new MainMenu(interactingClass.createFrame(),
 				new Kablewie());
-		
-		// The statement is set to true, if and only if
-		// inputs to start game is false
+		/*
+		 * The statement is set to true, if and only if
+		 * inputs to start game is false
+		 */ 
 		assertEquals("Test if the inputs are not valid to start Game",
 				true, test.startGame());
 	}
