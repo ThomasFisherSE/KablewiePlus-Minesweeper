@@ -1,0 +1,25 @@
+var classgame_1_1_computer =
+[
+    [ "Computer", "classgame_1_1_computer.html#a5c431ebcd02212c6058f8dd563fa843c", null ],
+    [ "checkGameOver", "classgame_1_1_computer.html#a6371f69b326e3c5850109226e363e11d", null ],
+    [ "generateMoveLists", "classgame_1_1_computer.html#a6e0d4b4f48cbecdb54fb48b92e6852f3", null ],
+    [ "getIntelligence", "classgame_1_1_computer.html#a4299fa23c23e6c45fdf90d707c1ff559", null ],
+    [ "isRunning", "classgame_1_1_computer.html#ac0699888085759270a1a49bdb01bf98d", null ],
+    [ "makeMove", "classgame_1_1_computer.html#a879022f8e0e2209ca73451367c23c82f", null ],
+    [ "makePerfectMove", "classgame_1_1_computer.html#afc798165c69c0cc61febf1096ef8388b", null ],
+    [ "makeSmartMove", "classgame_1_1_computer.html#a98ceaf5e26e9320553b703ed348160c4", null ],
+    [ "makeStupidMove", "classgame_1_1_computer.html#a53cc52a7e0af9838f803bfe978369ba8", null ],
+    [ "run", "classgame_1_1_computer.html#aade1e8440c076dbb52d4bd0192c2d18d", null ],
+    [ "setTime", "classgame_1_1_computer.html#a5cc98f8a40c7db017a459f7615600a17", null ],
+    [ "toggleAi", "classgame_1_1_computer.html#af119980fb2b837c5762a4cf7b9677aba", null ],
+    [ "m_aiToggled", "classgame_1_1_computer.html#ad4fb55bdf0d3f81cccdf0e6f323e1bcc", null ],
+    [ "m_board", "classgame_1_1_computer.html#a424a1b7e66853b286ef777f339839f08", null ],
+    [ "m_gameController", "classgame_1_1_computer.html#af602f06e4e3a4d42175c44a42505dae5", null ],
+    [ "m_intelligence", "classgame_1_1_computer.html#a43e5cc1feffe47e66e0a19c5b93f8f2d", null ],
+    [ "m_knownBombs", "classgame_1_1_computer.html#a8aa9bb264ed5531f4b4c19b1cde7b5a5", null ],
+    [ "m_knownSmartMoves", "classgame_1_1_computer.html#a4c3654bcc71e996c8e270fc8a5a2f5bd", null ],
+    [ "m_sleepTime", "classgame_1_1_computer.html#ae02da8a047df5cfaff763fd7dc7df8e2", null ],
+    [ "m_test", "classgame_1_1_computer.html#a7e3f016c6c66e2674c6345d6f4affb66", null ],
+    [ "MAX_ATTEMPTS", "classgame_1_1_computer.html#aa44771ea6e055c3e32a21e0ee52e43af", null ],
+    [ "MILLISEC_IN_SEC", "classgame_1_1_computer.html#aaec0504b60c5848e06d07c8985fffa6d", null ]
+];

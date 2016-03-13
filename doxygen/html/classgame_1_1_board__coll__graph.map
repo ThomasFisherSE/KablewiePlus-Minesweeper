@@ -1,0 +1,4 @@
+<map id="game.Board" name="game.Board">
+<area shape="rect" id="node3" href="$classgame_1_1_revealed.html" title="A Revealed tile." alt="" coords="151,97,247,121"/>
+<area shape="rect" id="node4" href="$classgame_1_1_tile.html" title="A class for a generic tile." alt="" coords="119,5,185,29"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="game.Tile" name="game.Tile">
+<area shape="rect" id="node2" href="$classgame_1_1_defused.html" title="A Defused Tile." alt="" coords="5,77,96,101"/>
+<area shape="rect" id="node3" href="$classgame_1_1_hidden.html" title="A hidden Tile." alt="" coords="121,77,204,101"/>
+<area shape="rect" id="node4" href="$classgame_1_1_mine.html" title="A Mine tile." alt="" coords="229,77,301,101"/>
+<area shape="rect" id="node5" href="$classgame_1_1_revealed.html" title="A Revealed tile." alt="" coords="327,77,423,101"/>
+</map>

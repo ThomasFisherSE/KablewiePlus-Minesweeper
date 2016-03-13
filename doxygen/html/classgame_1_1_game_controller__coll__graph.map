@@ -1,0 +1,10 @@
+<map id="game.GameController" name="game.GameController">
+<area shape="rect" id="node10" href="$classgame_1_1_saved_file.html" title="Saves and loads selected game." alt="" coords="981,375,1080,399"/>
+<area shape="rect" id="node21" href="$classgame_1_1_computer.html" title="A class for computer players." alt="" coords="982,136,1079,160"/>
+<area shape="rect" id="node11" href="$classmain_1_1_main_menu.html" title="creates main menu" alt="" coords="446,495,541,519"/>
+<area shape="rect" id="node8" href="$classgame_1_1_player.html" title="A class for a generic player." alt="" coords="453,116,534,140"/>
+<area shape="rect" id="node14" href="$classmain_1_1_kablewie.html" title="Starts the game." alt="" coords="229,541,321,565"/>
+<area shape="rect" id="node16" href="$classgame_1_1_board.html" title="Contains Board information." alt="" coords="453,807,533,831"/>
+<area shape="rect" id="node18" href="$classgame_1_1_revealed.html" title="A Revealed tile." alt="" coords="227,779,323,803"/>
+<area shape="rect" id="node19" href="$classgame_1_1_tile.html" title="A class for a generic tile." alt="" coords="8,803,75,827"/>
+</map>

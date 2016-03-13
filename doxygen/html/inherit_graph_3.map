@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classgame_1_1_tile.html" title="A class for a generic tile." alt="" coords="5,77,72,101"/>
+<area shape="rect" id="node2" href="$classgame_1_1_defused.html" title="A Defused Tile." alt="" coords="122,5,214,29"/>
+<area shape="rect" id="node3" href="$classgame_1_1_hidden.html" title="A hidden Tile." alt="" coords="126,53,210,77"/>
+<area shape="rect" id="node4" href="$classgame_1_1_mine.html" title="A Mine tile." alt="" coords="131,101,205,125"/>
+<area shape="rect" id="node5" href="$classgame_1_1_revealed.html" title="A Revealed tile." alt="" coords="120,149,216,173"/>
+</map>

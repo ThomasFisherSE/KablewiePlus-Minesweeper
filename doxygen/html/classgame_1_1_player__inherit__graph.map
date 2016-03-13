@@ -1,0 +1,4 @@
+<map id="game.Player" name="game.Player">
+<area shape="rect" id="node2" href="$classgame_1_1_computer.html" title="A class for computer players." alt="" coords="5,77,101,101"/>
+<area shape="rect" id="node3" href="$classgame_1_1_human.html" title="A class for Human players." alt="" coords="126,77,209,101"/>
+</map>
