@@ -18,6 +18,13 @@ import org.junit.Test;
 
 import game.*;
 
+/**
+ * 
+ * @class TileUnitTests
+ * @brief Tests Tile class
+ * 
+ * Tests methods in Computer, and whether the computer AI works correctly
+ * /
 public class TileUnitTests {
 	/**
 	 * Hidden class referenced because Tile is abstract
