@@ -68,19 +68,43 @@ public class BoardUnitTests {
 	public void testBoardIncomplete() {
 		Board tester = interactingClass.createBoard();
 		Computer testComputer = new Computer("AI", tester, interactingClass.createGameController(), Computer.LOW_PROBABILITY);
-		testComputer.run();
-		assertEquals("Test if the board has been completed and the game is won",
+		Thread testThread = new Thread(testComputer);
+		testThread.start();
+		testComputer.setTime(Computer.TEST_SLEEP_TIME);
+		testComputer.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("BoardUnitTests :: testBoardComplete() --> Error interrupting thread.");
+		}
+		assertEquals("Test if the board has not been completed",
 				false, tester.getGameWon()); 
 	}
 	
 	@Test
-	public void testBoardInitialization() {
+	public void testBoardDefaultInitialization() {
 		assertEquals("Test if the boards columns are initialized correclty",
 				10, interactingClass.createBoard().getColumns());
 		assertEquals("Test if the boards rows are initialized correclty",
 				10, interactingClass.createBoard().getRows());
 		assertEquals("Test if the boards mines are initialized correclty",
 				10, interactingClass.createBoard().getMineCount());
+	}
+	
+	@Test
+	public void testBoardCustomInitialization() {
+		int col,row,mines;
+		col = 15;
+		row = 15;
+		mines = 30;
+		Board tester = new Board(row,col,mines);
+		assertEquals("Test if the boards custom column size is initialized correctly",
+				col,tester.getColumns());
+		assertEquals("Test if the boards custom column size is initialized correctly",
+				row,tester.getRows());
+		assertEquals("Test if the boards custom column size is initialized correctly",
+				mines,tester.getMineCount());
 	}
 	
 	@Test

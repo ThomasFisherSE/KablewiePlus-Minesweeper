@@ -12,7 +12,8 @@ public class IntegrationTests {
 			boardTests.testBoardBounds();
 			boardTests.testBoardComplete();
 			boardTests.testBoardIncomplete();
-			boardTests.testBoardInitialization();
+			boardTests.testBoardDefaultInitialization();
+			boardTests.testBoardCustomInitialization();
 			boardTests.testBoardReturn();
 			boardTests.testTimeReturn();
 			boardTests.testMineReturn();
