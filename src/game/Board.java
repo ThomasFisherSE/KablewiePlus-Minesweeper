@@ -490,8 +490,8 @@ public class Board {
 
 	private boolean m_gameWon = false;
 	private boolean m_gameLost = false;
-	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
+	public ArrayList<ArrayList<Tile>> m_board;
 	public String m_timePassed;
 	public int m_rows;
 	public int m_columns;

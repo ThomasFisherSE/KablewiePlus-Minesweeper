@@ -13,7 +13,7 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardReturn() {
 		Board tester = interactingClass.createBoard();
-		assertEquals("Test if the board is returned correctly",tester,tester.getBoard());
+		assertEquals("Test if the board is returned correctly",tester.m_board,tester.getBoard());
 	}
 	
 	@Test
