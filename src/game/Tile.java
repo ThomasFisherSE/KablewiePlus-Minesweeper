@@ -16,6 +16,18 @@ import java.util.ArrayList;
 public abstract class Tile {
 	
 	/**
+	 * Tile Constructor
+	 * @param isMine a boolean is mine or not
+	 * @param isHidden a boolean is hidden or not
+	 * @param isDefused a boolean is defused or not
+	 */
+	public Tile(boolean isMine, boolean isHidden, boolean isDefused){
+		this.m_isMine = isMine;
+		this.m_isHidden = isHidden;
+		this.m_isDefused=isDefused;
+	}
+	
+	/**
 	 * @return the mines near by the tile calls it
 	 */
 	public int getNearbyMines() {
@@ -142,18 +154,6 @@ public abstract class Tile {
 	 * @param y the Y coordinate to render at
 	 */
 	public abstract void render(Graphics g, int x, int y);
-	
-	/**
-	 * Tile Constructor
-	 * @param isMine a boolean is mine or not
-	 * @param isHidden a boolean is hidden or not
-	 * @param isDefused a boolean is defused or not
-	 */
-	public Tile(boolean isMine, boolean isHidden, boolean isDefused){
-		this.m_isMine = isMine;
-		this.m_isHidden = isHidden;
-		this.m_isDefused=isDefused;
-	}
 
 		//Static values for WIDTH and HEIGHT
 		public static final int WIDTH = 30;
