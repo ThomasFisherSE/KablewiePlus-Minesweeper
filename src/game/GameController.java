@@ -416,7 +416,7 @@ public class GameController implements MouseListener, ActionListener {
 			
 			String author = "Author: Software Engineering Group 14\n";
 			author += "Date created : 06/12/2015 \n";
-			author += "Version : 1.0\n";
+			author += "Version : 2.0\n";
 			author += "The game was part of an assignment and ";
 			author += "is based on the famous game Minesweeper";
 			JOptionPane.showMessageDialog(m_about,
