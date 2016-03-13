@@ -20,11 +20,12 @@ public class Computer extends Player implements Runnable {
 	 * Constructor
 	 * 
 	 * @param name a String, the name given to the computer player
-	 * @param board a Board object, the board the computer player will make moves on
-	 * @param gc a GameController object, the class in charge of setting up games
-	 * @param intelligence an integer, the chance out of 100 a smart move will be made
+	 * @param board the board the computer player will make moves on
+	 * @param gc the GameController in charge of the current game
+	 * @param intelligence an integer, the chance of a smart move
 	 */
-	public Computer(String name, Board board, GameController gc, int intelligence) {
+	public Computer(String name, Board board, GameController gc,
+			int intelligence) {
 		super(name);
 		m_intelligence = intelligence;
 		m_board = board;
@@ -195,7 +196,8 @@ public class Computer extends Player implements Runnable {
 	 * @return boolean, true if move has been made, false if not
 	 */
 	public boolean makeMove() {
-		double randomInt = new Random().nextInt(MAXIMUM_INTELLIGENCE - MINIMUM_INTELLIGENCE + 1);
+		double randomInt = new Random().nextInt(
+				MAXIMUM_INTELLIGENCE - MINIMUM_INTELLIGENCE + 1);
 		
 		if (randomInt <= (m_intelligence)) {
 			if (m_test) {

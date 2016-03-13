@@ -1,6 +1,6 @@
 /**
  * @file Revealed.java
- * @author Anshul Kumar
+ * @author A5 Thomas Fisher, A4 Anshul Kumar
  * @date 5 December 2015
  * @see Tile.java
  * @brief A Revealed tile
@@ -52,13 +52,11 @@ public class Revealed extends Tile {
 			/*
 			 * using Spacing so that the number is drawn in the center
 			 */
-			int spacingX = 10;
-			int spacingY = 19;
-			int fontSize = 15;
-			g.setFont(new Font("Time new roman", Font.BOLD, fontSize));
+			
+			g.setFont(new Font("Time new roman", Font.BOLD, FONT_SIZE));
 			g.drawString(Integer.toString(getNearbyMines()),
-											x * Tile.WIDTH + spacingX,
-											y * Tile.HEIGHT + spacingY);
+											x * Tile.WIDTH + X_SPACING,
+											y * Tile.HEIGHT + Y_SPACING);
 		}
 	}
 
@@ -137,4 +135,7 @@ public class Revealed extends Tile {
 
 	private final ImageIcon m_revealedImage;
 	private final int REVEAL_RATE = 50;
+	private final int X_SPACING = 10;
+	private final int Y_SPACING = 19;
+	private final int FONT_SIZE = 15;
 }

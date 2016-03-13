@@ -27,7 +27,8 @@ public class SavedFileUnitTests {
 		SavedFile tester = interactingClass.createSavedFile();
 		
 		//valid input 
-		assertEquals("Should accept saving",tester.saveFile(1,interactingClass.createBoard(),
+		assertEquals("Should accept saving",tester.saveFile(1,
+				interactingClass.createBoard(),
 				interactingClass.createPlayer()),true);
 		
 		/**
@@ -80,7 +81,8 @@ public class SavedFileUnitTests {
 		//if loadFile 3 hasn't been created 
 		if (!new File("SaveFile3.csv").isFile()) {
 			//invalid input
-			assertEquals("Shouldn't accept reading from valid but non existent file",
+			assertEquals("Shouldn't accept reading from valid but non"
+					+ " existent file",
 				tester.loadFile(3),false);
 		}
 		assertEquals("Shouldn't accept non existent file", 

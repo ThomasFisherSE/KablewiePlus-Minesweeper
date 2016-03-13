@@ -24,7 +24,8 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardReturn() {
 		Board tester = interactingClass.createBoard();
-		assertEquals("Test if the board is returned correctly",tester,tester.getBoard());
+		assertEquals("Test if the board is returned correctly",
+				tester,tester.getBoard());
 	}
 	/**
 	 * Testing the return of the correct column value
@@ -33,7 +34,8 @@ public class BoardUnitTests {
 	public void testColumnReturn() {
 		Board tester = interactingClass.createBoard();
 		int col = tester.getColumns();
-		assertEquals("Test if correct columns are returned",col,tester.getColumns());
+		assertEquals("Test if correct columns are returned",
+				col,tester.getColumns());
 	}
 	/**
 	 * Testing the return of the correct row value
@@ -42,7 +44,8 @@ public class BoardUnitTests {
 	public void testRowReturn() {
 		Board tester = interactingClass.createBoard();
 		int row = tester.getRows();
-		assertEquals("Test if the correct row count is returned",row,tester.getRows());
+		assertEquals("Test if the correct row count is returned",
+				row,tester.getRows());
 		
 	}
 	/**
@@ -52,7 +55,8 @@ public class BoardUnitTests {
 	public void testMineReturn() {
 		Board tester = interactingClass.createBoard();
 		int mine = tester.getMineCount();
-		assertEquals("Test if the correct mine count is returned",mine,tester.getMineCount());
+		assertEquals("Test if the correct mine count is returned",
+				mine,tester.getMineCount());
 	}
 	/**
 	 * Testing if the correct time value is being returned
@@ -69,7 +73,8 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardComplete() {
 		Board tester = interactingClass.createBoard();
-		Computer testComputer = new Computer("AI", tester, interactingClass.createGameController(), Computer.CANNOT_LOSE);
+		Computer testComputer = new Computer("AI", tester,
+				interactingClass.createGameController(), Computer.CANNOT_LOSE);
 		Thread testThread = new Thread(testComputer);
 		testThread.start();
 		testComputer.setTime(Computer.TEST_SLEEP_TIME);
@@ -78,10 +83,12 @@ public class BoardUnitTests {
 		try {
 			testThread.join();
 		} catch (InterruptedException e) {
-			System.err.println("BoardUnitTests :: testBoardComplete() --> Error interrupting thread.");
+			System.err.println("BoardUnitTests :: testBoardComplete() -->"
+					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the board has been completed and the game is won",
+		assertEquals("Test if the board has been completed and the game "
+				+ "is won",
 				true, tester.getGameWon()); 
 	}
 	/**
@@ -90,7 +97,9 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardIncomplete() {
 		Board tester = interactingClass.createBoard();
-		Computer testComputer = new Computer("AI", tester, interactingClass.createGameController(), Computer.LOW_PROBABILITY);
+		Computer testComputer = new Computer("AI", tester,
+				interactingClass.createGameController(),
+				Computer.LOW_PROBABILITY);
 		Thread testThread = new Thread(testComputer);
 		testThread.start();
 		testComputer.setTime(Computer.TEST_SLEEP_TIME);
@@ -99,7 +108,8 @@ public class BoardUnitTests {
 		try {
 			testThread.join();
 		} catch (InterruptedException e) {
-			System.err.println("BoardUnitTests :: testBoardComplete() --> Error interrupting thread.");
+			System.err.println("BoardUnitTests :: testBoardComplete() -->"
+					+ " Error interrupting thread.");
 		}
 		assertEquals("Test if the board has not been completed",
 				false, tester.getGameWon()); 
@@ -126,11 +136,14 @@ public class BoardUnitTests {
 		row = 15;
 		mines = 30;
 		Board tester = new Board(row,col,mines);
-		assertEquals("Test if the boards custom column size is initialized correctly",
+		assertEquals("Test if the boards custom column size is initialized"
+				+ " correctly",
 				col,tester.getColumns());
-		assertEquals("Test if the boards custom column size is initialized correctly",
+		assertEquals("Test if the boards custom column size is initialized"
+				+ " correctly",
 				row,tester.getRows());
-		assertEquals("Test if the boards custom column size is initialized correctly",
+		assertEquals("Test if the boards custom column size is initialized"
+				+ " correctly",
 				mines,tester.getMineCount());
 	}
 	/**

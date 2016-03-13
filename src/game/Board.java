@@ -86,13 +86,15 @@ public class Board {
 		for (int i = 0; i < m_board.size(); ++i) {
 			for (int j = 0; j < m_board.size(); ++j) {
 				try {
-					if (m_board.get(i).get(j).isDefused() && m_board.get(i).get(j).isMine()) {
+					if (m_board.get(i).get(j).isDefused() &&
+							m_board.get(i).get(j).isMine()) {
 						++defusedTile;
 					}
 				} catch (IndexOutOfBoundsException e) {
 					System.err.println("Board.java :: getDefusedTile() --> "
 							+ "Index Out of Bounds \n"
-							+ "i:" + i + " j:" + j + " size: " + m_board.size());
+							+ "i:" + i + " j:" + j + " size: " + 
+							m_board.size());
 				}
 			}
 		}
@@ -135,7 +137,8 @@ public class Board {
 				} catch (IndexOutOfBoundsException e) {
 					System.err.println("Board.java :: getHiddenTile() --> "
 							+ "Index Out of Bounds \n"
-							+ "i:" + i + " j:" + j + " size: " + m_board.size());
+							+ "i:" + i + " j:" + j + " size: " +
+							m_board.size());
 				}
 			}
 		}
@@ -169,7 +172,8 @@ public class Board {
 				} catch (IndexOutOfBoundsException e) {
 					System.err.println("Board.java :: getHiddenTile() --> "
 							+ "Index Out of Bounds \n"
-							+ "i:" + i + " j:" + j + " size: " + m_board.size());
+							+ "i:" + i + " j:" + j + " size: " + 
+							m_board.size());
 				}
 			}
 		}

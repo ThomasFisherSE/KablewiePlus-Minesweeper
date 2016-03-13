@@ -1,3 +1,14 @@
+/**
+ * @file ComputerUnitTests.java
+
+ * @author Thomas Fisher
+ * @Date 13/03/2016
+ * @see Computer.java
+ * @brief Tests computer player
+ * 
+ * Tests methods in Computer, and whether the computer AI works correctly
+ */
+
 package testing;
 
 import static org.junit.Assert.*;

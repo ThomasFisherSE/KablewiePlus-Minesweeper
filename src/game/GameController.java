@@ -165,7 +165,8 @@ public class GameController implements MouseListener, ActionListener {
 		String v = "You Have won\n Time taken- " + m_timePassed;
 		
 		if (!m_test) {
-			JOptionPane.showMessageDialog(m_frame, v, "Congratulations", JOptionPane.YES_NO_CANCEL_OPTION);
+			JOptionPane.showMessageDialog(m_frame, v, "Congratulations", 
+					JOptionPane.YES_NO_CANCEL_OPTION);
 		}
 		
 	}
@@ -239,7 +240,8 @@ public class GameController implements MouseListener, ActionListener {
 
 			try {
 				time = Double.parseDouble(JOptionPane.showInputDialog(
-						"Enter time (0 - 10 seconds) for between computer turns: "));
+						"Enter time (0 - 10 seconds) for between computer"
+						+ " turns: "));
 			} catch (NumberFormatException e) {
 				time = Computer.DEFAULT_SLEEP_TIME;
 				validFlag = false;
@@ -345,7 +347,8 @@ public class GameController implements MouseListener, ActionListener {
 				try {
 					m_aiThread.join();
 				} catch (InterruptedException e) {
-					System.err.println("Error occured when waiting for ai thread to finish");
+					System.err.println("Error occured when waiting for ai"
+							+ " thread to finish");
 				}
 			}
 	 	} else if (event.getSource() == m_manyMistakes) {
@@ -355,7 +358,8 @@ public class GameController implements MouseListener, ActionListener {
 				}
 			}
 	 		
-			m_computerPlayer = new Computer("AI", m_board, this, Computer.LOW_PROBABILITY);
+			m_computerPlayer = new Computer("AI", m_board, this,
+					Computer.LOW_PROBABILITY);
 			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
@@ -368,7 +372,8 @@ public class GameController implements MouseListener, ActionListener {
 				}
 			}
 			
-			m_computerPlayer = new Computer("AI", m_board, this, Computer.NORMAL_PROBABILITY);
+			m_computerPlayer = new Computer("AI", m_board, this,
+					Computer.NORMAL_PROBABILITY);
 			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
@@ -381,7 +386,8 @@ public class GameController implements MouseListener, ActionListener {
 				}
 			}
 			
-			m_computerPlayer = new Computer("AI", m_board, this, Computer.PERFECT_PROBABILITY);
+			m_computerPlayer = new Computer("AI", m_board, this,
+					Computer.PERFECT_PROBABILITY);
 			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
@@ -394,7 +400,8 @@ public class GameController implements MouseListener, ActionListener {
 				}
 			}
 			
-			m_computerPlayer = new Computer("AI", m_board, this, Computer.CANNOT_LOSE);
+			m_computerPlayer = new Computer("AI", m_board, this,
+					Computer.CANNOT_LOSE);
 			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
@@ -411,7 +418,8 @@ public class GameController implements MouseListener, ActionListener {
 			
 			try {
 			intelligence = Integer.parseInt(JOptionPane.showInputDialog(
-						"Enter AI intelligence, (Unintelligent) 1 to (Perfect) 100: "));
+						"Enter AI intelligence, (Unintelligent) 1 to "
+						+ "(Perfect) 100: "));
 			} catch (NumberFormatException e) {
 				intelligence = Computer.NORMAL_PROBABILITY;
 			}
@@ -579,7 +587,8 @@ public class GameController implements MouseListener, ActionListener {
 	 * 
 	 * @return - a JMenuBar Object
 	 * @see Tony Gaddis and Godfrey Muganda, chapter 13.8,page 813 
-	 * from "Starting out with Java from control structures through data structures, 1st edition
+	 * from "Starting out with Java from control structures 
+	 * through data structures, 1st edition
 	 */
 	private JMenuBar myMenu() {
 		JMenuBar menu = new JMenuBar();
@@ -677,7 +686,8 @@ public class GameController implements MouseListener, ActionListener {
 				try {
 					m_aiThread.join();
 				} catch (InterruptedException e) {
-					System.err.println("Error occured when waiting for ai thread to finish");
+					System.err.println("Error occured when waiting "
+							+ "for ai thread to finish");
 				}
 			}
 		}
