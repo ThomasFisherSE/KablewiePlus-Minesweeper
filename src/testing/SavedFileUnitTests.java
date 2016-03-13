@@ -1,3 +1,13 @@
+/**
+ * @file SavedFileUnitTests.java
+ * @author Victoria Charvis
+ * @Date 11/03/2016
+ * @see SavedFile.java
+ * @brief Tests Saved File
+ * 
+ * Tests all methods in Saved File with valid and invalid input
+ */
+
 package testing;
 
 import static org.junit.Assert.*;
@@ -9,6 +19,9 @@ import org.junit.Test;
 
 public class SavedFileUnitTests {
 
+	/**
+	 * Tests if the file saves correctly
+	 */
 	@Test 
 	public void FileShouldSaveCorrectly() {
 		SavedFile tester = createFile();
@@ -17,8 +30,12 @@ public class SavedFileUnitTests {
 		assertEquals("Should accept reading from valid file",tester.saveFile(1,createBoard(),createPlayer()),true);
 		
 		//invalid input is not possible to be passed into saveFile
+		//Can't have empty username/board/slot parameter passed in 
 	}	
 	
+	/**
+	 * Tests if the file loads correctly
+	 */
 	@Test
 	public void FileShouldLoadCorrectly() {
 		SavedFile tester = createFile();
@@ -36,6 +53,9 @@ public class SavedFileUnitTests {
 		assertEquals("Shouldn't accept reading from 'non-slot' file", tester.validLoadFile("SaveFile5.csv") ,false);
 	}
 	
+	/**
+	 * Tests if a new game starts correctly
+	 */
 	@Test
 	public void GameShouldStart(){
 		SavedFile tester = createFile();
@@ -47,19 +67,30 @@ public class SavedFileUnitTests {
 		assertEquals("Created board tile values shouldn't be equal to the default amount",
 				tester.startup(createBadArrayList(),createBoard(),createPlayer()),false);
 	}
-	    
+	  
+	/**
+	 * Creates a new instance os SavedFile
+	 * 
+	 * @return a new SavedFile object
+	 */
 	public SavedFile createFile() {
 		return new SavedFile();
 	}
 	
+	/**
+	 * Creates a new board
+	 * 
+	 * @return a board of 10x10 with 10 mines
+	 */
 	public Board createBoard() {
 		return new Board(10,10,10);
 	}
-	
-	public Board createBadBoard() {
-		return new Board(0,0,0);
-	}
-	
+
+	/**
+	 * Creates an ArrayList of example saved game data
+	 * 
+	 * @return ArrayList of saved game data
+	 */
 	public ArrayList<String> createArrayList() {
 		ArrayList<String> saved = new ArrayList<String>();
 		saved.add("PLayer Name");//example name
@@ -79,6 +110,11 @@ public class SavedFileUnitTests {
 		return saved;
 	}
 	
+	/**
+	 * Creates an ArrayList of faulty saved game data
+	 * 
+	 * @return ArrayList of saved game data
+	 */
 	public ArrayList<String> createBadArrayList() {
 		ArrayList<String> saved = new ArrayList<String>();
 		saved.add("PLayer Name");//example name
@@ -98,10 +134,11 @@ public class SavedFileUnitTests {
 		return saved;
 	}
 	
-	public Player createBadPlayer() {
-		return new Player("");
-	}
-	
+	/**
+	 * Creates a new player
+	 * 
+	 * @return the created player
+	 */
 	public Player createPlayer() {
 		return new Player("PlayerName");
 	}
