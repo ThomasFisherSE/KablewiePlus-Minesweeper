@@ -11,9 +11,7 @@
 package testing;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
 import game.*;
 import org.junit.Test;
 
@@ -27,11 +25,28 @@ public class SavedFileUnitTests {
 		SavedFile tester = createFile();
 		
 		//valid input 
-		assertEquals("Should accept reading from valid file",tester.saveFile(1,createBoard(),createPlayer()),true);
+		assertEquals("Should accept saving",tester.saveFile(1,createBoard(),createPlayer()),true);
 		
 		//invalid input is not possible to be passed into saveFile
-		//Can't have empty username/board/slot parameter passed in 
+		//Can't have empty username/board/slot parameter passed in but test included anyway
+		assertEquals("Shouldn't accept saving, empty board",tester.saveFile(1,createBadBoard(),createPlayer()),false);
+		assertEquals("Shouldn't accept saving, empty username",tester.saveFile(1,createBoard(),createBadPlayer()),false);
 	}	
+	
+	/**
+	 * Tests if data passed in is valid 
+	 */
+	@Test
+	public void TestValidData() {
+		SavedFile tester = createFile();
+		//valid input
+		assertEquals("Shouldn accept as vaid data",tester.validData(createBoard(),createPlayer()),true);
+		
+		//invalid input
+		assertEquals("Shouldn't accept empty board",tester.validData(createBadBoard(),createPlayer()),false);
+		assertEquals("Shouldn't accept empty username",tester.validData(createBoard(),createBadPlayer()),false);
+		
+	}
 	
 	/**
 	 * Tests if the file loads correctly
@@ -63,18 +78,29 @@ public class SavedFileUnitTests {
 		//valid input
 		assertEquals("Created board tile values should be equal to the default amount",
 				tester.startup(createArrayList(),createBoard(),createPlayer()),true);
+		
 		//invalid input
 		assertEquals("Created board tile values shouldn't be equal to the default amount",
 				tester.startup(createBadArrayList(),createBoard(),createPlayer()),false);
 	}
 	  
 	/**
-	 * Creates a new instance os SavedFile
+	 * Creates a new instance of SavedFile
 	 * 
 	 * @return a new SavedFile object
 	 */
 	public SavedFile createFile() {
 		return new SavedFile();
+	}
+	
+	
+	/**
+	 * Creates a new board
+	 * 
+	 * @return a board of 0x0 with 0 mines
+	 */
+	public Board createBadBoard() {
+		return new Board(0,0,0);
 	}
 	
 	/**
@@ -132,6 +158,15 @@ public class SavedFileUnitTests {
 			saved.add("FTT");
 		}
 		return saved;
+	}
+	
+	/**
+	 * Creates a new player with invalid username
+	 * 
+	 * @return the created player
+	 */
+	public Player createBadPlayer() {
+		return new Player("");
 	}
 	
 	/**
