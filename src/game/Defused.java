@@ -15,6 +15,13 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+/**
+ * 
+ * @class Defused
+ * @brief A Defused Tile
+ *
+ * A Defused Tile, inherits from Tile
+ */
 public class Defused extends Tile {
 
 	/**
