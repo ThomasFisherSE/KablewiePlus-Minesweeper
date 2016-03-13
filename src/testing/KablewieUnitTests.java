@@ -18,7 +18,7 @@ public class KablewieUnitTests {
 	@Test
 	public void testStartLoadedGame() {
 		Kablewie tester = new Kablewie();	
-		String time = null;
+		String time = "00:00:07";
 		assertEquals("Test whether the kablewie class displays the game frames",true,tester.startLoadedGame(interactingClass.createBoard(), interactingClass.createPlayer(),time));	
 
 	}
