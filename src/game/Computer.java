@@ -350,7 +350,7 @@ public class Computer extends Player implements Runnable {
 	public static final int NORMAL_PROBABILITY = 90; 
 	
 	// Only 50% chance to make a perfect move
-	public static final int EASY_PROBABILITY = 50; 
+	public static final int LOW_PROBABILITY = 50; 
 	
 	// The default time in seconds between turns
 	public static final double DEFAULT_SLEEP_TIME = 2;

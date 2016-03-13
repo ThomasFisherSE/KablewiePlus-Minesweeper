@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import game.Board;
-import game.Computer;
-import game.GameController;
+import game.*;
 
 public class BoardUnitTests {
 	IntegrationTests interactingClass = new IntegrationTests();
@@ -33,7 +31,7 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardIncomplete() {
 		Board tester = interactingClass.createBoard();
-		Computer testComputer = new Computer("AI", tester, interactingClass.createGameController(), Computer.EASY_PROBABILITY);
+		Computer testComputer = new Computer("AI", tester, interactingClass.createGameController(), Computer.LOW_PROBABILITY);
 		testComputer.run();
 		assertEquals("Test if the board has been completed and the game is won",
 				false, tester.getGameWon()); 

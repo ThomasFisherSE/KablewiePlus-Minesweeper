@@ -10,10 +10,10 @@ public class ComputerUnitTests {
 	
 	@Test
 	public void testLowIntelligencePreset() {
-		Computer tester = new Computer("AI", interactingClass.createBoard(), interactingClass.createGameController(), Computer.EASY_PROBABILITY);
+		Computer tester = new Computer("AI", interactingClass.createBoard(), interactingClass.createGameController(), Computer.LOW_PROBABILITY);
 		
 		assertEquals("Test if the correct intelligence is set by clicking the Low-Intelligence preset",
-				Computer.EASY_PROBABILITY, tester.getIntelligence());
+				Computer.LOW_PROBABILITY, tester.getIntelligence());
 	}
 	
 	@Test
@@ -179,7 +179,8 @@ public class ComputerUnitTests {
 	public void testMinIntelligence() {
 		Computer tester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(), Computer.MINIMUM_INTELLIGENCE);
+				interactingClass.createGameController(), 
+				Computer.MINIMUM_INTELLIGENCE);
 		
 		Thread testThread = new Thread(tester);
 		testThread.start();
@@ -202,7 +203,8 @@ public class ComputerUnitTests {
 	public void testMaxIntelligence() {
 		Computer tester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(), Computer.MAXIMUM_INTELLIGENCE);
+				interactingClass.createGameController(), 
+				Computer.MAXIMUM_INTELLIGENCE);
 		
 		Thread testThread = new Thread(tester);
 		testThread.start();
@@ -218,6 +220,34 @@ public class ComputerUnitTests {
 		
 		assertEquals("Test if the computer player can always play to "
 				+ "completion with the max intelligence", 
+				true, tester.checkGameOver());
+	}
+	
+	@Test
+	public void testAiWhenMinesRevealed() {
+		Board testBoard = new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES);
+		
+		Computer tester = new Computer("AI", testBoard, 
+				interactingClass.createGameController(), 
+				Computer.PERFECT_PROBABILITY);
+		
+		testBoard.showBombTile();
+		
+		Thread testThread = new Thread(tester);
+		testThread.start();
+		tester.setTime(Computer.TEST_SLEEP_TIME);
+		tester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: testAiWhenMinesRevealed()"
+					+ " --> Error interrupting thread.");
+		}
+		
+		assertEquals("Test if the computer player can always play to "
+				+ "completion when the revealed mines feature is in effect.", 
 				true, tester.checkGameOver());
 	}
 }

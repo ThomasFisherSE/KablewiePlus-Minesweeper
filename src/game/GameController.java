@@ -341,7 +341,7 @@ public class GameController implements MouseListener, ActionListener {
 				}
 			}
 	 		
-			m_computerPlayer = new Computer("AI", m_board, this, Computer.EASY_PROBABILITY);
+			m_computerPlayer = new Computer("AI", m_board, this, Computer.LOW_PROBABILITY);
 			setTime();
 			
 			m_aiThread = new Thread(m_computerPlayer);
