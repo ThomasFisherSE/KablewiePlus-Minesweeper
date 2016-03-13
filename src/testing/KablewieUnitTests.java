@@ -20,16 +20,38 @@ public class KablewieUnitTests {
 	@Test
 	public void testStartGame() {
 		Kablewie tester = new Kablewie();
-		assertEquals("Test whether the kablewie class displays the game frames",true,tester.startGame(interactingClass.createBoard(), interactingClass.createPlayer(), interactingClass.createMainMenu()));	
+		//valid input
+		assertEquals("Test if input is valid",true,tester.startGame(interactingClass.createBoard(), interactingClass.createPlayer(), interactingClass.createMainMenu()));	
+		
+
 	}
+	@Test
+	public void testStartGame2() {
+		Kablewie tester = new Kablewie();		
+		//invalid input
+		assertEquals("Test if input is not valid",false,tester.startGame(interactingClass.createBoard(), interactingClass.createPlayer(), interactingClass.createMainMenu()));	
+
+	}	
 	
 	
 	@Test
 	public void testStartLoadedGame() {
 		Kablewie tester = new Kablewie();	
 		String time = "00:00:07";
-		assertEquals("Test whether the kablewie class displays the game frames",true,tester.startLoadedGame(interactingClass.createBoard(), interactingClass.createPlayer(),time));	
+		//valid input
+		assertEquals("Test if input is valid",true,tester.startLoadedGame(interactingClass.createBoard(), interactingClass.createPlayer(),time));	
+		
 
 	}
+	@Test
+	public void testStartLoadedGame2() {
+		Kablewie tester = new Kablewie();	
+		String time = "00:00:07";
+		
+		//invalid input
+		assertEquals("Test if input is not valid",false,tester.startLoadedGame(interactingClass.createBoard(), interactingClass.createPlayer(),time));	
+
+	}
+	
 		
 }
