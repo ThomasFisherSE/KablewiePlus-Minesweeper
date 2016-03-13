@@ -15,6 +15,13 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+/**
+ * 
+ * @class Mine
+ * @brief A Mine tile
+ *
+ * A Mine tile, inherits from Tile
+ * /
 public class Mine extends Tile {
 	
 	/**
