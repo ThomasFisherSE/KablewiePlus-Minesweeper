@@ -21,12 +21,6 @@ import game.Computer;
 public class BoardUnitTests {
 	IntegrationTests interactingClass = new IntegrationTests();
 	
-	@Test
-	public void testBoardReturn() {
-		Board tester = interactingClass.createBoard();
-		assertEquals("Test if the board is returned correctly",
-				tester,tester.getBoard());
-	}
 	/**
 	 * Testing the return of the correct column value
 	 */
