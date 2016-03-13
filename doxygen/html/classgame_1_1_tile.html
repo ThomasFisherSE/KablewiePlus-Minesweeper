@@ -64,7 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -97,18 +97,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">game.Tile Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class for a generic tile.  
+ <a href="classgame_1_1_tile.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for game.Tile:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classgame_1_1_tile.png" usemap="#game.Tile_map" alt=""/>
-  <map id="game.Tile_map" name="game.Tile_map">
-<area href="classgame_1_1_defused.html" alt="game.Defused" shape="rect" coords="0,56,99,80"/>
-<area href="classgame_1_1_hidden.html" alt="game.Hidden" shape="rect" coords="109,56,208,80"/>
-<area href="classgame_1_1_mine.html" alt="game.Mine" shape="rect" coords="218,56,317,80"/>
-<area href="classgame_1_1_revealed.html" alt="game.Revealed" shape="rect" coords="327,56,426,80"/>
+<div class="center"><img src="classgame_1_1_tile__inherit__graph.png" border="0" usemap="#game_8_tile_inherit__map" alt="Inheritance graph"/></div>
+<map name="game_8_tile_inherit__map" id="game_8_tile_inherit__map">
 </map>
- </div></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -155,7 +153,10 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:ab1fdabf05e507b86c9f08a317819eaea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_tile.html#ab1fdabf05e507b86c9f08a317819eaea">m_nearbyMines</a></td></tr>
 <tr class="separator:ab1fdabf05e507b86c9f08a317819eaea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class for a generic tile. </p>
+<p>An abstract class for a generic tile, inherited by <a class="el" href="classgame_1_1_mine.html" title="A Mine tile. ">Mine</a>, <a class="el" href="classgame_1_1_hidden.html" title="A hidden Tile. ">Hidden</a>, <a class="el" href="classgame_1_1_revealed.html" title="A Revealed tile. ">Revealed</a> and <a class="el" href="classgame_1_1_defused.html" title="A Defused Tile. ">Defused</a> </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ac2ce7d249894cb2b9da5ba9fcf16a773"></a>
 <div class="memitem">
 <div class="memproto">
@@ -185,7 +186,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="classgame_1_1_tile.html">Tile</a> Constructor </p><dl class="params"><dt>Parameters</dt><dd>
+<p><a class="el" href="classgame_1_1_tile.html" title="A class for a generic tile. ">Tile</a> Constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">isMine</td><td>a boolean is mine or not </td></tr>
     <tr><td class="paramname">isHidden</td><td>a boolean is hidden or not </td></tr>
@@ -223,7 +224,7 @@ Private Attributes</h2></td></tr>
 <p>Calculates the number of mines around a tile</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tile</td><td>a <a class="el" href="classgame_1_1_tile.html">Tile</a> thats being checked </td></tr>
+    <tr><td class="paramname">tile</td><td>a <a class="el" href="classgame_1_1_tile.html" title="A class for a generic tile. ">Tile</a> thats being checked </td></tr>
     <tr><td class="paramname">tileArround</td><td>an ArrayList of tiles that are around the tile </td></tr>
   </table>
   </dd>
@@ -279,7 +280,7 @@ Private Attributes</h2></td></tr>
 <p>Gets the tiles that are around a set position</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">board</td><td>a <a class="el" href="classgame_1_1_board.html">Board</a> object that contains all the tiles </td></tr>
+    <tr><td class="paramname">board</td><td>a <a class="el" href="classgame_1_1_board.html" title="Contains Board information. ">Board</a> object that contains all the tiles </td></tr>
     <tr><td class="paramname">i</td><td>the row to get around </td></tr>
     <tr><td class="paramname">j</td><td>the column to get around </td></tr>
   </table>
@@ -475,7 +476,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Change the <a class="el" href="classgame_1_1_tile.html">Tile</a> type</p>
+<p>Change the <a class="el" href="classgame_1_1_tile.html" title="A class for a generic tile. ">Tile</a> type</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">isMine</td><td>a boolean for if its a mine </td></tr>
