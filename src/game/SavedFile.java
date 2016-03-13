@@ -22,6 +22,15 @@ import main.Kablewie;
 public class SavedFile {
 	
 	/**
+	 * Constructor
+	 * 
+	 * @param gc, the GameController for the current game
+	 */
+	public SavedFile(GameController gc) {
+		m_gameController = gc;
+	}
+	
+	/**
 	 * Loads the game data from file
 	 *  
 	 * @param slot the number slot for the file to be loaded from
@@ -101,6 +110,7 @@ public class SavedFile {
 			startup(line, loadedBoard, loadedPlayer);
 		}
 		catch (Exception e) {}
+		
 		return true;
 	}
 	
@@ -208,7 +218,7 @@ public class SavedFile {
 		/*Enables player to continue playing game*/
 		Kablewie loadedGame = new Kablewie();
 		String loadedTime = line.get(TIME);
-		loadedBoard.loadGraphics();
+		loadedBoard.loadGraphics(m_gameController);
 		loadedGame.startLoadedGame(loadedBoard, loadedPlayer, loadedTime);
 		return true;
 	}
@@ -248,6 +258,8 @@ public class SavedFile {
 			return false;
 	}
 
+	private GameController m_gameController;
+	
 	final static int USERNAME = 0;
 	final static int TIME = 1;
 	final static int DIFFUSED_TILE = 2;

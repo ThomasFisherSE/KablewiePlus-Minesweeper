@@ -307,7 +307,7 @@ public class Board {
 	/**
 	 * Loads the graphics
 	 */
-	public void loadGraphics() {
+	public void loadGraphics(GameController gc) {
 		//for every tile in the game set the graphics
 		for (int j=0;j<m_board.size();j++) {
 			for (int i=0;i<m_board.size();i++) {
@@ -329,7 +329,7 @@ public class Board {
 								isDefused));
 						
 						m_board.get(j).get(i).setHidden(true);
-						m_reveal.revealPosition(m_board, j, i);
+						m_reveal.revealPosition(m_board, j, i, gc);
 						haveWon();
 					}
 				}
@@ -413,7 +413,7 @@ public class Board {
 	 * @param x an int which is the X position of the click
 	 * @param y an int which is the Y position of the click
 	 */
-	public void revealTile(int x, int y) {
+	public void revealTile(int x, int y, GameController gc) {
 		
 		
 		if (inLimit(y, x) && !(m_board.get(y).get(x).isDefused())) {
@@ -421,7 +421,7 @@ public class Board {
 			if (m_board.get(y).get(x).isHidden() && 
 					!(m_board.get(y).get(x).isMine())) {
 				
-				m_reveal.revealPosition(m_board, y, x);
+				m_reveal.animatedReveal(m_board, y, x, gc);
 				haveWon();
 				
 			} else if (m_board.get(y).get(x).isMine()) {

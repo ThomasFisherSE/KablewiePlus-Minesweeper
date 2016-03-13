@@ -210,7 +210,7 @@ public class IntegrationTests {
   	 * @return the SavedFile object
   	 */
     public SavedFile createSavedFile() {
-    	return new SavedFile();
+    	return new SavedFile(createGameController());
     }
 	
 }

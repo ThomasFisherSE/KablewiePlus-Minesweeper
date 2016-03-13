@@ -12,9 +12,12 @@ package game;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 public class Revealed extends Tile {
 	
@@ -67,8 +70,7 @@ public class Revealed extends Tile {
 	 * @param j the column to get around
 	 */
 	public void revealPosition(ArrayList<ArrayList<Tile>> board,
-								int i, int j) {
-		
+								int i, int j, GameController gc) {
 		if (	i < 0 
 				|| j < 0 
 				|| i >= board.size() 
@@ -88,14 +90,14 @@ public class Revealed extends Tile {
 			
 			r.calculateNearbyMines(r, getTileArround(board, i, j));
 			
-			revealPosition(board, i - 1, j - 1);
-			revealPosition(board, i - 1, j);
-			revealPosition(board, i - 1, j + 1);
-			revealPosition(board, i, j - 1);
-			revealPosition(board, i, j + 1);
-			revealPosition(board, i + 1, j - 1);
-			revealPosition(board, i + 1, j);
-			revealPosition(board, i + 1, j + 1);
+			animatedReveal(board, i - 1, j - 1, gc);
+			animatedReveal(board, i - 1, j, gc);
+			animatedReveal(board, i - 1, j + 1, gc);
+			animatedReveal(board, i, j - 1, gc);
+			animatedReveal(board, i, j + 1, gc);
+			animatedReveal(board, i + 1, j - 1, gc);
+			animatedReveal(board, i + 1, j, gc);
+			animatedReveal(board, i + 1, j + 1, gc);
 			
 		} else {
 			
@@ -105,6 +107,22 @@ public class Revealed extends Tile {
 			r.calculateNearbyMines(r, getTileArround(board, i, j));
 			
 		}
+		
+		gc.repaintAll();
+	}
+	
+	public void animatedReveal(ArrayList<ArrayList<Tile>> board,
+			int i, int j, GameController gc) {
+		int delay = 50;
+    	Timer timer = new Timer( delay, new ActionListener(){
+    		public void actionPerformed( ActionEvent e ){
+    			revealPosition(board, i, j, gc);
+    		}
+    	} );
+    	timer.setRepeats( false );
+    	timer.start();
+    	
+    	gc.repaintAll();
 	}
 
 	private final ImageIcon m_revealedImage;

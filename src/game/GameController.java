@@ -70,8 +70,10 @@ public class GameController implements MouseListener, ActionListener {
 
 		m_time = new Timer(1000, this);
 		m_time.start();
-		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
 		
+		if (!m_test) {
+			m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		}
 	}
 	
 	/**
@@ -101,7 +103,11 @@ public class GameController implements MouseListener, ActionListener {
 		
 		m_time = new Timer(TIMER_DELAY, this);
 		m_time.start();
-		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		if (!m_test) {
+			m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		}
+		
 		
 		m_panelGame.repaint();
 		m_panelInfo.repaint();
@@ -133,7 +139,10 @@ public class GameController implements MouseListener, ActionListener {
 	 * Show the animation when game is lost
 	 */
 	public void setGameLost() {
-		m_bomb.loop(1);
+		if (!m_test) {
+			m_bomb.loop(1);
+		}
+		
 		m_time.stop();
 		m_tick.stop();
 		m_GameFinshed.setVisible(true);
@@ -144,7 +153,10 @@ public class GameController implements MouseListener, ActionListener {
 	 * Show the animation when game is won
 	 */
 	public void setGameWin() {
-		m_won.loop(1);
+		if (!m_test) {
+			m_won.loop(1);
+		}
+		
 		m_time.stop();
 		m_tick.stop();
 		m_GameFinshed.setVisible(true);
@@ -254,7 +266,7 @@ public class GameController implements MouseListener, ActionListener {
 	 * @param event an ActionEvent describing what happened
 	 */
 	public void actionPerformed(ActionEvent event) {
-		m_savedFile = new SavedFile();
+		m_savedFile = new SavedFile(this);
 		if (event.getSource() == m_time) {
 			m_panelInfo.repaint();
 			
@@ -502,7 +514,7 @@ public class GameController implements MouseListener, ActionListener {
 			if (e.getButton() == MouseEvent.BUTTON1) {
 				// Work out the positions in the Array of the mouse click
 				
-				m_board.revealTile(xPos, yPos);
+				m_board.revealTile(xPos, yPos, this);
 				m_panelGame.repaint();
 				m_panelInfo.repaint();
 			} else if (e.getButton() == MouseEvent.BUTTON3) {
@@ -549,12 +561,17 @@ public class GameController implements MouseListener, ActionListener {
 	}
 	
 	
-	/*
-	 * Repaints panels
+	/**
+	 * Repaints Panels
 	 */
 	public void repaintAll() {
+		m_panelGame.revalidate();
 		m_panelGame.repaint();
+		m_panelInfo.revalidate();
 		m_panelInfo.repaint();
+		m_frame.revalidate();
+		m_frame.repaint();
+		m_panelGame.updateUI();
 	}
 	
 	/**
@@ -684,7 +701,10 @@ public class GameController implements MouseListener, ActionListener {
 		m_bomb.flush();
 		m_bomb.setFramePosition(0);
 		m_time.start();
-		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		if (!m_test) {
+			m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		}
 	}
 	
 	/**

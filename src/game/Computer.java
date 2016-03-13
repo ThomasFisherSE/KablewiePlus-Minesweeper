@@ -241,7 +241,7 @@ public class Computer extends Player implements Runnable {
 			int column = rnd.nextInt(m_board.getBoard().get(row).size());
 			Tile randomTile = m_board.getBoard().get(row).get(column);
 			if (!randomTile.isMine() && randomTile.isHidden()) {
-				m_board.revealTile(column, row);
+				m_board.revealTile(column, row, m_gameController);
 				
 				findingHiddenTile = false;
 			} else if (randomTile.isMine() && !randomTile.isDefused()) {
@@ -302,7 +302,7 @@ public class Computer extends Player implements Runnable {
 			for (int i = 0; i < m_board.getBoard().size(); i++) {
 				for (int j = 0; j < m_board.getBoard().size(); j++) {
 					if (m_board.getBoard().get(i).get(j).equals(tileToReveal)){
-						m_board.revealTile(j, i);
+						m_board.revealTile(j, i, m_gameController);
 						
 						m_knownSmartMoves.remove(0);
 					}
@@ -335,7 +335,7 @@ public class Computer extends Player implements Runnable {
 			Tile randomTile = m_board.getBoard().get(column).get(row);
 			
 			if (randomTile.isHidden() && !randomTile.isDefused()) {
-				m_board.revealTile(row, column);
+				m_board.revealTile(row, column, m_gameController);
 				findingHiddenTile = false;
 			}
 			
