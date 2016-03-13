@@ -150,7 +150,7 @@ public class GameController implements MouseListener, ActionListener {
 		m_GameFinshed.setVisible(true);
 		m_GameFinshed.setIcon(new ImageIcon("images/GameWon.jpg"));
 		
-		String v = "You Have won\n time taken- " + m_timePassed;
+		String v = "You Have won\n Time taken- " + m_timePassed;
 		
 		if (!m_test) {
 			JOptionPane.showMessageDialog(m_frame, v, "Congratulations", JOptionPane.YES_NO_CANCEL_OPTION);
