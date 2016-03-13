@@ -434,7 +434,12 @@ public class Board {
 			if (m_board.get(y).get(x).isHidden() && 
 					!(m_board.get(y).get(x).isMine())) {
 				
-				m_reveal.animatedReveal(m_board, y, x, gc);
+				if (gc.isTesting()) {
+					m_reveal.revealPosition(m_board, y, x, gc);
+				} else {
+					m_reveal.animatedReveal(m_board, y, x, gc);
+				}
+				
 				haveWon();
 				
 			} else if (m_board.get(y).get(x).isMine()) {

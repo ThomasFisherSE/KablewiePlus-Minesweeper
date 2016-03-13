@@ -114,6 +114,15 @@ public class GameController implements MouseListener, ActionListener {
 	}
 	
 	/**
+	 * Checks if the current game is for testing purposes
+	 * 
+	 * @return boolean the current setting of m_test
+	 */
+	public boolean isTesting() {
+		return m_test;
+	}
+	
+	/**
 	 * Builds a String of the instructions
 	 * 
 	 * @return a String of the instructions

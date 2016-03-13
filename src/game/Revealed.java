@@ -89,14 +89,14 @@ public class Revealed extends Tile {
 			
 			r.calculateNearbyMines(r, getTileArround(board, i, j));
 			
-			animatedReveal(board, i - 1, j - 1, gc);
-			animatedReveal(board, i - 1, j, gc);
-			animatedReveal(board, i - 1, j + 1, gc);
-			animatedReveal(board, i, j - 1, gc);
-			animatedReveal(board, i, j + 1, gc);
-			animatedReveal(board, i + 1, j - 1, gc);
-			animatedReveal(board, i + 1, j, gc);
-			animatedReveal(board, i + 1, j + 1, gc);
+			revealPosition(board, i - 1, j - 1, gc);
+			revealPosition(board, i - 1, j, gc);
+			revealPosition(board, i - 1, j + 1, gc);
+			revealPosition(board, i, j - 1, gc);
+			revealPosition(board, i, j + 1, gc);
+			revealPosition(board, i + 1, j - 1, gc);
+			revealPosition(board, i + 1, j, gc);
+			revealPosition(board, i + 1, j + 1, gc);
 			
 		} else {
 			
@@ -124,7 +124,44 @@ public class Revealed extends Tile {
 		int delay = REVEAL_RATE;
     	Timer timer = new Timer( delay, new ActionListener(){
     		public void actionPerformed( ActionEvent e ){
-    			revealPosition(board, i, j, gc);
+    			if (	i < 0 
+    					|| j < 0 
+    					|| i >= board.size() 
+    					|| j >= board.get(0).size() 
+    					|| !(board.get(i).get(j).isHidden())) {
+    				// Escape if true
+    				return;
+    			}
+    			
+    			ArrayList<Tile> tileArround = getTileArround(board, i, j);
+    			
+    			if (calculateNearbyMines(board.get(i).get(j), tileArround) == 0) {
+    				
+    				board.get(i).remove(j);
+    				board.get(i).add(j, new Revealed(false, false, false));
+    				Revealed r = (Revealed) board.get(i).get(j);
+    				
+    				r.calculateNearbyMines(r, getTileArround(board, i, j));
+    				
+    				animatedReveal(board, i - 1, j - 1, gc);
+    				animatedReveal(board, i - 1, j, gc);
+    				animatedReveal(board, i - 1, j + 1, gc);
+    				animatedReveal(board, i, j - 1, gc);
+    				animatedReveal(board, i, j + 1, gc);
+    				animatedReveal(board, i + 1, j - 1, gc);
+    				animatedReveal(board, i + 1, j, gc);
+    				animatedReveal(board, i + 1, j + 1, gc);
+    				
+    			} else {
+    				
+    				board.get(i).remove(j);
+    				board.get(i).add(j, new Revealed(false, false, false));
+    				Revealed r = (Revealed) board.get(i).get(j);
+    				r.calculateNearbyMines(r, getTileArround(board, i, j));
+    				
+    			}
+    			
+    			gc.repaintAll();
     		}
     	} );
     	timer.setRepeats( false );
