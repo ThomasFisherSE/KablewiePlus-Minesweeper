@@ -24,7 +24,7 @@ public class TileUnitTests {
 	 */
 	
 	@Test
-	public void test() {
+	public void testSurroundingTiles() {
 		Tile tester = new Hidden(false, false, false); 
 		Board testBoard = m_interactingClass.createBoard();
 		
@@ -33,7 +33,7 @@ public class TileUnitTests {
 		 */
 
 		assertEquals("test if the length of the array list created is always"
-				+ " 9 for a tile in the middle of the board", 9,
+				+ " 9 for a tile in the middle of the board", TILES_ARRAY_SIZE,
 				(tester.getTileArround(testBoard.getBoard(),
 						testBoard.getColumns() / 2,testBoard.getRows() / 2)
 						).size());
@@ -41,9 +41,12 @@ public class TileUnitTests {
 		
 		
 		assertEquals("test if the length of the array list created is always"
-				+ " 4 for a tile in the corner of the board", 4,
+				+ " 4 for a tile in the corner of the board", CORNER_ARRAY_SIZE,
 				(tester.getTileArround(testBoard.getBoard(),0,0)).size());
 	}
 	
 	IntegrationTests m_interactingClass = new IntegrationTests();
+	
+	private final int TILES_ARRAY_SIZE = 9;
+	private final int CORNER_ARRAY_SIZE = 4;
 }

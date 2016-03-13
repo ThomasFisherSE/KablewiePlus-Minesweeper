@@ -41,6 +41,7 @@ public class IntegrationTests {
 			computerTests.testNormalIntelligencePreset();
 			computerTests.testAiOnDefaultBoard();
 			computerTests.testAiOnLargeBoard();
+			computerTests.testAiOnSmallBoard();
 			computerTests.testAiWithDefaultMines();
 			computerTests.testAiWithMaxMines();
 			computerTests.testAiWithMinMines();
@@ -59,6 +60,19 @@ public class IntegrationTests {
 			savedFileTests.FileShouldSaveCorrectly();
 			savedFileTests.GameShouldStart();
 			savedFileTests.TestValidData();
+			
+			KablewieUnitTests kablewieTests = new KablewieUnitTests();
+			kablewieTests.testStartGame();
+			kablewieTests.testStartGame2();
+			kablewieTests.testStartLoadedGame();
+			kablewieTests.testStartLoadedGame2();
+			
+			MainMenuUnitTests mainMenuTests = new MainMenuUnitTests();
+			mainMenuTests.startGameTest1();
+			mainMenuTests.startGameTest2();
+			
+			TileUnitTests tileTests = new TileUnitTests();
+			tileTests.testSurroundingTiles();
 			
 			System.out.println("Tests were successful.");
 		} catch (Exception e) {
