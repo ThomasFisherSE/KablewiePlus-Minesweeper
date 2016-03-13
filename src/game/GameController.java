@@ -546,6 +546,15 @@ public class GameController implements MouseListener, ActionListener {
 	public void mouseReleased(MouseEvent arg0) {
 	}
 	
+	
+	/*
+	 * Repaints panels
+	 */
+	public void repaintAll() {
+		m_panelGame.repaint();
+		m_panelInfo.repaint();
+	}
+	
 	/**
 	 * Builds a JMenuBar with options 
 	 * 
@@ -634,14 +643,6 @@ public class GameController implements MouseListener, ActionListener {
 		
 		return menu;
 
-	}
-	
-	/*
-	 * Repaints panels
-	 */
-	public void repaintAll() {
-		m_panelGame.repaint();
-		m_panelInfo.repaint();
 	}
 	
 	/**
