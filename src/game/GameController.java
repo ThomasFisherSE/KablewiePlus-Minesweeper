@@ -44,6 +44,70 @@ import main.Kablewie;
 public class GameController implements MouseListener, ActionListener {
 	
 	/**
+	 * Constructor
+	 * 
+	 * @param board a Board object for containing the tiles.
+	 * @param player a Player object
+	 * @param frame a JFrame to add the JPanel to
+	 * @param menu a mainmenu object
+	 */
+	public GameController(Board board, Player player, 
+							JFrame frame, MainMenu menu) {
+		// Set Class variables
+		this.m_board = board;
+		this.m_player = player;
+		this.m_frame = frame;
+		this.m_menu = menu;
+		
+		m_frame.setMinimumSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT));
+		
+		m_timePassed = "00:00:00";
+		m_loaded = false;
+		
+		setInfo();
+		startGame();
+		setSound();
+
+		m_time = new Timer(1000, this);
+		m_time.start();
+		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param board a Board object for containing the tiles.
+	 * @param player a Player object
+	 * @param time the loaded time passed
+	 * @param frame a JFrame to add the JPanel to
+	 */
+	public GameController(Board board, Player player, String time, 
+			JFrame frame) {
+		// Set Class variables
+		this.m_board = board;
+		this.m_player = player;
+		this.m_timePassed = time;
+		this.m_frame = frame;
+		
+		m_frame.setSize((m_board.getBoard().size() * 30) +
+				SPACING, m_board.getBoard().size() * 30 + 105);
+		
+		m_loaded = true;
+		
+		setInfo();
+		startGame();
+		setSound();
+		
+		m_time = new Timer(TIMER_DELAY, this);
+		m_time.start();
+		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		m_panelGame.repaint();
+		m_panelInfo.repaint();
+	}
+	
+	/**
 	 * Builds a String of the instructions
 	 * 
 	 * @return a String of the instructions
@@ -423,70 +487,6 @@ public class GameController implements MouseListener, ActionListener {
 	 */
 	public void asTest() {
 		m_test = true;
-	}
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param board a Board object for containing the tiles.
-	 * @param player a Player object
-	 * @param frame a JFrame to add the JPanel to
-	 * @param menu a mainmenu object
-	 */
-	public GameController(Board board, Player player, 
-							JFrame frame, MainMenu menu) {
-		// Set Class variables
-		this.m_board = board;
-		this.m_player = player;
-		this.m_frame = frame;
-		this.m_menu = menu;
-		
-		m_frame.setMinimumSize(new Dimension(BOARD_WIDTH,BOARD_HEIGHT));
-		
-		m_timePassed = "00:00:00";
-		m_loaded = false;
-		
-		setInfo();
-		startGame();
-		setSound();
-
-		m_time = new Timer(1000, this);
-		m_time.start();
-		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
-		
-	}
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param board a Board object for containing the tiles.
-	 * @param player a Player object
-	 * @param time the loaded time passed
-	 * @param frame a JFrame to add the JPanel to
-	 */
-	public GameController(Board board, Player player, String time, 
-			JFrame frame) {
-		// Set Class variables
-		this.m_board = board;
-		this.m_player = player;
-		this.m_timePassed = time;
-		this.m_frame = frame;
-		
-		m_frame.setSize((m_board.getBoard().size() * 30) +
-				SPACING, m_board.getBoard().size() * 30 + 105);
-		
-		m_loaded = true;
-		
-		setInfo();
-		startGame();
-		setSound();
-		
-		m_time = new Timer(TIMER_DELAY, this);
-		m_time.start();
-		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
-		
-		m_panelGame.repaint();
-		m_panelInfo.repaint();
 	}
 
 	/**
