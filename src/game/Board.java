@@ -1,6 +1,6 @@
 /**
  * @file Board.java
- * @author A4 Ethan Davies A5 Victoria Charvis
+ * @author A4 Ethan Davies A5 Victoria Charvis,Ibrahim Shehu
  * @date 7 December 2015
  * @see Tile.java
  * 
