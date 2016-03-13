@@ -487,15 +487,15 @@ public class Board {
 			}
 		}
 	}
-	
-	private int m_rows;
-	private int m_columns;
-	private int m_mineCount;
+
 	private boolean m_gameWon = false;
 	private boolean m_gameLost = false;
 	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
-	private String m_timePassed;
+	public String m_timePassed;
+	public int m_rows;
+	public int m_columns;
+	public int m_mineCount;
 	public ArrayList<Tile> revealedTiles;
 	
 	public static final int DEFAULT_SIZE = 10;

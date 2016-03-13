@@ -4,10 +4,42 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import game.*;
+import game.Board;
+import game.Computer;
 
 public class BoardUnitTests {
 	IntegrationTests interactingClass = new IntegrationTests();
+	
+	@Test
+	public void testBoardReturn() {
+		Board tester = interactingClass.createBoard();
+		assertEquals("Test if the board is returned correctly",tester,tester.getBoard());
+	}
+	
+	@Test
+	public void testColumnReturn() {
+		Board tester = interactingClass.createBoard();
+		assertEquals("Test if correct columns are returned",tester.m_columns,tester.getColumns());
+	}
+	
+	@Test
+	public void testRowReturn() {
+		Board tester = interactingClass.createBoard();
+		assertEquals("Test if the correct row count is returned",tester.m_rows,tester.getRows());
+		
+	}
+	
+	@Test
+	public void testMineReturn() {
+		Board tester = interactingClass.createBoard();
+		assertEquals("Test if the correct mine count is returned",tester.m_mineCount,tester.getMineCount());
+	}
+	
+	@Test
+	public void testTimeReturn () {
+		Board tester = interactingClass.createBoard();
+		assertEquals("Test correct time return", tester.m_timePassed,tester.getTimePassed());
+	}
 	
 	@Test
 	public void testBoardComplete() {
