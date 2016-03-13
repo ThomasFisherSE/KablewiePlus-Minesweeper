@@ -13,6 +13,13 @@ package game;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @class Tile
+ * @brief A class for a generic tile
+ *
+ * An abstract class for a generic tile, inherited by Mine, Hidden, Revealed and Defused
+ * /
 public abstract class Tile {
 	
 	/**
