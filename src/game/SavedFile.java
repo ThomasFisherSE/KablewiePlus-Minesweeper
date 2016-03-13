@@ -113,6 +113,10 @@ public class SavedFile {
 	 * @return if saving was successful
 	 */
 	public boolean saveFile(int slot, Board board, Player player) {
+		if (!validData(board, player)) {
+			return false;
+		}
+		
 		String fileName = ("SaveFile" + slot + ".csv");
 		try {
 			
@@ -206,6 +210,20 @@ public class SavedFile {
 		String loadedTime = line.get(TIME);
 		loadedBoard.loadGraphics();
 		loadedGame.startLoadedGame(loadedBoard, loadedPlayer, loadedTime);
+		return true;
+	}
+	
+	/**
+	 * Tests if input passed is valid
+	 * 
+	 * @param board the board to be saved
+	 * @param player the player to be saved
+	 * @return if the data is valid
+	 */
+	public boolean validData(Board board, Player player) {
+		if (board.getBoard().size()==0 || player.getUsername().equalsIgnoreCase("")) {
+			return false;
+		}
 		return true;
 	}
 	
