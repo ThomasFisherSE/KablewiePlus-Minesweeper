@@ -40,7 +40,7 @@ public class SavedFile {
 	 * @return if loading was successful
 	 */
 	public boolean loadFile(int slot) {
-		/*Getting the file name from the slot chosen*/
+		//Getting the file name from the slot chosen
 		String fileName = ("SaveFile" + slot + ".csv");
 		
 		if (!validateLoadFile(fileName)) {
@@ -51,32 +51,32 @@ public class SavedFile {
 			
 			Scanner	in = new Scanner(new File(fileName));
 			
-			/*setting up array list to store lines in*/
+			//setting up array list to store lines in
 			ArrayList<String> line = new ArrayList<String>();
 			
-			/*read in each field of the file*/
+			//read in each field of the file
 			in.useDelimiter(",");
 			while (in.hasNext()) {
 				String readFile = in.next();
-				/*store data in the array list*/
+				//store data in the array list
 				line.add(readFile);	
 			}
 			in.close();
 			
-			/*Setup new objects using saved game data*/
+			//Setup new objects using saved game data
 			Player loadedPlayer = new Player(line.get(USERNAME));
 			int boardSize = Integer.parseInt(line.get(BOARDSIZE));
 			int mineAmount = Integer.parseInt(line.get(MINE_COUNT)); 
 			Board loadedBoard = new Board(boardSize, mineAmount);
-			/*Continuing to read the file after the current data*/
+			//Continuing to read the file after the current data
 			int arrayIndex = 7;
 			
-			/*Setting up the tiles*/
+			//Setting up the tiles
 			for (int i=0; i<boardSize; i++) {
 				for (int j=0; j<boardSize; j++) {
-					/*For each line in the array list*/
+					//For each line in the array list
 					String data = line.get(arrayIndex);
-					/*Setup scanner to detect character change*/
+					//Setup scanner to detect character change
 					Scanner s = new Scanner(data);
 					s.useDelimiter("");  
 					
@@ -85,27 +85,27 @@ public class SavedFile {
 					 * and apply these values to tiles
 					 */
 					String value = s.next();
-					/*Diffused value*/
+					//Diffused value
 					if (value.equalsIgnoreCase("T")) {
 						loadedBoard.setState(j, i, "D", true);
 					} else {
 						loadedBoard.setState(j, i, "D", false);
 					}
-					/*Mine value*/
+					//Mine value
 					value = s.next();
 					if (value.equalsIgnoreCase("T")) {
 						loadedBoard.setState(j, i, "M", true);
 					} else {
 						loadedBoard.setState(j, i, "M", false);
 					}
-					/*Hidden value*/
+					//Hidden value
 					value = s.next();
 					if (value.equalsIgnoreCase("T")) {
 						loadedBoard.setState(j, i, "H", true);
 					} else {
 						loadedBoard.setState(j, i, "H", false);
 					}
-					/*Increase index to access next element in array*/
+					//Increase index to access next element in array
 					arrayIndex++;
 					s.close();
 				}
@@ -133,7 +133,7 @@ public class SavedFile {
 		String fileName = ("SaveFile" + slot + ".csv");
 		try {
 			
-			/*Set up connection to the file*/
+			//Set up connection to the file
 			FileWriter writer = new FileWriter(fileName);
 			PrintWriter output = new PrintWriter(writer);
 			
@@ -148,14 +148,14 @@ public class SavedFile {
 			output.print(board.getHiddenTile()+",");
 			output.print(board.getRevealedTile()+",");
 			
-			/*Saving tile data*/
+			//Saving tile data
 			
 			/*Creating a copy of the tiles in the board*/
 			ArrayList<ArrayList<Tile>> boardData;
 			boardData = new ArrayList<ArrayList<Tile>>();
 			boardData = board.getBoard();
 			
-			/*Getting and saving the board size*/
+			//Getting and saving the board size
 			int tileAmount = boardData.size();
 			output.print(tileAmount+",");
 			
@@ -183,7 +183,7 @@ public class SavedFile {
 				}
 			}
 			
-			/*closing the resource*/
+			//closing the resource
 			output.close();
 		}
 		
@@ -201,10 +201,10 @@ public class SavedFile {
 	 */
 	public boolean startup(ArrayList<String> line, Board loadedBoard,
 			Player loadedPlayer) {
-		/*Used to check file read in correctly*/
+		//Used to check file read in correctly
 		if (Integer.parseInt(line.get(DIFFUSED_TILE)) 
 				!= loadedBoard.getDefusedTile()) {
-			/*error reading file*/
+			//error reading file
 			JOptionPane.showMessageDialog(null, "Input file corrupted", "Loading error", 
 					JOptionPane.INFORMATION_MESSAGE);
 			new Kablewie();
@@ -212,7 +212,7 @@ public class SavedFile {
 		}
 		if (Integer.parseInt(line.get(HIDDEN_TILE)) 
 				!= loadedBoard.getHiddenTile()) {
-			/*error reading file*/
+			//error reading file
 			JOptionPane.showMessageDialog(null, "Input file corrupted", "Loading error", 
 					JOptionPane.INFORMATION_MESSAGE);
 			new Kablewie();
@@ -220,14 +220,14 @@ public class SavedFile {
 		}
 		if (Integer.parseInt(line.get(REVEALED_TILE)) 
 				!= loadedBoard.getRevealedTile()) {
-			/*error reading file*/
+			//Error reading file
 			JOptionPane.showMessageDialog(null, "Input file corrupted", "Loading error", 
 					JOptionPane.INFORMATION_MESSAGE);
 			new Kablewie();
 			return false;
 		}
 		
-		/*Enables player to continue playing game*/
+		//Enables player to continue playing game
 		Kablewie loadedGame = new Kablewie();
 		String loadedTime = line.get(TIME);
 		loadedBoard.loadGraphics(m_gameController);
@@ -257,11 +257,11 @@ public class SavedFile {
 	 * @return if the file is valid for the game
 	 */
 	public boolean validateLoadFile(String fileName) {
-		/*if file is one of the accepted ones*/
+		//if file is one of the accepted ones
 		if (fileName.equalsIgnoreCase("SaveFile1.csv")|| 
 				fileName.equalsIgnoreCase("SaveFile2.csv")
 				||fileName.equalsIgnoreCase("SaveFile3.csv")) {
-			/*Checking if the file exists*/
+			//Checking if the file exists
 			if (!new File(fileName).isFile() ||
 					new File(fileName).length()==0) {
 				return false;
@@ -269,7 +269,7 @@ public class SavedFile {
 		} 
 			return false;
 	}
-
+	
 	private GameController m_gameController;
 	
 	final static int USERNAME = 0;
