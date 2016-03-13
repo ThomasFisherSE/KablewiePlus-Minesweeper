@@ -1,3 +1,14 @@
+/**
+ * @file BoardUnitTests.java
+
+ * @author Ethan Davies
+ * @Date 13/03/2016
+ * @see Board.java
+ * @brief Tests board initialization 
+ * 
+ * Tests methods in Board that return values and initialize board states
+ */
+
 package testing;
 
 import static org.junit.Assert.*;
@@ -15,14 +26,18 @@ public class BoardUnitTests {
 		Board tester = interactingClass.createBoard();
 		assertEquals("Test if the board is returned correctly",tester,tester.getBoard());
 	}
-	
+	/**
+	 * Testing the return of the correct column value
+	 */
 	@Test
 	public void testColumnReturn() {
 		Board tester = interactingClass.createBoard();
 		int col = tester.getColumns();
 		assertEquals("Test if correct columns are returned",col,tester.getColumns());
 	}
-	
+	/**
+	 * Testing the return of the correct row value
+	 */
 	@Test
 	public void testRowReturn() {
 		Board tester = interactingClass.createBoard();
@@ -30,21 +45,27 @@ public class BoardUnitTests {
 		assertEquals("Test if the correct row count is returned",row,tester.getRows());
 		
 	}
-	
+	/**
+	 * Testing if the correct number of mines is being returned
+	 */
 	@Test
 	public void testMineReturn() {
 		Board tester = interactingClass.createBoard();
 		int mine = tester.getMineCount();
 		assertEquals("Test if the correct mine count is returned",mine,tester.getMineCount());
 	}
-	
+	/**
+	 * Testing if the correct time value is being returned
+	 */
 	@Test
 	public void testTimeReturn () {
 		Board tester = interactingClass.createBoard();
 		String time = tester.getTimePassed();
 		assertEquals("Test correct time return",time,tester.getTimePassed());
 	}
-	
+	/**
+	 * Testing if the board can be played to completion or not
+	 */
 	@Test
 	public void testBoardComplete() {
 		Board tester = interactingClass.createBoard();
@@ -63,7 +84,9 @@ public class BoardUnitTests {
 		assertEquals("Test if the board has been completed and the game is won",
 				true, tester.getGameWon()); 
 	}
-	
+	/**
+	 * Testing for when the board is not played to completion
+	 */
 	@Test
 	public void testBoardIncomplete() {
 		Board tester = interactingClass.createBoard();
@@ -81,7 +104,9 @@ public class BoardUnitTests {
 		assertEquals("Test if the board has not been completed",
 				false, tester.getGameWon()); 
 	}
-	
+	/**
+	 * Testing the default board initialization
+	 */
 	@Test
 	public void testBoardDefaultInitialization() {
 		assertEquals("Test if the boards columns are initialized correclty",
@@ -91,7 +116,9 @@ public class BoardUnitTests {
 		assertEquals("Test if the boards mines are initialized correclty",
 				10, interactingClass.createBoard().getMineCount());
 	}
-	
+	/**
+	 * Testing a custom board initialization
+	 */
 	@Test
 	public void testBoardCustomInitialization() {
 		int col,row,mines;
@@ -106,7 +133,9 @@ public class BoardUnitTests {
 		assertEquals("Test if the boards custom column size is initialized correctly",
 				mines,tester.getMineCount());
 	}
-	
+	/**
+	 * Testing the bounds of the board in which a turn can be made
+	 */
 	@Test
 	public void testBoardBounds() {
 		assertEquals("Test to ensure the board does not accept invalid bounds",
