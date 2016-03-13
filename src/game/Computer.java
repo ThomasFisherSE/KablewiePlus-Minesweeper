@@ -278,7 +278,7 @@ public class Computer extends Player implements Runnable {
 	 *  
 	 *  @return boolean, true if move has been made, false if not
 	 */
-	private boolean makeSmartMove() {
+	public boolean makeSmartMove() {
 		generateMoveLists();
 		
 		if (!m_knownBombs.isEmpty()) {

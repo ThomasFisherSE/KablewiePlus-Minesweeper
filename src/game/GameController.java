@@ -217,9 +217,11 @@ public class GameController implements MouseListener, ActionListener {
 	}
 	
 	/**
-	 * Sets the time
+	 * Sets the time between computer player turns for this game
 	 */
 	public void setTime() {
+		boolean validFlag = true;
+		
 		do {
 			double time;
 
@@ -228,6 +230,7 @@ public class GameController implements MouseListener, ActionListener {
 						"Enter time (0 - 10 seconds) for between computer turns: "));
 			} catch (NumberFormatException e) {
 				time = Computer.DEFAULT_SLEEP_TIME;
+				validFlag = false;
 			} catch (NullPointerException e) {
 				// JOptionPane was probably closed.
 				time = Computer.DEFAULT_SLEEP_TIME;
@@ -235,15 +238,14 @@ public class GameController implements MouseListener, ActionListener {
 			
 			if (time >= MIN_TIME && time <=MAX_TIME) {
 				m_computerPlayer.setTime(time);
-				m_flag = false;
+				validFlag = false;
 			} else if (!(time >= MIN_TIME && time <=MAX_TIME)) {
 				JOptionPane.showMessageDialog(null,
 						"Time values must be between 0 and 10 seconds",
 						"Value Error",
 						JOptionPane.WARNING_MESSAGE);
 			}
-		} while (m_flag);
-		m_flag = true;
+		} while (validFlag);
 	}
 	
 	/**
@@ -708,7 +710,6 @@ public class GameController implements MouseListener, ActionListener {
 		m_frame.repaint();
 
 		m_panelGame.repaint();
-		//m_humanPlayer.takeTurn();
 	}
 
 	private MainMenu m_menu;
@@ -728,7 +729,6 @@ public class GameController implements MouseListener, ActionListener {
 	private long m_minutesPlayed;
 	private long m_secondsPlayed;
 	private String m_timePassed;
-	private boolean m_flag = true;
 	private boolean m_minesRevealed = false;
 
 	private JMenuItem m_newGame;

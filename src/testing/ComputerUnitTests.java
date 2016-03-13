@@ -8,6 +8,9 @@ import org.junit.Test;
 public class ComputerUnitTests {
 	IntegrationTests interactingClass = new IntegrationTests();
 	
+	/**
+	 * Testing the low intelligence preset in the JMenu
+	 */
 	@Test
 	public void testLowIntelligencePreset() {
 		Computer tester = new Computer("AI", interactingClass.createBoard(),
@@ -19,6 +22,9 @@ public class ComputerUnitTests {
 				Computer.LOW_PROBABILITY, tester.getIntelligence());
 	}
 	
+	/**
+	 * Testing the normal intelligence preset in the JMenu
+	 */
 	@Test
 	public void testNormalIntelligencePreset() {
 		Computer tester = new Computer("AI", interactingClass.createBoard(),
@@ -30,6 +36,9 @@ public class ComputerUnitTests {
 				Computer.NORMAL_PROBABILITY, tester.getIntelligence());
 	}
 	
+	/**
+	 * Testing the high intelligence preset in the JMenu
+	 */
 	@Test
 	public void testHighIntelligencePreset() {
 		Computer tester = new Computer("AI", interactingClass.createBoard(),
@@ -41,6 +50,9 @@ public class ComputerUnitTests {
 				Computer.PERFECT_PROBABILITY, tester.getIntelligence());
 	}
 	
+	/**
+	 * Testing the cannot lose intelligence preset in the JMenu
+	 */
 	@Test
 	public void testCantLosePreset() {
 		Computer tester = new Computer("AI", interactingClass.createBoard(),
@@ -51,6 +63,9 @@ public class ComputerUnitTests {
 				Computer.CANNOT_LOSE, tester.getIntelligence());
 	}
 	
+	/**
+	 * Testing the computer player playing on a large board
+	 */
 	@Test
 	public void testAiOnLargeBoard() {
 		Computer tester = new Computer("AI", new Board(
@@ -70,10 +85,13 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion on a large board", true, tester.checkGameOver());
+		assertEquals("The computer player should be able to play to completion"
+				+ " on a large board", true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing on a default board
+	 */
 	@Test
 	public void testAiOnDefaultBoard() {
 		Computer tester = new Computer("AI", new Board(
@@ -93,11 +111,13 @@ public class ComputerUnitTests {
 					+ " --> Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion on a default sized board", true,
-				tester.checkGameOver());
+		assertEquals("The computer player should be able to play to completion"
+				+ " on a default board", true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing on a small board
+	 */
 	@Test
 	public void testAiOnSmallBoard() {
 		Computer tester = new Computer("AI", new Board(
@@ -117,11 +137,13 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion on a small sized board", true,
-				tester.checkGameOver());
+		assertEquals("The computer player should be able to play to completion"
+				+ " on a small board", true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing with the max number of mines
+	 */
 	@Test
 	public void testAiWithMaxMines() {
 		Computer tester = new Computer("AI", new Board(
@@ -141,11 +163,14 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion with the max number of mines", 
+		assertEquals("The computer player should be able to play to completion"
+				+ " with the max number of mines", 
 				true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing with the default number of mines
+	 */
 	@Test
 	public void testAiWithDefaultMines() {
 		Computer tester = new Computer("AI", new Board(
@@ -165,11 +190,14 @@ public class ComputerUnitTests {
 					+ " --> Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion with the default number of mines", 
+		assertEquals("The computer player should be able to play to completion"
+				+ " with the default number of mines", 
 				true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing with the min number of mines
+	 */
 	@Test
 	public void testAiWithMinMines() {
 		Computer tester = new Computer("AI", new Board(
@@ -189,11 +217,14 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion with the min number of mines", 
+		assertEquals("The computer player should be able to play to completion"
+				+ " with the min number of mines", 
 				true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing with the min possible intelligence
+	 */
 	@Test
 	public void testMinIntelligence() {
 		Computer tester = new Computer("AI", new Board(
@@ -213,11 +244,13 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion with the min intelligence", 
-				true, tester.checkGameOver());
+		assertEquals("The computer player should be able to play to completion"
+				+ " with min intelligence", true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing with the max possible intelligence
+	 */
 	@Test
 	public void testMaxIntelligence() {
 		Computer tester = new Computer("AI", new Board(
@@ -237,11 +270,13 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion with the max intelligence", 
-				true, tester.checkGameOver());
+		assertEquals("The computer player should be able to play to completion"
+				+ " with max intelligence", true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the computer player playing when mines are revealed
+	 */
 	@Test
 	public void testAiWhenMinesRevealed() {
 		Board testBoard = new Board(
@@ -265,11 +300,13 @@ public class ComputerUnitTests {
 					+ " --> Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion when the revealed mines feature is in effect.", 
-				true, tester.checkGameOver());
+		assertEquals("The computer player should be able to play to completion"
+				+ " when mines are revealed", true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing running multiple computer players after each other
+	 */
 	@Test
 	public void testRunningAiConsecutively() {
 		Board testBoard = new Board(
@@ -310,11 +347,14 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if the computer player can always play to "
-				+ "completion with the max intelligence", 
+		assertEquals("The computer player should be able to play to completion"
+				+ " when running several computer players consecutively", 
 				true, tester.checkGameOver());
 	}
 	
+	/**
+	 * Testing the generateMoveLists() method
+	 */
 	@Test
 	public void testGeneratingMoves() {
 		Computer newBoardTester = new Computer("AI", new Board(
@@ -327,21 +367,26 @@ public class ComputerUnitTests {
 				interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
-		/* Make 9 perfect moves; since there are 10 mines, 
+		
+		/**
+		 * Make 9 perfect moves; since there are 10 mines, 
 		 * after 9 perfect moves, there should always be a smart move possible
 		 */
-		
 		for (int i = 0; i<10; i++) {
 			midGameTester.makePerfectMove();
 		}
 		
-		assertEquals("Test if move lists can be generated for a new board", 
+		assertEquals("Move lists should be able to be generated for a new "
+				+ "board", 
 				false, newBoardTester.generateMoveLists());
 		
-		assertEquals("Test if move lists can be generated mid-game", 
+		assertEquals("Move lists should be able to be generated mid-game", 
 				true, midGameTester.generateMoveLists());
 	}
 	
+	/**
+	 * Testing the makeStupidMove() method
+	 */
 	@Test
 	public void testMakeStupidMove() {
 		Computer newBoardTester = new Computer("AI", new Board(
@@ -376,16 +421,19 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if a stupid move can be made on a new board", 
+		assertEquals("A stupid move should be able to be made on a new board", 
 				true, newBoardTester.makeStupidMove());
 		
-		assertEquals("Test if a stupid move can be made mid-game", 
+		assertEquals("A stupid move should be able to be made mid-game", 
 				true, midGameTester.makeStupidMove());
 		
-		assertEquals("Test if a stupid move can be made when "
+		assertEquals("A stupid move should be able to be made when "
 				+ "the game is over", false, gameOverTester.makeStupidMove());
 	}
 	
+	/**
+	 * Testing the makePerfectMove() method
+	 */
 	@Test
 	public void testMakePerfectMove() {
 		Computer newBoardTester = new Computer("AI", new Board(
@@ -420,16 +468,19 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if a perfect move can be made on a new board", 
+		assertEquals("A perfect move should be able to be made on a new board", 
 				true, newBoardTester.makePerfectMove());
 		
-		assertEquals("Test if a perfect move can be made mid-game", 
+		assertEquals("A perfect move should be able to be made mid-game", 
 				true, midGameTester.makePerfectMove());
 		
-		assertEquals("Test if a perfect move can be made when "
+		assertEquals("A perfect move should be able to be made when "
 				+ "the game is over", false, gameOverTester.makePerfectMove());
 	}
 	
+	/**
+	 * Testing the makeMove() method
+	 */
 	@Test
 	public void testMakeMove() {
 		Computer newBoardTester = new Computer("AI", new Board(
@@ -464,15 +515,60 @@ public class ComputerUnitTests {
 					+ " Error interrupting thread.");
 		}
 		
-		assertEquals("Test if a move can be made on a new board", 
+		assertEquals("A move should be able to be made on a new board", 
 				true, newBoardTester.makeMove());
 		
-		assertEquals("Test if a move can be made mid-game", 
+		assertEquals("A move should be able to be made mid-game", 
 				true, midGameTester.makeMove());
 		
-		assertEquals("Test if a move can be made when the game is over", 
+		assertEquals("A move should be able to be made when the game is over", 
 				false, gameOverTester.makeMove());
 	}
 	
-	
+	/**
+	 * Testing the makeSmartMove() method
+	 */
+	@Test
+	public void testMakeSmartMove() {
+		Computer newBoardTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(),
+				Computer.PERFECT_PROBABILITY);
+		
+		Computer midGameTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		for (int i = 0; i<10; i++) {
+			midGameTester.makePerfectMove();
+		}
+		
+		Computer gameOverTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		Thread testThread = new Thread(gameOverTester);
+		testThread.start();
+		gameOverTester.setTime(Computer.TEST_SLEEP_TIME);
+		gameOverTester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: "
+					+ "testMakeSmartMove() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("A smart move should be able to be made on a new board", 
+				true, newBoardTester.makeSmartMove());
+		
+		assertEquals("A smart move should be able to be made mid-game", 
+				true, midGameTester.makeSmartMove());
+		
+		assertEquals("A smart move should not be made when the game is over", 
+				false, gameOverTester.makeSmartMove());
+	}
 }
