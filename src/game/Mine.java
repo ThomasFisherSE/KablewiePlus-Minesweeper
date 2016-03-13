@@ -21,7 +21,7 @@ import javax.swing.ImageIcon;
  * @brief A Mine tile
  *
  * A Mine tile, inherits from Tile
- * /
+ */
 public class Mine extends Tile {
 	
 	/**

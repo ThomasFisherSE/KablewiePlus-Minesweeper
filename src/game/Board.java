@@ -23,7 +23,8 @@ import javax.swing.JOptionPane;
  * Contain the Information of the current Board
  * and various helper methods for manipulating
  * the board.
- * /
+ */
+
 public class Board {
 	
 	/**

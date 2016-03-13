@@ -20,7 +20,7 @@ import java.util.Random;
  * @brief A class for computer players.
  * 
  * A class for computer players, inherits from Player
- * /
+ */
 public class Computer extends Player implements Runnable {
 	
 	/**

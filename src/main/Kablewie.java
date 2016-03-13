@@ -28,7 +28,7 @@ import game.Player;
  *
  * Starts the game then creates and
  * calls the other components.
- * /
+ */
 public class Kablewie {
 
 	/**

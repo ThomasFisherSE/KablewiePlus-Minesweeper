@@ -21,7 +21,7 @@ import javax.swing.ImageIcon;
  * @brief A hidden Tile
  *
  * A hidden Tile, inherits from Tile
- * /
+ */
 public class Hidden extends Tile {
 	
 	/**

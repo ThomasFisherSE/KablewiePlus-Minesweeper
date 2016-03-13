@@ -20,7 +20,7 @@ import org.junit.Test;
  * @brief Tests Kablewie class
  * 
  * Tests all methods in Kablewie class with valid input
- * /
+ */
 public class KablewieUnitTests {
 
 	/** 

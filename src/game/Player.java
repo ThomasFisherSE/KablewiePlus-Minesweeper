@@ -15,7 +15,7 @@ package game;
  * @brief A class for a generic player
  *
  * A class for a generic player, inherited by Human and Computer players
- * /
+ */
 public class Player {
 	
 	/**

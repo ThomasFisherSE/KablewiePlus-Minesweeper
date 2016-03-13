@@ -26,7 +26,7 @@ import javax.swing.Timer;
  * @brief A Revealed tile
  *
  * A Revealed Tile, inherits from Tile
- * /
+ */
 public class Revealed extends Tile {
 	
 	/**

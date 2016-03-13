@@ -24,7 +24,7 @@ import game.Computer;
  * @brief Tests board initialization 
  * 
  * Tests methods in Board that return values and initialize board states
- * /
+ */
 public class BoardUnitTests {
 	/**
 	 * Testing the return of the correct column value

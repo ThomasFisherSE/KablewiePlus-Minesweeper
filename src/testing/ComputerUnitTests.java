@@ -22,7 +22,7 @@ import org.junit.Test;
  * @brief Tests computer player
  * 
  * Tests methods in Computer, and whether the computer AI works correctly
- * /
+ */
 public class ComputerUnitTests {
 	
 	/**
