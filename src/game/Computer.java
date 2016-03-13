@@ -64,6 +64,8 @@ public class Computer extends Player implements Runnable {
 			m_gameController.setGameWin();
 			m_aiToggled = false;
 			return true;
+		} else if (m_board == null){
+			return true;
 		} else {
 			return false;
 		}
