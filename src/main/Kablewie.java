@@ -21,6 +21,14 @@ import game.Board;
 import game.GameController;
 import game.Player;
 
+/**
+ * 
+ * @class Kablewie
+ * @brief Starts the game
+ *
+ * Starts the game then creates and
+ * calls the other components.
+ * /
 public class Kablewie {
 
 	/**
