@@ -15,6 +15,13 @@ import javax.swing.JFrame;
 import game.*;
 import main.*;
 
+/**
+ * 
+ * @class IntegrationTests
+ * @brief integration testing
+ * 
+ * Integration testing for the classes
+ */
 public class IntegrationTests {
 	/**
 	 * Tests all unit tests
