@@ -1,3 +1,12 @@
+/**
+ * @file KablewieUnitTests.java
+ * @author Ibrahim Shehu
+ * @Date 11/03/2016
+ * @see Kablewie.java
+ * @brief Tests Kablewie class
+ * 
+ * Tests all methods in Kablewie class with valid input
+ */
 package testing;
 
 import static org.junit.Assert.*;
