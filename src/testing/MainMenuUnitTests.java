@@ -2,8 +2,6 @@ package testing;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Assert.*;
-
 import main.*;
 
 import org.junit.Test;
