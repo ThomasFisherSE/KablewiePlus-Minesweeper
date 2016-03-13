@@ -27,8 +27,10 @@ public class Mine extends Tile {
 				boolean isDefused,
 				String path) {
 		
-		// Always set hidden to false as Mine is a visible tile.
-		// Always set mine to true as Mine is a mine.
+		/**
+		 *  Always set hidden to false as Mine is a visible tile.
+		 *  Always set mine to true as Mine is a mine.
+		 */ 
 		super(true, true, false);
 		m_mineImage = new ImageIcon(path);
 	}
