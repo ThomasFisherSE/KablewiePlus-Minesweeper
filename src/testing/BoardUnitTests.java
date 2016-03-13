@@ -18,6 +18,13 @@ import org.junit.Test;
 import game.Board;
 import game.Computer;
 
+/**
+ * 
+ * @class BoardUnitTests
+ * @brief Tests board initialization 
+ * 
+ * Tests methods in Board that return values and initialize board states
+ * /
 public class BoardUnitTests {
 	/**
 	 * Testing the return of the correct column value
