@@ -35,7 +35,7 @@ public class SavedFile {
 			return false;
 		}
 		
-		try{
+		try {
 			
 			Scanner	in = new Scanner(new File(fileName));
 			
@@ -44,7 +44,7 @@ public class SavedFile {
 			
 			/*read in each field of the file*/
 			in.useDelimiter(",");
-			while (in.hasNext()){
+			while (in.hasNext()) {
 				String readFile = in.next();
 				/*store data in the array list*/
 				line.add(readFile);	
@@ -226,7 +226,6 @@ public class SavedFile {
 			} else return true;
 		} 
 			return false;
-		
 	}
 
 	final static int USERNAME = 0;
