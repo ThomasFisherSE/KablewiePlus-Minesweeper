@@ -1,6 +1,6 @@
 /**
- * @author Scott-Cheg
  * @file IntegrationTests.java
+ * @author Scott-Cheg
  * @date 11/03/2015
  * @see All files in the package testing
  * @brief integration testing
@@ -70,87 +70,6 @@ public class IntegrationTests {
 	}
 	
 	/**
-	 * Creates a board
-	 */
-	public Board createBoard() {
-		return new Board(Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES);
-	}
-	
-	/**
-	 * Creates a GameController object
-	 * 
-	 * @return the GameController object
-	 */
-	public GameController createGameController() {
-		GameController gc = new GameController(createBoard(), createHuman(), createFrame(), createMainMenu());
-		gc.asTest();
-		return gc;
-	}
-	
-	/**
-	 * Creates a MainMenu object
-	 * 
-	 * @return the MainMenu object
-	 */
-	public MainMenu createMainMenu() {
-		return new MainMenu(createFrame(), new Kablewie());
-	}
-	
-	/**
-	 * Creates a JFrame object
-	 * 
-	 * @return the JFrame object
-	 */
-	public JFrame createFrame() {
-		return new JFrame("testFrame");
-	}
-	
-	/**
-	 * Creates a Computer object
-	 * 
-	 * @return the Computer object
-	 */
-    public Computer createComputer() {
-        return new Computer("AI", createBoard(), createGameController(), 0);
-    }
-    
-    /**
-	 * Creates a Human object
-	 * 
-	 * @return the Human object
-	 */
-    public Human createHuman() {
-    	return new Human("testPlayer");
-    }
-    
-    /**
-  	 * Creates a Player object
-  	 * 
-  	 * @return the Player object
-  	 */
-    public Player createPlayer() {
-    	return new Player("testPlayer");
-    }
-    
-    /**
-  	 * Creates a SavedFile object
-  	 * 
-  	 * @return the SavedFile object
-  	 */
-    public SavedFile createSavedFile() {
-    	return new SavedFile();
-    }
-    
-	/**
-	 * Creates a new board
-	 * 
-	 * @return a board of 0x0 with 0 mines
-	 */
-	public Board createBadBoard() {
-		return new Board(0,0,0);
-	}
-
-	/**
 	 * Creates an ArrayList of valid saved game data
 	 * 
 	 * @return ArrayList of saved game data
@@ -164,11 +83,14 @@ public class IntegrationTests {
 		saved.add("100");//example hidden amount
 		saved.add("0");//example revealed amount
 		//as default all tiles are hidden(T) and diffused(F)
-		for (int i=0; i<90;i++) {
+		int min = 0;
+		int max = 90;
+		int mineAmount = 10;
+		for (int i=min; i<max;i++) {
 			saved.add("FFT");
 		}
 		//as default there are 10 mines
-		for (int i=0; i<10;i++) {
+		for (int i=min; i<mineAmount;i++) {
 			saved.add("FTT");
 		}
 		return saved;
@@ -188,11 +110,14 @@ public class IntegrationTests {
 		saved.add("0");//example mismatched hidden amount
 		saved.add("0");//example revealed amount
 		//as default all tiles are hidden(T) and diffused(F)
-		for (int i=0; i<90;i++) {
+		int min = 0;
+		int max = 90;
+		int mineAmount = 10;
+		for (int i=min; i<max;i++) {
 			saved.add("FFT");
 		}
 		//There are 10 mines
-		for (int i=0; i<10;i++) {
+		for (int i=min; i<mineAmount;i++) {
 			saved.add("FTT");
 		}
 		return saved;
@@ -206,4 +131,86 @@ public class IntegrationTests {
 	public Player createBadPlayer() {
 		return new Player("");
 	}
+	
+	/**
+	 * Creates a new board
+	 * 
+	 * @return a board of 0x0 with 0 mines
+	 */
+	public Board createBadBoard() {
+		return new Board(0,0,0);
+	}
+	
+	/**
+	 * Creates a board
+	 */
+	public Board createBoard() {
+		return new Board(Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES);
+	}
+	
+	/**
+	 * Creates a Computer object
+	 * 
+	 * @return the Computer object
+	 */
+    public Computer createComputer() {
+        return new Computer("AI", createBoard(), createGameController(), 0);
+    }
+    
+	/**
+	 * Creates a JFrame object
+	 * 
+	 * @return the JFrame object
+	 */
+	public JFrame createFrame() {
+		return new JFrame("testFrame");
+	}
+	
+	/**
+	 * Creates a GameController object
+	 * 
+	 * @return the GameController object
+	 */
+	public GameController createGameController() {
+		GameController gc = new GameController(createBoard(), createHuman(), createFrame(), createMainMenu());
+		gc.asTest();
+		return gc;
+	}
+	
+	/**
+	 * Creates a Human object
+	 * 
+	 * @return the Human object
+	 */
+    public Human createHuman() {
+    	return new Human("testPlayer");
+    }
+    
+	/**
+	 * Creates a MainMenu object
+	 * 
+	 * @return the MainMenu object
+	 */
+	public MainMenu createMainMenu() {
+		return new MainMenu(createFrame(), new Kablewie());
+	}
+	
+	/**
+  	 * Creates a Player object
+  	 * 
+  	 * @return the Player object
+  	 */
+    public Player createPlayer() {
+    	return new Player("testPlayer");
+    }
+	
+	/**
+  	 * Creates a SavedFile object
+  	 * 
+  	 * @return the SavedFile object
+  	 */
+    public SavedFile createSavedFile() {
+    	return new SavedFile();
+    }
+	
 }
