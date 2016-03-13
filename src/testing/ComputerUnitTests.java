@@ -66,7 +66,8 @@ public class ComputerUnitTests {
 	@Test
 	public void testCantLosePreset() {
 		Computer tester = new Computer("AI", m_interactingClass.createBoard(),
-				m_interactingClass.createGameController(), Computer.CANNOT_LOSE);
+				m_interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
 		
 		assertEquals("Test if the correct intelligence is set by using"
 				+ " the cannot lose preset",

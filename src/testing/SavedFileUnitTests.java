@@ -50,8 +50,8 @@ public class SavedFileUnitTests {
 		SavedFile tester = m_interactingClass.createSavedFile();
 		//valid input
 		assertEquals("Shouldn accept as vaid data",tester.validateData(
-				m_interactingClass.createBoard(),m_interactingClass.createPlayer())
-				,true);
+				m_interactingClass.createBoard(),
+				m_interactingClass.createPlayer()),true);
 		
 		//invalid input
 		assertEquals("Shouldn't accept empty board",tester.validateData(

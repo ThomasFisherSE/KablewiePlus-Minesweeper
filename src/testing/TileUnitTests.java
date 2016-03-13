@@ -29,7 +29,7 @@ public class TileUnitTests {
 		Board testBoard = m_interactingClass.createBoard();
 		
 		/**
-		 * Testing the adjacent tiles that the array has up to 8 surrounding squares
+		 * Testing the number of adjacent tiles a tile should have
 		 */
 
 		assertEquals("test if the length of the array list created is always"
@@ -41,7 +41,8 @@ public class TileUnitTests {
 		
 		
 		assertEquals("test if the length of the array list created is always"
-				+ " 4 for a tile in the corner of the board", CORNER_ARRAY_SIZE,
+				+ " 4 for a tile in the corner of the board",
+				CORNER_ARRAY_SIZE,
 				(tester.getTileArround(testBoard.getBoard(),0,0)).size());
 	}
 	

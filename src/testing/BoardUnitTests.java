@@ -66,7 +66,8 @@ public class BoardUnitTests {
 	public void testBoardComplete() {
 		Board tester = m_interactingClass.createBoard();
 		Computer testComputer = new Computer("AI", tester,
-				m_interactingClass.createGameController(), Computer.CANNOT_LOSE);
+				m_interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
 		Thread testThread = new Thread(testComputer);
 		testThread.start();
 		testComputer.setTime(Computer.TEST_SLEEP_TIME);

@@ -158,7 +158,8 @@ public class IntegrationTests {
 	 * Creates a board
 	 */
 	public Board createBoard() {
-		return new Board(Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES);
+		return new Board(Board.DEFAULT_SIZE, Board.DEFAULT_SIZE,
+				Board.DEFAULT_MINES);
 	}
 	
 	/**
@@ -185,7 +186,8 @@ public class IntegrationTests {
 	 * @return the GameController object
 	 */
 	public GameController createGameController() {
-		GameController gc = new GameController(createBoard(), createHuman(), createFrame(), createMainMenu());
+		GameController gc = new GameController(createBoard(), createHuman(),
+				createFrame(), createMainMenu());
 		gc.asTest();
 		return gc;
 	}
