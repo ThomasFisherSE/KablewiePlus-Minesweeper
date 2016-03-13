@@ -20,6 +20,13 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
+/**
+ * 
+ * @class Revealed
+ * @brief A Revealed tile
+ *
+ * A Revealed Tile, inherits from Tile
+ * /
 public class Revealed extends Tile {
 	
 	/**
