@@ -14,6 +14,9 @@
 package game;
 
 import java.util.*;
+
+import javax.swing.JOptionPane;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -202,16 +205,25 @@ public class SavedFile {
 		if (Integer.parseInt(line.get(DIFFUSED_TILE)) 
 				!= loadedBoard.getDefusedTile()) {
 			/*error reading file*/
+			JOptionPane.showMessageDialog(null, "Input file corrupted", "Loading error", 
+					JOptionPane.INFORMATION_MESSAGE);
+			new Kablewie();
 			return false;
 		}
 		if (Integer.parseInt(line.get(HIDDEN_TILE)) 
 				!= loadedBoard.getHiddenTile()) {
 			/*error reading file*/
+			JOptionPane.showMessageDialog(null, "Input file corrupted", "Loading error", 
+					JOptionPane.INFORMATION_MESSAGE);
+			new Kablewie();
 			return false;
 		}
 		if (Integer.parseInt(line.get(REVEALED_TILE)) 
 				!= loadedBoard.getRevealedTile()) {
 			/*error reading file*/
+			JOptionPane.showMessageDialog(null, "Input file corrupted", "Loading error", 
+					JOptionPane.INFORMATION_MESSAGE);
+			new Kablewie();
 			return false;
 		}
 		
