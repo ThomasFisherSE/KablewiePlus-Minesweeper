@@ -13,6 +13,11 @@ public class IntegrationTests {
 			boardTests.testBoardComplete();
 			boardTests.testBoardIncomplete();
 			boardTests.testBoardInitialization();
+			boardTests.testBoardReturn();
+			boardTests.testTimeReturn();
+			boardTests.testMineReturn();
+			boardTests.testRowReturn();
+			boardTests.testColumnReturn();
 			
 			ComputerUnitTests computerTests = new ComputerUnitTests();
 			computerTests.testCantLosePreset();
