@@ -24,7 +24,7 @@ public class Defused extends Tile {
 	 */
 	public Defused(boolean isMine, boolean isHidden, boolean isDefused) {
 		super(isMine, isHidden, isDefused);
-		m_defused = new ImageIcon("images/defused.png");
+		m_defused = new ImageIcon("resources/images/defused.png");
 	}
 
 	/**

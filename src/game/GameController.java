@@ -155,7 +155,7 @@ public class GameController implements MouseListener, ActionListener {
 		m_time.stop();
 		m_tick.stop();
 		m_GameFinshed.setVisible(true);
-		m_GameFinshed.setIcon(new ImageIcon("images/gameLost.jpg"));
+		m_GameFinshed.setIcon(new ImageIcon("resources/images/gameLost.jpg"));
 	}
 	
 	/**
@@ -169,7 +169,7 @@ public class GameController implements MouseListener, ActionListener {
 		m_time.stop();
 		m_tick.stop();
 		m_GameFinshed.setVisible(true);
-		m_GameFinshed.setIcon(new ImageIcon("images/GameWon.jpg"));
+		m_GameFinshed.setIcon(new ImageIcon("resources/images/GameWon.jpg"));
 		
 		String v = "You Have won\n Time taken- " + m_timePassed;
 		
@@ -215,21 +215,21 @@ public class GameController implements MouseListener, ActionListener {
 		try {
 			AudioInputStream audioInputStream = 
 					AudioSystem.getAudioInputStream(
-							new File("sound/tick.wav").getAbsoluteFile()
+							new File("resources/sound/tick.wav").getAbsoluteFile()
 					);
 			m_tick = AudioSystem.getClip();
 			m_tick.open(audioInputStream);
 			
 			audioInputStream =
 					AudioSystem.getAudioInputStream(
-							new File("sound/bomb.wav").getAbsoluteFile()
+							new File("resources/sound/bomb.wav").getAbsoluteFile()
 					);
 			m_bomb = AudioSystem.getClip();
 			m_bomb.open(audioInputStream);
 			
 			audioInputStream =
 					AudioSystem.getAudioInputStream(
-							new File("sound/won.wav").getAbsoluteFile()
+							new File("resources/sound/won.wav").getAbsoluteFile()
 					);
 			m_won = AudioSystem.getClip();
 			m_won.open(audioInputStream);

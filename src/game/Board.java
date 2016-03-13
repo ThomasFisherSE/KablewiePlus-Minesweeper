@@ -451,13 +451,13 @@ public class Board {
 				this.m_gameLost = true;
 				m_board.get(y).remove(x); // create a mine tile
 				m_board.get(y).add(x, new Mine(true, true, false, 
-						"images/mineX.jpg"));
+						"resources/images/mineX.jpg"));
 				for (int i = 0; i < m_board.size(); ++i) {
 					for (int j = 0; j < m_board.get(0).size(); ++j) {
 						if (m_board.get(i).get(j).isMine() && !(i == y && j == x)) {
 							m_board.get(i).remove(j); // create a mine tile
 							m_board.get(i).add(j, new Mine(true, true, false, 
-									"images/mine.png"));
+									"resources/images/mine.png"));
 						}
 					}
 				}	
@@ -485,14 +485,14 @@ public class Board {
 
 	                    m_board.get(y).remove(x); // create a mine tile
 	                    m_board.get(y).add(x, new Mine(true, true, false, 
-	                    		"images/mine.png"));
+	                    		"resources/images/mine.png"));
 	                    for (int i = 0; i < m_board.size(); ++i) {
 	                        for (int j = 0; j < m_board.get(0).size(); ++j) {
 	                            if (m_board.get(i).get(j).isMine() && 
 	                            		!(i == y && j == x)) {
 	                                m_board.get(i).remove(j);
 	                                m_board.get(i).add(j, new Mine(true, true,
-	                                		false, "images/mine.png"));
+	                                		false, "resources/images/mine.png"));
 	                            }
 	                        }
 	                    }	

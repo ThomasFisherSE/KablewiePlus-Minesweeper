@@ -25,7 +25,7 @@ public class Hidden extends Tile {
 	public Hidden(boolean isMine, boolean isHidden,boolean isDefused) {
 		// Always set hidden to false as its the hidden tile.
 		super(isMine, true,false);
-		m_hidden=new ImageIcon("images/hidden.png");
+		m_hidden=new ImageIcon("resources/images/hidden.png");
 	}
 	
 	/**
