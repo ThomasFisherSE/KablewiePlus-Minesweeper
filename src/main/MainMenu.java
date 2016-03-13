@@ -24,6 +24,11 @@ import game.Player;
 /* 
  * Suppress serial ID warning as ID would not
  * match coding conventions.
+ * @class MainMenu
+ * @brief creates main menu
+ *
+ * Handles creation of the main menu
+ * and user input on the menu.
  */
 @SuppressWarnings("serial")
 public class MainMenu extends JPanel implements MouseListener, KeyListener {
