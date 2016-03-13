@@ -13,6 +13,13 @@ import static org.junit.Assert.assertEquals;
 import main.*;
 import org.junit.Test;
 
+/**
+ * 
+ * @class MainMenuUnitTests
+ * @brief Tests MainMenu class
+ * 
+ * Tests all method in MainMenu class with valid and invalid input
+ */
 public class MainMenuUnitTests {
 	/** 
 	 * Testing to the testStartGame with valid input 
