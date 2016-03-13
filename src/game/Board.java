@@ -448,24 +448,26 @@ public class Board {
 	public void showBombTile() {
 		
 		for (int y=0; y < m_columns - 1; y++ ){
-			for (int x=0; x < m_rows - 1; x++){
-				if (m_board.get(y).get(x).isMine()) {
-					m_board.get(y).remove(x); // create a mine tile
-	                m_board.get(y).add(x, new Mine(true, true, false, 
+	            for (int x=0; x < m_rows - 1; x++){
+			
+	                if (m_board.get(y).get(x).isMine()) {
+
+	                    m_board.get(y).remove(x); // create a mine tile
+	                    m_board.get(y).add(x, new Mine(true, true, false, 
 	                    		"images/mine.png"));
-	                for (int i = 0; i < m_board.size(); ++i) {
-	                	for (int j = 0; j < m_board.get(0).size(); ++j) {
-	                		if (m_board.get(i).get(j).isMine() && 
+	                    for (int i = 0; i < m_board.size(); ++i) {
+	                        for (int j = 0; j < m_board.get(0).size(); ++j) {
+	                            if (m_board.get(i).get(j).isMine() && 
 	                            		!(i == y && j == x)) {
-	                			m_board.get(i).remove(j);
-	                            m_board.get(i).add(j, new Mine(true, true,
+	                                m_board.get(i).remove(j);
+	                                m_board.get(i).add(j, new Mine(true, true,
 	                                		false, "images/mine.png"));
+	                            }
 	                        }
-	                    }
-	                }	
-	            }
-	        }		
-		 }
+	                    }	
+	                }
+	            }		
+		}
 	 }
 
 	/**
@@ -487,15 +489,15 @@ public class Board {
 			}
 		}
 	}
-
+	
+	private int m_rows;
+	private int m_columns;
+	private int m_mineCount;
 	private boolean m_gameWon = false;
 	private boolean m_gameLost = false;
+	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
-	public ArrayList<ArrayList<Tile>> m_board;
-	public String m_timePassed;
-	public int m_rows;
-	public int m_columns;
-	public int m_mineCount;
+	private String m_timePassed;
 	public ArrayList<Tile> revealedTiles;
 	
 	public static final int DEFAULT_SIZE = 10;

@@ -13,32 +13,36 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardReturn() {
 		Board tester = interactingClass.createBoard();
-		assertEquals("Test if the board is returned correctly",tester.m_board,tester.getBoard());
+		assertEquals("Test if the board is returned correctly",tester,tester.getBoard());
 	}
 	
 	@Test
 	public void testColumnReturn() {
 		Board tester = interactingClass.createBoard();
-		assertEquals("Test if correct columns are returned",tester.m_columns,tester.getColumns());
+		int col = tester.getColumns();
+		assertEquals("Test if correct columns are returned",col,tester.getColumns());
 	}
 	
 	@Test
 	public void testRowReturn() {
 		Board tester = interactingClass.createBoard();
-		assertEquals("Test if the correct row count is returned",tester.m_rows,tester.getRows());
+		int row = tester.getRows();
+		assertEquals("Test if the correct row count is returned",row,tester.getRows());
 		
 	}
 	
 	@Test
 	public void testMineReturn() {
 		Board tester = interactingClass.createBoard();
-		assertEquals("Test if the correct mine count is returned",tester.m_mineCount,tester.getMineCount());
+		int mine = tester.getMineCount();
+		assertEquals("Test if the correct mine count is returned",mine,tester.getMineCount());
 	}
 	
 	@Test
 	public void testTimeReturn () {
 		Board tester = interactingClass.createBoard();
-		assertEquals("Test correct time return", tester.m_timePassed,tester.getTimePassed());
+		String time = tester.getTimePassed();
+		assertEquals("Test correct time return",time,tester.getTimePassed());
 	}
 	
 	@Test
