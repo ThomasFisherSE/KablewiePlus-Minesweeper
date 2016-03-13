@@ -22,6 +22,14 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import main.Kablewie;
 
+/**
+ * 
+ * @class SavedFile
+ * @brief Saves and loads selected game
+ * 
+ * Saves the current game into the selected CSV file (Comma seperated values)
+ * Loads a selected game from a selected CSV file (Comma seperated values)
+ */
 public class SavedFile {
 	
 	/**
