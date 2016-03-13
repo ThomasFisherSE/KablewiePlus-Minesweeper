@@ -42,6 +42,15 @@ import main.Kablewie;
  * match coding conventions.
  */
 @SuppressWarnings("serial")
+/**
+ * 
+ * @class GameController
+ * @brief Controls the game
+ *
+ * Controls the flow of the game takes the
+ * click of the user and passes the position
+ * of the clicked tile to the Board
+ */
 public class GameController implements MouseListener, ActionListener {
 	
 	/**
