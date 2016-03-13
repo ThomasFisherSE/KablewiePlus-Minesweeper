@@ -68,6 +68,52 @@ public class Computer extends Player implements Runnable {
 		}
 	}
 	
+	
+	/**
+	 * Accessor method for if the computer ai is running currently
+	 *  
+	 * @return boolean, true if ai is toggled, false if not
+	 */
+	public boolean isRunning() {
+		return m_aiToggled;
+	}
+	
+	/**
+	 * Run the ai
+	 */
+	public void run() {
+		makeMove(); //Make first move
+		m_gameController.repaintAll();
+		checkGameOver();
+		
+		while (m_aiToggled) {
+			//Sleep here as computer will always have just made a move
+			try {
+				Thread.sleep(m_sleepTime); //Wait 3 seconds
+			} catch (InterruptedException e) {
+				System.err.println("Failed to put thread to sleep.");
+			}
+			
+			boolean foundValidMove = false;
+			
+			do {
+				if (makeMove()) foundValidMove = true;
+				m_gameController.repaintAll();	
+				checkGameOver();
+			} while (!foundValidMove && m_aiToggled);
+		}
+	}
+	
+	/**
+	 * Mutator method for toggling the ai on or off
+	 *  
+	 * @return boolean, true if the ai is now toggled on, false if it's off
+	 */
+	public boolean toggleAi() {
+		m_aiToggled = !m_aiToggled;
+		return m_aiToggled;
+	}
+	
 	/**
 	 * Generate a list of safe, smart moves
 	 */
@@ -133,15 +179,6 @@ public class Computer extends Player implements Runnable {
 				}
 			}
 		}
-	}
-	
-	/**
-	 * Accessor method for if the computer ai is running currently
-	 *  
-	 * @return boolean, true if ai is toggled, false if not
-	 */
-	public boolean isRunning() {
-		return m_aiToggled;
 	}
 	
 	/**
@@ -284,42 +321,6 @@ public class Computer extends Player implements Runnable {
 		}
 			
 		return true;
-	}
-	
-	/**
-	 * Run the ai
-	 */
-	public void run() {
-		makeMove(); //Make first move
-		m_gameController.repaintAll();
-		checkGameOver();
-		
-		while (m_aiToggled) {
-			//Sleep here as computer will always have just made a move
-			try {
-				Thread.sleep(m_sleepTime); //Wait 3 seconds
-			} catch (InterruptedException e) {
-				System.err.println("Failed to put thread to sleep.");
-			}
-			
-			boolean foundValidMove = false;
-			
-			do {
-				if (makeMove()) foundValidMove = true;
-				m_gameController.repaintAll();	
-				checkGameOver();
-			} while (!foundValidMove && m_aiToggled);
-		}
-	}
-	
-	/**
-	 * Mutator method for toggling the ai on or off
-	 *  
-	 * @return boolean, true if the ai is now toggled on, false if it's off
-	 */
-	public boolean toggleAi() {
-		m_aiToggled = !m_aiToggled;
-		return m_aiToggled;
 	}
 
 	private final int MILLISEC_IN_SEC = 1000;
