@@ -13,6 +13,7 @@ package game;
 
 import java.awt.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class Board {
 	
@@ -258,7 +259,7 @@ public class Board {
 				} else {
 					m_board.get(y).remove(x);
 					m_board.get(y).add(x, new Hidden(isMine, true, false));
-				}
+				} 
 			}
 		}
 	}
@@ -438,6 +439,8 @@ public class Board {
 						}
 					}
 				}	
+			} else if (!m_board.get(y).get(x).isHidden()) {
+				JOptionPane.showMessageDialog(null, "You can't reveal a revealed tile", "Invalid Move", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
