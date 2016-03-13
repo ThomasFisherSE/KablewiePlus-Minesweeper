@@ -42,18 +42,13 @@ public class SavedFile {
 	public boolean loadFile(int slot) {
 		//Getting the file name from the slot chosen
 		String fileName = ("SaveFile" + slot + ".csv");
-		
 		if (!validateLoadFile(fileName)) {
 			return false;
 		}
-		
 		try {
-			
 			Scanner	in = new Scanner(new File(fileName));
-			
 			//setting up array list to store lines in
 			ArrayList<String> line = new ArrayList<String>();
-			
 			//read in each field of the file
 			in.useDelimiter(",");
 			while (in.hasNext()) {
@@ -62,7 +57,14 @@ public class SavedFile {
 				line.add(readFile);	
 			}
 			in.close();
-			
+			//If file contents are deleted
+			if (line.size() == 1) {
+				JOptionPane.showMessageDialog(null, 
+						"Input file corrupted", "Loading error", 
+						JOptionPane.INFORMATION_MESSAGE);
+				new Kablewie();
+				return false;
+			}
 			//Setup new objects using saved game data
 			Player loadedPlayer = new Player(line.get(USERNAME));
 			int boardSize = Integer.parseInt(line.get(BOARDSIZE));
@@ -70,7 +72,6 @@ public class SavedFile {
 			Board loadedBoard = new Board(boardSize, mineAmount);
 			//Continuing to read the file after the current data
 			int arrayIndex = 7;
-			
 			//Setting up the tiles
 			for (int i=0; i<boardSize; i++) {
 				for (int j=0; j<boardSize; j++) {
@@ -79,7 +80,6 @@ public class SavedFile {
 					//Setup scanner to detect character change
 					Scanner s = new Scanner(data);
 					s.useDelimiter("");  
-					
 					/*
 					 * Read the tile values(T or F) 
 					 * and apply these values to tiles
@@ -113,7 +113,6 @@ public class SavedFile {
 			startup(line, loadedBoard, loadedPlayer);
 		}
 		catch (Exception e) {}
-		
 		return true;
 	}
 	
