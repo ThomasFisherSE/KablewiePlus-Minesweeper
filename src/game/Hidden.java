@@ -11,6 +11,8 @@
 package game;
 
 import java.awt.Graphics;
+import java.net.URL;
+
 import javax.swing.ImageIcon;
 
 public class Hidden extends Tile {
@@ -25,7 +27,8 @@ public class Hidden extends Tile {
 	public Hidden(boolean isMine, boolean isHidden,boolean isDefused) {
 		// Always set hidden to false as its the hidden tile.
 		super(isMine, true,false);
-		m_hidden=new ImageIcon("resources/images/hidden.png");
+		URL url = getClass().getResource("/images/hidden.png");
+		m_hidden=new ImageIcon(url);
 	}
 	
 	/**

@@ -11,6 +11,8 @@
 package game;
 
 import java.awt.Graphics;
+import java.net.URL;
+
 import javax.swing.ImageIcon;
 
 public class Defused extends Tile {
@@ -24,7 +26,8 @@ public class Defused extends Tile {
 	 */
 	public Defused(boolean isMine, boolean isHidden, boolean isDefused) {
 		super(isMine, isHidden, isDefused);
-		m_defused = new ImageIcon("resources/images/defused.png");
+		URL url = getClass().getResource("/images/defused.png");
+		m_defused = new ImageIcon(url);
 	}
 
 	/**

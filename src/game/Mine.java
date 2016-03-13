@@ -11,6 +11,8 @@
 package game;
 
 import java.awt.Graphics;
+import java.net.URL;
+
 import javax.swing.ImageIcon;
 
 public class Mine extends Tile {
@@ -32,7 +34,8 @@ public class Mine extends Tile {
 		 *  Always set mine to true as Mine is a mine.
 		 */ 
 		super(true, true, false);
-		m_mineImage = new ImageIcon(path);
+		URL url = getClass().getResource(path);
+		m_mineImage = new ImageIcon(url);
 	}
 	
 	/**

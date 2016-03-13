@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -155,7 +156,8 @@ public class GameController implements MouseListener, ActionListener {
 		m_time.stop();
 		m_tick.stop();
 		m_GameFinshed.setVisible(true);
-		m_GameFinshed.setIcon(new ImageIcon("resources/images/gameLost.jpg"));
+		URL url = getClass().getResource("/images/gameLost.jpg");
+		m_GameFinshed.setIcon(new ImageIcon(url));
 	}
 	
 	/**
@@ -169,7 +171,8 @@ public class GameController implements MouseListener, ActionListener {
 		m_time.stop();
 		m_tick.stop();
 		m_GameFinshed.setVisible(true);
-		m_GameFinshed.setIcon(new ImageIcon("resources/images/GameWon.jpg"));
+		URL url = getClass().getResource("/images/GameWon.jpg");
+		m_GameFinshed.setIcon(new ImageIcon(url));
 		
 		String v = "You Have won\n Time taken- " + m_timePassed;
 		
@@ -215,22 +218,19 @@ public class GameController implements MouseListener, ActionListener {
 		try {
 			AudioInputStream audioInputStream = 
 					AudioSystem.getAudioInputStream(
-							new File("resources/sound/tick.wav").getAbsoluteFile()
-					);
+							getClass().getResourceAsStream("/sound/tick.wav"));
 			m_tick = AudioSystem.getClip();
 			m_tick.open(audioInputStream);
 			
 			audioInputStream =
 					AudioSystem.getAudioInputStream(
-							new File("resources/sound/bomb.wav").getAbsoluteFile()
-					);
+							getClass().getResourceAsStream("/sound/bomb.wav"));
 			m_bomb = AudioSystem.getClip();
 			m_bomb.open(audioInputStream);
 			
 			audioInputStream =
 					AudioSystem.getAudioInputStream(
-							new File("resources/sound/won.wav").getAbsoluteFile()
-					);
+							getClass().getResourceAsStream("/sound/won.wav"));
 			m_won = AudioSystem.getClip();
 			m_won.open(audioInputStream);
 			

@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -31,7 +32,8 @@ public class Revealed extends Tile {
 	public Revealed(boolean isMine, boolean isHidden, boolean isDefused) {
 		// Always set hidden to false as its the revealed tile.
 		super(isMine, false, isDefused);
-		m_revealedImage = new ImageIcon("resources/images/revealed.png");
+		URL url = getClass().getResource("/images/revealed.png");
+		m_revealedImage = new ImageIcon(url);
 	}
 	
 	/**
@@ -166,12 +168,10 @@ public class Revealed extends Tile {
     	} );
     	timer.setRepeats( false );
     	timer.start();
-    	
-    	gc.repaintAll();
 	}
 
 	private final ImageIcon m_revealedImage;
-	private final int REVEAL_RATE = 50;
+	private final int REVEAL_RATE = 20;
 	private final int X_SPACING = 10;
 	private final int Y_SPACING = 19;
 	private final int FONT_SIZE = 15;
