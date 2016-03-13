@@ -34,6 +34,7 @@ public class IntegrationTests {
 			computerTests.testMinIntelligence();
 			computerTests.testAiWhenMinesRevealed();
 			computerTests.testRunningAiConsecutively();
+			computerTests.testGeneratingMoves();
 			
 			SavedFileUnitTests savedFileTests = new SavedFileUnitTests();
 			savedFileTests.FileShouldLoadCorrectly();

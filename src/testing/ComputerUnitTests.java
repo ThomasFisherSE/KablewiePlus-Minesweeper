@@ -314,4 +314,165 @@ public class ComputerUnitTests {
 				+ "completion with the max intelligence", 
 				true, tester.checkGameOver());
 	}
+	
+	@Test
+	public void testGeneratingMoves() {
+		Computer newBoardTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(),
+				Computer.PERFECT_PROBABILITY);
+		
+		Computer midGameTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		/* Make 9 perfect moves; since there are 10 mines, 
+		 * after 9 perfect moves, there should always be a smart move possible
+		 */
+		
+		for (int i = 0; i<10; i++) {
+			midGameTester.makePerfectMove();
+		}
+		
+		assertEquals("Test if move lists can be generated for a new board", 
+				false, newBoardTester.generateMoveLists());
+		
+		assertEquals("Test if move lists can be generated mid-game", 
+				true, midGameTester.generateMoveLists());
+	}
+	
+	@Test
+	public void testMakeStupidMove() {
+		Computer newBoardTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(),
+				Computer.PERFECT_PROBABILITY);
+		
+		Computer midGameTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		for (int i = 0; i<10; i++) {
+			midGameTester.makePerfectMove();
+		}
+		
+		Computer gameOverTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		Thread testThread = new Thread(gameOverTester);
+		testThread.start();
+		gameOverTester.setTime(Computer.TEST_SLEEP_TIME);
+		gameOverTester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: "
+					+ "testMakeStupidMove() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if a stupid move can be made on a new board", 
+				true, newBoardTester.makeStupidMove());
+		
+		assertEquals("Test if a stupid move can be made mid-game", 
+				true, midGameTester.makeStupidMove());
+		
+		assertEquals("Test if a stupid move can be made when "
+				+ "the game is over", false, gameOverTester.makeStupidMove());
+	}
+	
+	@Test
+	public void testMakePerfectMove() {
+		Computer newBoardTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(),
+				Computer.PERFECT_PROBABILITY);
+		
+		Computer midGameTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		for (int i = 0; i<10; i++) {
+			midGameTester.makePerfectMove();
+		}
+		
+		Computer gameOverTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		Thread testThread = new Thread(gameOverTester);
+		testThread.start();
+		gameOverTester.setTime(Computer.TEST_SLEEP_TIME);
+		gameOverTester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: "
+					+ "testMakePerfectMove() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if a perfect move can be made on a new board", 
+				true, newBoardTester.makePerfectMove());
+		
+		assertEquals("Test if a perfect move can be made mid-game", 
+				true, midGameTester.makePerfectMove());
+		
+		assertEquals("Test if a perfect move can be made when "
+				+ "the game is over", false, gameOverTester.makePerfectMove());
+	}
+	
+	@Test
+	public void testMakeMove() {
+		Computer newBoardTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
+				interactingClass.createGameController(),
+				Computer.PERFECT_PROBABILITY);
+		
+		Computer midGameTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		for (int i = 0; i<10; i++) {
+			midGameTester.makePerfectMove();
+		}
+		
+		Computer gameOverTester = new Computer("AI", new Board(
+				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
+				interactingClass.createGameController(),
+				Computer.CANNOT_LOSE);
+		
+		Thread testThread = new Thread(gameOverTester);
+		testThread.start();
+		gameOverTester.setTime(Computer.TEST_SLEEP_TIME);
+		gameOverTester.toggleAi();
+		
+		try {
+			testThread.join();
+		} catch (InterruptedException e) {
+			System.err.println("ComputerUnitTests :: "
+					+ "testMakeMove() -->"
+					+ " Error interrupting thread.");
+		}
+		
+		assertEquals("Test if a move can be made on a new board", 
+				true, newBoardTester.makeMove());
+		
+		assertEquals("Test if a move can be made mid-game", 
+				true, midGameTester.makeMove());
+		
+		assertEquals("Test if a move can be made when the game is over", 
+				false, gameOverTester.makeMove());
+	}
+	
+	
 }

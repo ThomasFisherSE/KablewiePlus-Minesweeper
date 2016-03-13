@@ -498,7 +498,6 @@ public class Board {
 	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
 	private String m_timePassed;
-	public ArrayList<Tile> revealedTiles;
 	
 	public static final int DEFAULT_SIZE = 10;
 	public static final int DEFAULT_MINES = DEFAULT_SIZE;

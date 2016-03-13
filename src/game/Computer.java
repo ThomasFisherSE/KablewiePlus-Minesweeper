@@ -116,8 +116,10 @@ public class Computer extends Player implements Runnable {
 	
 	/**
 	 * Generate a list of safe, smart moves
+	 * 
+	 * @return boolean, true if moves are available, false if lists are empty
 	 */
-	private void generateMoveLists() {
+	public boolean generateMoveLists() {
 		m_knownSmartMoves.clear();
 		m_knownBombs.clear();
 		
@@ -179,6 +181,12 @@ public class Computer extends Player implements Runnable {
 				}
 			}
 		}
+		
+		if (m_knownBombs.isEmpty() && m_knownSmartMoves.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	/**
@@ -186,7 +194,7 @@ public class Computer extends Player implements Runnable {
 	 * 
 	 * @return boolean, true if move has been made, false if not
 	 */
-	private boolean makeMove() {
+	public boolean makeMove() {
 		double randomInt = new Random().nextInt(MAXIMUM_INTELLIGENCE - MINIMUM_INTELLIGENCE + 1);
 		
 		if (randomInt <= (m_intelligence)) {
@@ -223,37 +231,46 @@ public class Computer extends Player implements Runnable {
 	 *  
 	 *  @return boolean, true if a move has been made, false if not
 	 */
-	private boolean makePerfectMove() {
-				Random rnd = new Random();
-				int row = rnd.nextInt(m_board.getBoard().size());
-				int column = rnd.nextInt(m_board.getBoard().get(row).size());
-				Tile randomTile = m_board.getBoard().get(row).get(column);
-				if (!randomTile.isMine() && randomTile.isHidden()) {
-					m_board.revealTile(column, row);
+	public boolean makePerfectMove() {
+		boolean findingHiddenTile = true;
+		int attempts = 0;
+		
+		while (findingHiddenTile) {
+			Random rnd = new Random();
+			int row = rnd.nextInt(m_board.getBoard().size());
+			int column = rnd.nextInt(m_board.getBoard().get(row).size());
+			Tile randomTile = m_board.getBoard().get(row).get(column);
+			if (!randomTile.isMine() && randomTile.isHidden()) {
+				m_board.revealTile(column, row);
+				
+				findingHiddenTile = false;
+			} else if (randomTile.isMine() && !randomTile.isDefused()) {
+				m_board.defusedTile(column, row);
+				m_gameController.repaintAll();
 					
-					return true;
-				} else if (randomTile.isMine() && !randomTile.isDefused()) {
-					m_board.defusedTile(column, row);
-					m_gameController.repaintAll();
-					
-					if (m_test) {
-						System.out.println("Mine tile found. Looping.");
-					}
-					
-					return true;
-				} else if (randomTile.isMine() && randomTile.isDefused()) {
-					if (m_test) {
-						System.out.println("Mine already defused. Looping.");
-					}
-					
-					return false;
-				} else {
-					if (m_test) {
-						System.out.println("Revealed tile found. Looping.");
-					}
-					
-					return false;
+				if (m_test) {
+					System.out.println("Mine tile found. Looping.");
 				}
+				
+				findingHiddenTile = false;
+			} else if (randomTile.isMine() && randomTile.isDefused()) {
+				if (m_test) {
+					System.out.println("Mine already defused. Looping.");
+				}
+			} else {
+				if (m_test) {
+					System.out.println("Revealed tile found. Looping.");
+				}
+			}
+			
+			if (attempts > MAX_ATTEMPTS) {
+				return false;
+			}
+			
+			attempts++;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -277,6 +294,8 @@ public class Computer extends Player implements Runnable {
 					}
 				}
 			}
+			
+			return true;
 		} else if (!m_knownSmartMoves.isEmpty()) {
 			Tile tileToReveal = m_knownSmartMoves.get(0);
 			
@@ -289,6 +308,8 @@ public class Computer extends Player implements Runnable {
 					}
 				}
 			}
+			
+			return true;
 		} else {
 			if (m_test) {
 				System.out.println("No smart moves available, "
@@ -296,8 +317,6 @@ public class Computer extends Player implements Runnable {
 			}
 			return makeStupidMove();
 		}
-		
-		return true;
 	}
 	
 	/**
@@ -305,8 +324,9 @@ public class Computer extends Player implements Runnable {
 	 *  
 	 * @return boolean, true if move has been made, false if not
 	 */
-	private boolean makeStupidMove() {
+	public boolean makeStupidMove() {
 		boolean findingHiddenTile = true;
+		int attempts = 0;
 		
 		while (findingHiddenTile) {
 			Random rnd = new Random();
@@ -318,12 +338,19 @@ public class Computer extends Player implements Runnable {
 				m_board.revealTile(row, column);
 				findingHiddenTile = false;
 			}
+			
+			if (attempts > MAX_ATTEMPTS) {
+				return false;
+			}
+			
+			attempts++;
 		}
 			
 		return true;
 	}
 
 	private final int MILLISEC_IN_SEC = 1000;
+	private final int MAX_ATTEMPTS = 100;
 	
 	private boolean m_aiToggled = false;
 	private Board m_board;
@@ -333,14 +360,15 @@ public class Computer extends Player implements Runnable {
 	private int m_sleepTime = (int) (DEFAULT_SLEEP_TIME * 100);
 	private ArrayList<Tile> m_knownSmartMoves = new ArrayList<Tile>();
 	private ArrayList<Tile> m_knownBombs = new ArrayList<Tile>();
-	
+
 	public static final int MAXIMUM_INTELLIGENCE = 100;
 	public static final int MINIMUM_INTELLIGENCE = 1;
 	
 	/**
 	 * Common AI Probability Presets
-	 * Cheating AI, knows where each mine is
 	 */
+	
+	// Cheating AI, knows where each mine is
 	public static final int CANNOT_LOSE = -1;
 	
 	// Will always make smart moves where possible
