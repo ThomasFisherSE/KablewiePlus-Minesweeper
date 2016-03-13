@@ -4,7 +4,7 @@
  * @date 7 December 2015
  * @see Tile.java
  * 
- * Contain the Information of the current Board
+ * @brief Contain the Information of the current Board
  * and various helper methods for manipulating
  * the board.
  */ 
@@ -15,6 +15,15 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
+/**
+ * 
+ * @class Board
+ * @brief Contains Board information
+ * 
+ * Contain the Information of the current Board
+ * and various helper methods for manipulating
+ * the board.
+ * /
 public class Board {
 	
 	/**
