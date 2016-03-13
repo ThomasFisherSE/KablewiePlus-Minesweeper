@@ -10,6 +10,13 @@
 
 package game;
 
+/**
+ * 
+ * @class Human
+ * @brief A class for Human players.
+ *
+ * A class for Human players, inherits from Player
+ */
 public class Human extends Player  {
 	
 	/**
