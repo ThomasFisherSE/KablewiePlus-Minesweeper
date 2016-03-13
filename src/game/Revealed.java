@@ -68,6 +68,7 @@ public class Revealed extends Tile {
 	 * @param board a Board object that contains all the tiles
 	 * @param i the row to get around
 	 * @param j the column to get around
+	 * @param gc the GameController for the current game
 	 */
 	public void revealPosition(ArrayList<ArrayList<Tile>> board,
 								int i, int j, GameController gc) {
@@ -111,9 +112,18 @@ public class Revealed extends Tile {
 		gc.repaintAll();
 	}
 	
+	
+	/**
+	 * An animated reveal of tiles
+	 * 
+	 * @param board a Board object that contains all the tiles
+	 * @param i the row to get around
+	 * @param j the column to get around
+	 * @param gc the GameController for the current game
+	 */
 	public void animatedReveal(ArrayList<ArrayList<Tile>> board,
 			int i, int j, GameController gc) {
-		int delay = 50;
+		int delay = REVEAL_RATE;
     	Timer timer = new Timer( delay, new ActionListener(){
     		public void actionPerformed( ActionEvent e ){
     			revealPosition(board, i, j, gc);
@@ -126,4 +136,5 @@ public class Revealed extends Tile {
 	}
 
 	private final ImageIcon m_revealedImage;
+	private final int REVEAL_RATE = 50;
 }

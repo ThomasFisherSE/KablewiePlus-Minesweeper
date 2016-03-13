@@ -76,6 +76,8 @@ public class Board {
 	 }
  	
  	/**
+ 	 * Get the number of defused tiles
+ 	 * 
 	 * @return an int with the number of defused tiles
 	 */
 	public int getDefusedTile() {
@@ -117,6 +119,8 @@ public class Board {
 	}
 	
 	/**
+	 * Get the number of hidden tiles
+	 * 
 	 * @return an int with the number of hidden tiles
 	 */
 	public int getHiddenTile() {
@@ -149,6 +153,8 @@ public class Board {
 	}
 	
 	/**
+	 * Get the number of revealed tiles
+	 * 
 	 * @return an int with the number of revealed tiles
 	 */
 	public int getRevealedTile() {
@@ -306,6 +312,8 @@ public class Board {
 	
 	/**
 	 * Loads the graphics
+	 * 
+	 * @param gc, the GameController for the current game
 	 */
 	public void loadGraphics(GameController gc) {
 		//for every tile in the game set the graphics
@@ -362,14 +370,14 @@ public class Board {
 		Font timeNewRoman = new Font("Time new roman", Font.BOLD, FONT_SIZE);
 		
 		// Positioning Values.
-		int x = 1;
-		int y = 10;
+		int x = START_X;
+		int y = START_Y;
 		
 		g.setFont(timeNewRoman);
 		g.setColor(Color.RED);
 		g.drawString("Name : " + player.getUsername(), x, y);
 		
-		x = x + 180;
+		x = x + X_SPACING;
 		
 		if (timePassed == null) {
 			g.drawString("Time: 00:00:00", x, y);
@@ -378,19 +386,19 @@ public class Board {
 			m_timePassed = timePassed;
 		}
 		
-		x = 1;
-		y = 27;
+		x = START_X;
+		y = y + Y_SPACING;
 		g.setColor(Color.BLUE);
 		g.drawString("Defused Mine : " + getDefusedTile(), x, y);
 		
-		x = x + 180;
+		x = x + X_SPACING;
 		g.drawString("Mines Present : " + m_mineCount, x, y);
 		
-		y = 48;
-		x = 1;
+		y = y + Y_SPACING;
+		x = START_X;
 		g.drawString("Hidden Square : " + getHiddenTile(), x, y);
 		
-		x = x + 180;
+		x = x + X_SPACING;
 		g.drawString("Revealed Square : " + getRevealedTile(), x, y);
 	}
 	
@@ -412,6 +420,7 @@ public class Board {
 	 * 
 	 * @param x an int which is the X position of the click
 	 * @param y an int which is the Y position of the click
+	 * @param gc the GameController for the current game
 	 */
 	public void revealTile(int x, int y, GameController gc) {
 		
@@ -510,4 +519,8 @@ public class Board {
 	public static final int MIN_MINES = 1;
 	
 	private final int FONT_SIZE = 12;
+	private final int START_X = 1;
+	private final int START_Y = 10;
+	private final int X_SPACING = 180;
+	private final int Y_SPACING = 19;
 }
