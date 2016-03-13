@@ -13,21 +13,21 @@ package game;
 public class Human extends Player  {
 	
 	/**
-	 * Gets if it's the human players turn
-	 * 
-	 * @return boolean if it's the human players turn
-	 */
-	public boolean getPlayersTurn() {
-		return m_playersTurn;
-	}
-	
-	/**
 	 * Constructor
 	 * 
 	 * @param name the players name
 	 */
 	public Human(String name) {
 		super(name);
+	}
+	
+	/**
+	 * Gets if it's the human players turn
+	 * 
+	 * @return boolean if it's the human players turn
+	 */
+	public boolean getPlayersTurn() {
+		return m_playersTurn;
 	}
 	
 	/**
