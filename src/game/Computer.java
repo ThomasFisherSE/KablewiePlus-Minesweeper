@@ -14,6 +14,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+/**
+ * 
+ * @class Computer
+ * @brief A class for computer players.
+ * 
+ * A class for computer players, inherits from Player
+ * /
 public class Computer extends Player implements Runnable {
 	
 	/**
