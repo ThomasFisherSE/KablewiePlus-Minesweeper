@@ -16,6 +16,13 @@ import java.io.File;
 import game.*;
 import org.junit.Test;
 
+/**
+ * 
+ * @class SavedFileUnitTests
+ * @brief Tests Saved File
+ * 
+ * Tests all methods in Saved File with valid and invalid input
+ */
 public class SavedFileUnitTests {
 	/**
 	 * Tests if the file saves correctly
