@@ -265,9 +265,11 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 			if (!(boardSize > MIN_BOARD_SIZE && boardSize <= MAX_BOARD_SIZE)
 					|| !(numMines < boardSize * boardSize && numMines <= MAX_MINES && numMines > MIN_MINES)) {
 				m_totalMinesText.setText(m_boardSizeText.getText());
+				JOptionPane.showMessageDialog(null, "Please enter valid values for Board Size i.e Max Board size 30 x 30");
 				return false;
 			}
 			if (username.length() <=0 || username.length() >12) {
+				JOptionPane.showMessageDialog(null, "Please enter Username i.e Letters or Numbers not more than 12 chracters");
 				return false;
 			}
 			Board board = new Board(boardSize, boardSize, numMines);
@@ -278,6 +280,7 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "Please enter values for Board Size and Total Mine");
 			return false;
 		}
 		
