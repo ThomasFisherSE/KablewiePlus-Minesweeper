@@ -16,6 +16,13 @@ import static org.junit.Assert.*;
 import game.*;
 import org.junit.Test;
 
+/**
+ * 
+ * @class ComputerUnitTests
+ * @brief Tests computer player
+ * 
+ * Tests methods in Computer, and whether the computer AI works correctly
+ * /
 public class ComputerUnitTests {
 	
 	/**
