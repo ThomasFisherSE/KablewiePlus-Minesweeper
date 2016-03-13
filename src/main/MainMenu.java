@@ -279,7 +279,7 @@ public class MainMenu extends JPanel implements MouseListener, KeyListener {
 			m_kablewie.startGame(board, player, this);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
+		//	System.out.println(e);
 			JOptionPane.showMessageDialog(null, "Please enter values for Board Size and Total Mine");
 			return false;
 		}
