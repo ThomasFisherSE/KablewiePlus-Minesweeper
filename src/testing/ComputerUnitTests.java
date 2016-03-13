@@ -17,15 +17,14 @@ import game.*;
 import org.junit.Test;
 
 public class ComputerUnitTests {
-	IntegrationTests interactingClass = new IntegrationTests();
 	
 	/**
 	 * Testing the low intelligence preset in the JMenu
 	 */
 	@Test
 	public void testLowIntelligencePreset() {
-		Computer tester = new Computer("AI", interactingClass.createBoard(),
-				interactingClass.createGameController(),
+		Computer tester = new Computer("AI", m_interactingClass.createBoard(),
+				m_interactingClass.createGameController(),
 				Computer.LOW_PROBABILITY);
 		
 		assertEquals("Test if the correct intelligence is set by clicking"
@@ -38,8 +37,8 @@ public class ComputerUnitTests {
 	 */
 	@Test
 	public void testNormalIntelligencePreset() {
-		Computer tester = new Computer("AI", interactingClass.createBoard(),
-				interactingClass.createGameController(),
+		Computer tester = new Computer("AI", m_interactingClass.createBoard(),
+				m_interactingClass.createGameController(),
 				Computer.NORMAL_PROBABILITY);
 		
 		assertEquals("Test if the correct intelligence is set by clicking"
@@ -52,8 +51,8 @@ public class ComputerUnitTests {
 	 */
 	@Test
 	public void testHighIntelligencePreset() {
-		Computer tester = new Computer("AI", interactingClass.createBoard(),
-				interactingClass.createGameController(),
+		Computer tester = new Computer("AI", m_interactingClass.createBoard(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		assertEquals("Test if the correct intelligence is set by clicking"
@@ -66,8 +65,8 @@ public class ComputerUnitTests {
 	 */
 	@Test
 	public void testCantLosePreset() {
-		Computer tester = new Computer("AI", interactingClass.createBoard(),
-				interactingClass.createGameController(), Computer.CANNOT_LOSE);
+		Computer tester = new Computer("AI", m_interactingClass.createBoard(),
+				m_interactingClass.createGameController(), Computer.CANNOT_LOSE);
 		
 		assertEquals("Test if the correct intelligence is set by using"
 				+ " the cannot lose preset",
@@ -81,7 +80,7 @@ public class ComputerUnitTests {
 	public void testAiOnLargeBoard() {
 		Computer tester = new Computer("AI", new Board(
 				Board.MAX_SIZE, Board.MAX_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Thread testThread = new Thread(tester);
@@ -107,7 +106,7 @@ public class ComputerUnitTests {
 	public void testAiOnDefaultBoard() {
 		Computer tester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Thread testThread = new Thread(tester);
@@ -133,7 +132,7 @@ public class ComputerUnitTests {
 	public void testAiOnSmallBoard() {
 		Computer tester = new Computer("AI", new Board(
 				Board.MIN_SIZE, Board.MIN_SIZE, Board.MIN_SIZE), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Thread testThread = new Thread(tester);
@@ -159,7 +158,7 @@ public class ComputerUnitTests {
 	public void testAiWithMaxMines() {
 		Computer tester = new Computer("AI", new Board(
 				Board.MAX_SIZE, Board.MAX_SIZE, Board.MAX_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Thread testThread = new Thread(tester);
@@ -186,7 +185,7 @@ public class ComputerUnitTests {
 	public void testAiWithDefaultMines() {
 		Computer tester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Thread testThread = new Thread(tester);
@@ -213,7 +212,7 @@ public class ComputerUnitTests {
 	public void testAiWithMinMines() {
 		Computer tester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.MIN_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Thread testThread = new Thread(tester);
@@ -240,7 +239,7 @@ public class ComputerUnitTests {
 	public void testMinIntelligence() {
 		Computer tester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(), 
+				m_interactingClass.createGameController(), 
 				Computer.MINIMUM_INTELLIGENCE);
 		
 		Thread testThread = new Thread(tester);
@@ -266,7 +265,7 @@ public class ComputerUnitTests {
 	public void testMaxIntelligence() {
 		Computer tester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(), 
+				m_interactingClass.createGameController(), 
 				Computer.MAXIMUM_INTELLIGENCE);
 		
 		Thread testThread = new Thread(tester);
@@ -294,7 +293,7 @@ public class ComputerUnitTests {
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES);
 		
 		Computer tester = new Computer("AI", testBoard, 
-				interactingClass.createGameController(), 
+				m_interactingClass.createGameController(), 
 				Computer.PERFECT_PROBABILITY);
 		
 		testBoard.showBombTile();
@@ -324,7 +323,7 @@ public class ComputerUnitTests {
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES);
 		
 		GameController testGameController = 
-				interactingClass.createGameController();
+				m_interactingClass.createGameController();
 		
 		Computer tester = new Computer("AI", testBoard, testGameController, 
 				Computer.MAXIMUM_INTELLIGENCE);
@@ -370,12 +369,12 @@ public class ComputerUnitTests {
 	public void testGeneratingMoves() {
 		Computer newBoardTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Computer midGameTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		
@@ -402,12 +401,12 @@ public class ComputerUnitTests {
 	public void testMakeStupidMove() {
 		Computer newBoardTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Computer midGameTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		for (int i = 0; i<10; i++) {
@@ -416,7 +415,7 @@ public class ComputerUnitTests {
 		
 		Computer gameOverTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		Thread testThread = new Thread(gameOverTester);
@@ -449,12 +448,12 @@ public class ComputerUnitTests {
 	public void testMakePerfectMove() {
 		Computer newBoardTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Computer midGameTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		for (int i = 0; i<10; i++) {
@@ -463,7 +462,7 @@ public class ComputerUnitTests {
 		
 		Computer gameOverTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		Thread testThread = new Thread(gameOverTester);
@@ -496,12 +495,12 @@ public class ComputerUnitTests {
 	public void testMakeMove() {
 		Computer newBoardTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Computer midGameTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		for (int i = 0; i<10; i++) {
@@ -510,7 +509,7 @@ public class ComputerUnitTests {
 		
 		Computer gameOverTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		Thread testThread = new Thread(gameOverTester);
@@ -543,12 +542,12 @@ public class ComputerUnitTests {
 	public void testMakeSmartMove() {
 		Computer newBoardTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES), 
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.PERFECT_PROBABILITY);
 		
 		Computer midGameTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		for (int i = 0; i<10; i++) {
@@ -557,7 +556,7 @@ public class ComputerUnitTests {
 		
 		Computer gameOverTester = new Computer("AI", new Board(
 				Board.DEFAULT_SIZE, Board.DEFAULT_SIZE, Board.DEFAULT_MINES),
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.CANNOT_LOSE);
 		
 		Thread testThread = new Thread(gameOverTester);
@@ -582,4 +581,6 @@ public class ComputerUnitTests {
 		assertEquals("A smart move should not be made when the game is over", 
 				false, gameOverTester.makeSmartMove());
 	}
+	
+	IntegrationTests m_interactingClass = new IntegrationTests();
 }

@@ -19,9 +19,6 @@ import org.junit.Test;
 import game.*;
 
 public class TileUnitTests {
-	IntegrationTests interactingClass = new IntegrationTests();
-
-	
 	/**
 	 * Hidden class referenced because Tile is abstract
 	 */
@@ -29,7 +26,7 @@ public class TileUnitTests {
 	@Test
 	public void test() {
 		Tile tester = new Hidden(false, false, false); 
-		Board testBoard = interactingClass.createBoard();
+		Board testBoard = m_interactingClass.createBoard();
 		
 		/**
 		 * Testing the adjacent tiles that the array has up to 8 surrounding squares
@@ -47,4 +44,6 @@ public class TileUnitTests {
 				+ " 4 for a tile in the corner of the board", 4,
 				(tester.getTileArround(testBoard.getBoard(),0,0)).size());
 	}
+	
+	IntegrationTests m_interactingClass = new IntegrationTests();
 }

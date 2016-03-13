@@ -15,7 +15,6 @@ import main.Kablewie;
 import org.junit.Test;
 
 public class KablewieUnitTests {
-	IntegrationTests interactingClass = new IntegrationTests();
 
 	/** 
 	 * Testing to the testStartGame with valid input 
@@ -25,9 +24,9 @@ public class KablewieUnitTests {
 		Kablewie tester = new Kablewie();
 		//valid input
 		assertEquals("Test if input is valid",true,tester.startGame(
-				interactingClass.createBoard(), 
-				interactingClass.createPlayer(),
-				interactingClass.createMainMenu()));	
+				m_interactingClass.createBoard(), 
+				m_interactingClass.createPlayer(),
+				m_interactingClass.createMainMenu()));	
 		
 
 	}
@@ -39,9 +38,9 @@ public class KablewieUnitTests {
 	public void testStartGame2() {
 		Kablewie tester = new Kablewie();		
 		assertEquals("Test if input is not valid",false,tester.startGame(
-				interactingClass.createBoard(),
-				interactingClass.createPlayer(),
-				interactingClass.createMainMenu()));	
+				m_interactingClass.createBoard(),
+				m_interactingClass.createPlayer(),
+				m_interactingClass.createMainMenu()));	
 
 	}	
 	/** 
@@ -52,8 +51,8 @@ public class KablewieUnitTests {
 		Kablewie tester = new Kablewie();	
 		String time = "00:00:07";
 		assertEquals("Test if input is valid",true,tester.startLoadedGame(
-				interactingClass.createBoard(),
-				interactingClass.createPlayer(),time));	
+				m_interactingClass.createBoard(),
+				m_interactingClass.createPlayer(),time));	
 		
 
 	}
@@ -65,10 +64,10 @@ public class KablewieUnitTests {
 		Kablewie tester = new Kablewie();	
 		String time = "00:00:07";
 		assertEquals("Test if input is not valid",false,tester.startLoadedGame(
-				interactingClass.createBoard(),
-				interactingClass.createPlayer(),time));	
+				m_interactingClass.createBoard(),
+				m_interactingClass.createPlayer(),time));	
 
 	}
 	
-		
+	IntegrationTests m_interactingClass = new IntegrationTests();
 }

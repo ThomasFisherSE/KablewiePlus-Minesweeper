@@ -17,19 +17,17 @@ import game.*;
 import org.junit.Test;
 
 public class SavedFileUnitTests {
-	IntegrationTests interactingClass = new IntegrationTests();
-
 	/**
 	 * Tests if the file saves correctly
 	 */
 	@Test 
 	public void FileShouldSaveCorrectly() {
-		SavedFile tester = interactingClass.createSavedFile();
+		SavedFile tester = m_interactingClass.createSavedFile();
 		
 		//valid input 
 		assertEquals("Should accept saving",tester.saveFile(1,
-				interactingClass.createBoard(),
-				interactingClass.createPlayer()),true);
+				m_interactingClass.createBoard(),
+				m_interactingClass.createPlayer()),true);
 		
 		/**
 		 * Invalid input is not possible to be passed into saveFile
@@ -37,11 +35,11 @@ public class SavedFileUnitTests {
 		 * included anyway
 		 */
 		assertEquals("Shouldn't accept saving, empty board",tester.saveFile(1,
-				interactingClass.createBadBoard(),
-				interactingClass.createPlayer()),false);
+				m_interactingClass.createBadBoard(),
+				m_interactingClass.createPlayer()),false);
 		assertEquals("Shouldn't accept saving, empty username",tester.saveFile(
-				1,interactingClass.createBoard(),
-				interactingClass.createBadPlayer()),false);
+				1,m_interactingClass.createBoard(),
+				m_interactingClass.createBadPlayer()),false);
 	}	
 	
 	/**
@@ -49,19 +47,19 @@ public class SavedFileUnitTests {
 	 */
 	@Test
 	public void TestValidData() {
-		SavedFile tester = interactingClass.createSavedFile();
+		SavedFile tester = m_interactingClass.createSavedFile();
 		//valid input
 		assertEquals("Shouldn accept as vaid data",tester.validateData(
-				interactingClass.createBoard(),interactingClass.createPlayer())
+				m_interactingClass.createBoard(),m_interactingClass.createPlayer())
 				,true);
 		
 		//invalid input
 		assertEquals("Shouldn't accept empty board",tester.validateData(
-				interactingClass.createBadBoard(),
-				interactingClass.createPlayer()),false);
+				m_interactingClass.createBadBoard(),
+				m_interactingClass.createPlayer()),false);
 		assertEquals("Shouldn't accept empty username",tester.validateData(
-				interactingClass.createBoard(),
-				interactingClass.createBadPlayer()),false);
+				m_interactingClass.createBoard(),
+				m_interactingClass.createBadPlayer()),false);
 		
 	}
 	
@@ -70,7 +68,7 @@ public class SavedFileUnitTests {
 	 */
 	@Test
 	public void FileShouldLoadCorrectly() {
-		SavedFile tester = interactingClass.createSavedFile();
+		SavedFile tester = m_interactingClass.createSavedFile();
 		
 		//valid input
 		assertEquals("Should accept reading from valid file",tester.loadFile(1)
@@ -100,20 +98,22 @@ public class SavedFileUnitTests {
 	 */
 	@Test
 	public void GameShouldStart(){
-		SavedFile tester = interactingClass.createSavedFile();
+		SavedFile tester = m_interactingClass.createSavedFile();
 		
 		//valid input
 		assertEquals("Created board tile values should be equal "
 				+ "to the default amount",
-				tester.startup(interactingClass.createArrayList(),
-						interactingClass.createBoard(),
-						interactingClass.createPlayer()), true);
+				tester.startup(m_interactingClass.createArrayList(),
+						m_interactingClass.createBoard(),
+						m_interactingClass.createPlayer()), true);
 		
 		//invalid input
 		assertEquals("Created board tile values shouldn't be "
 				+ "equal to the default amount",
-				tester.startup(interactingClass.createBadArrayList(),
-						interactingClass.createBoard(),
-						interactingClass.createPlayer()), false);
+				tester.startup(m_interactingClass.createBadArrayList(),
+						m_interactingClass.createBoard(),
+						m_interactingClass.createPlayer()), false);
 	}
+	
+	IntegrationTests m_interactingClass = new IntegrationTests();
 }

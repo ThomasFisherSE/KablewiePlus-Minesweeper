@@ -14,14 +14,12 @@ import main.*;
 import org.junit.Test;
 
 public class MainMenuUnitTests {
-	IntegrationTests interactingClass = new IntegrationTests();
-	
 	/** 
 	 * Testing to the testStartGame with valid input 
 	 */
 	@Test
 	public void startGameTest1() {
-		MainMenu test = new MainMenu(interactingClass.createFrame(),
+		MainMenu test = new MainMenu(m_interactingClass.createFrame(),
 				new Kablewie());
 		/**
 		* The statement is set to false, if and only if
@@ -36,7 +34,7 @@ public class MainMenuUnitTests {
 	 */
 	@Test
 	public void startGameTest2() {
-		MainMenu test = new MainMenu(interactingClass.createFrame(),
+		MainMenu test = new MainMenu(m_interactingClass.createFrame(),
 				new Kablewie());
 		/*
 		 * The statement is set to true, if and only if
@@ -45,4 +43,6 @@ public class MainMenuUnitTests {
 		assertEquals("Test if the inputs are not valid to start Game",
 				true, test.startGame());
 	}
+	
+	IntegrationTests m_interactingClass = new IntegrationTests();
 }

@@ -19,14 +19,12 @@ import game.Board;
 import game.Computer;
 
 public class BoardUnitTests {
-	IntegrationTests interactingClass = new IntegrationTests();
-	
 	/**
 	 * Testing the return of the correct column value
 	 */
 	@Test
 	public void testColumnReturn() {
-		Board tester = interactingClass.createBoard();
+		Board tester = m_interactingClass.createBoard();
 		int col = tester.getColumns();
 		assertEquals("Test if correct columns are returned",
 				col,tester.getColumns());
@@ -36,7 +34,7 @@ public class BoardUnitTests {
 	 */
 	@Test
 	public void testRowReturn() {
-		Board tester = interactingClass.createBoard();
+		Board tester = m_interactingClass.createBoard();
 		int row = tester.getRows();
 		assertEquals("Test if the correct row count is returned",
 				row,tester.getRows());
@@ -47,7 +45,7 @@ public class BoardUnitTests {
 	 */
 	@Test
 	public void testMineReturn() {
-		Board tester = interactingClass.createBoard();
+		Board tester = m_interactingClass.createBoard();
 		int mine = tester.getMineCount();
 		assertEquals("Test if the correct mine count is returned",
 				mine,tester.getMineCount());
@@ -57,7 +55,7 @@ public class BoardUnitTests {
 	 */
 	@Test
 	public void testTimeReturn () {
-		Board tester = interactingClass.createBoard();
+		Board tester = m_interactingClass.createBoard();
 		String time = tester.getTimePassed();
 		assertEquals("Test correct time return",time,tester.getTimePassed());
 	}
@@ -66,9 +64,9 @@ public class BoardUnitTests {
 	 */
 	@Test
 	public void testBoardComplete() {
-		Board tester = interactingClass.createBoard();
+		Board tester = m_interactingClass.createBoard();
 		Computer testComputer = new Computer("AI", tester,
-				interactingClass.createGameController(), Computer.CANNOT_LOSE);
+				m_interactingClass.createGameController(), Computer.CANNOT_LOSE);
 		Thread testThread = new Thread(testComputer);
 		testThread.start();
 		testComputer.setTime(Computer.TEST_SLEEP_TIME);
@@ -90,9 +88,9 @@ public class BoardUnitTests {
 	 */
 	@Test
 	public void testBoardIncomplete() {
-		Board tester = interactingClass.createBoard();
+		Board tester = m_interactingClass.createBoard();
 		Computer testComputer = new Computer("AI", tester,
-				interactingClass.createGameController(),
+				m_interactingClass.createGameController(),
 				Computer.LOW_PROBABILITY);
 		Thread testThread = new Thread(testComputer);
 		testThread.start();
@@ -114,11 +112,11 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardDefaultInitialization() {
 		assertEquals("Test if the boards columns are initialized correclty",
-				10, interactingClass.createBoard().getColumns());
+				10, m_interactingClass.createBoard().getColumns());
 		assertEquals("Test if the boards rows are initialized correclty",
-				10, interactingClass.createBoard().getRows());
+				10, m_interactingClass.createBoard().getRows());
 		assertEquals("Test if the boards mines are initialized correclty",
-				10, interactingClass.createBoard().getMineCount());
+				10, m_interactingClass.createBoard().getMineCount());
 	}
 	/**
 	 * Testing a custom board initialization
@@ -146,8 +144,10 @@ public class BoardUnitTests {
 	@Test
 	public void testBoardBounds() {
 		assertEquals("Test to ensure the board does not accept invalid bounds",
-				false, interactingClass.createBoard().inLimit(-1,-1));
+				false, m_interactingClass.createBoard().inLimit(-1,-1));
 		assertEquals("Test to ensure the board accepts valid board bounds",
-				true, interactingClass.createBoard().inLimit(0,0));
+				true, m_interactingClass.createBoard().inLimit(0,0));
 	}
+	
+	IntegrationTests m_interactingClass = new IntegrationTests();
 }
