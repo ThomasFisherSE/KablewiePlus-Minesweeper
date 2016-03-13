@@ -270,6 +270,10 @@ public class Board {
 					m_board.get(y).remove(x);
 					m_board.get(y).add(x, new Hidden(isMine, true, false));
 				} 
+			}  else {
+				JOptionPane.showMessageDialog(null, 
+						"You can't diffuse a revealed tile", "Invalid Move",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
@@ -458,8 +462,14 @@ public class Board {
 					}
 				}	
 			} else if (!m_board.get(y).get(x).isHidden()) {
-				JOptionPane.showMessageDialog(null, "You can't reveal a revealed tile", "Invalid Move", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, 
+						"You can't reveal a revealed tile", "Invalid Move",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
+		} else {
+			JOptionPane.showMessageDialog(null, 
+					"You can't reveal a diffused tile", "Invalid Move",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
