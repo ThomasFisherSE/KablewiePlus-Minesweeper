@@ -31,7 +31,7 @@ public class SavedFile {
 		/*Getting the file name from the slot chosen*/
 		String fileName = ("SaveFile" + slot + ".csv");
 		
-		if (!validLoadFile(fileName)) {
+		if (!validateLoadFile(fileName)) {
 			return false;
 		}
 		
@@ -113,7 +113,7 @@ public class SavedFile {
 	 * @return if saving was successful
 	 */
 	public boolean saveFile(int slot, Board board, Player player) {
-		if (!validData(board, player)) {
+		if (!validateData(board, player)) {
 			return false;
 		}
 		
@@ -220,8 +220,9 @@ public class SavedFile {
 	 * @param player the player to be saved
 	 * @return if the data is valid
 	 */
-	public boolean validData(Board board, Player player) {
-		if (board.getBoard().size()==0 || player.getUsername().equalsIgnoreCase("")) {
+	public boolean validateData(Board board, Player player) {
+		if (board.getBoard().size()==0 || 
+				player.getUsername().equalsIgnoreCase("")) {
 			return false;
 		}
 		return true;
@@ -233,13 +234,14 @@ public class SavedFile {
 	 * @param fileName the name of the file
 	 * @return if the file is valid for the game
 	 */
-	public boolean validLoadFile(String fileName) {
+	public boolean validateLoadFile(String fileName) {
 		/*if file is one of the accepted ones*/
 		if (fileName.equalsIgnoreCase("SaveFile1.csv")|| 
 				fileName.equalsIgnoreCase("SaveFile2.csv")
 				||fileName.equalsIgnoreCase("SaveFile3.csv")) {
 			/*Checking if the file exists*/
-			if (!new File(fileName).isFile() || new File(fileName).length()==0) {
+			if (!new File(fileName).isFile() ||
+					new File(fileName).length()==0) {
 				return false;
 			} else return true;
 		} 
