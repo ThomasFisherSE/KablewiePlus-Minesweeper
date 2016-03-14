@@ -1,6 +1,6 @@
 /**
  * @file GameController.java
- * @author A4 Peter Jenkins, A5 Thomas Fisher, Victoria Charvis,Ibrahim Shehu
+ * @author A4 Peter Jenkins, A5 Thomas Fisher, Victoria Charvis,Ibrahim Shehu, Eromosele Gideon
  * @date 29 February 2016
  * @see Kablewie.java
  * @brief Controls the game

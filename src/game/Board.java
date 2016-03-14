@@ -1,6 +1,6 @@
 /**
  * @file Board.java
- * @author A4 Ethan Davies A5 Victoria Charvis,Ibrahim Shehu, Thomas Fisher
+ * @author A4 Ethan Davies A5 Victoria Charvis,Ibrahim Shehu, Thomas Fisher, Eromosele Gideon
  * @date 7 December 2015
  * @see Tile.java
  * 
