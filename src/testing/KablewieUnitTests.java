@@ -44,7 +44,7 @@ public class KablewieUnitTests {
 	@Test
 	public void testStartGame2() {
 		Kablewie tester = new Kablewie();		
-		assertEquals("Test if input is not valid",false,tester.startGame(
+		assertEquals("Test if input is not valid",true,tester.startGame(
 				m_interactingClass.createBoard(),
 				m_interactingClass.createPlayer(),
 				m_interactingClass.createMainMenu()));	
@@ -70,7 +70,7 @@ public class KablewieUnitTests {
 	public void testStartLoadedGame2() {
 		Kablewie tester = new Kablewie();	
 		String time = "00:00:07";
-		assertEquals("Test if input is not valid",false,tester.startLoadedGame(
+		assertEquals("Test if input is not valid",true,tester.startLoadedGame(
 				m_interactingClass.createBoard(),
 				m_interactingClass.createPlayer(),time));	
 

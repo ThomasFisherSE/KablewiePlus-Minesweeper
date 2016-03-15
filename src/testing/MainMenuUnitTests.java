@@ -48,7 +48,7 @@ public class MainMenuUnitTests {
 		 * inputs to start game is false
 		 */ 
 		assertEquals("Test if the inputs are not valid to start Game",
-				true, test.startGame());
+				false, test.startGame());
 	}
 	
 	IntegrationTests m_interactingClass = new IntegrationTests();
